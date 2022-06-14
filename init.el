@@ -1,0 +1,41 @@
+(setq inhibit-startup-message t) ;; stops showing startup screen when we start emacs
+(scroll-bar-mode -1)             ;; disable scroll scrool
+(tool-bar-mode -1)                 ;; disable toolbar
+(tooltip-mode -1)                 ;; disable tooltios
+(set-fringe-mode 10)              ;; gives some breathing room
+(menu-bar-mode -1)                ;; disable menubar
+(set-face-attribute 'default nil :font "JetBrainsMono Nerd Font Mono" :height 100) ;; set font and font-size
+
+;; Other Configurations
+(recentf-mode 1) ;; Maintains a list of recent files
+(setq history-length 25) ;; saves history of minibuffer upto 25 length
+(savehist-mode 1) ;; initiate above mode
+(save-place-mode 1) ;; saves cursor location in files
+
+;; Move customizations variables to a separate file and load it
+(setq custom-file (locate-user-emacs-file "custom-vars.el"))
+(load custom-file 'noerror 'nomessage)
+
+;; Move package-list to package-list.el
+(setq custom-file (locate-user-emacs-file "package-list.el"))
+(load custom-file 'noerror 'nomessage)
+
+;; Move global bindings to bindings.el
+(setq custom-file (locate-user-emacs-file "bindings.el"))
+(load custom-file 'noerror 'nomessage)
+
+;; Sync files if the file is edited outside emacs
+(global-auto-revert-mode 1)
+
+;; Revert Dired and other buffers (same as above for dired and non file buffers)
+(setq global-auto-revert-non-file-buffers t)
+
+;; Enable line numbers
+(column-number-mode)
+(global-display-line-numbers-mode t)
+
+;; Disable line numbers for some modes
+(dolist (mode '(org-mode-hook
+		term-mode-hook
+		eshell-mode-hook))
+  (add-hook mode (lambda () (display-line-numbers-mode 0))))

@@ -1,0 +1,3 @@
+(general-define-key
+ :prefix "C-x"
+ "o n" 'neotree-show)
