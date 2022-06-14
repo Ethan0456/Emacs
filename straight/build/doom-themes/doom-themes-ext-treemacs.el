@@ -1,1 +1,1 @@
-/home/ethan/.emacs.d/straight/repos/themes/extensions/doom-themes-ext-treemacs.el
+/Users/abhijeetsingh/.emacs.d/straight/repos/themes/extensions/doom-themes-ext-treemacs.el

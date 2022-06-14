@@ -1,1 +1,1 @@
-/home/ethan/.emacs.d/straight/repos/general.el/.dirs-local.el
+/Users/abhijeetsingh/.emacs.d/straight/repos/general.el/.dirs-local.el

@@ -1,1 +1,1 @@
-/home/ethan/.emacs.d/straight/repos/themes/themes/doom-acario-dark-theme.el
+/Users/abhijeetsingh/.emacs.d/straight/repos/themes/themes/doom-acario-dark-theme.el

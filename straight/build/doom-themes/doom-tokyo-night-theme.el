@@ -1,1 +1,1 @@
-/home/ethan/.emacs.d/straight/repos/themes/themes/doom-tokyo-night-theme.el
+/Users/abhijeetsingh/.emacs.d/straight/repos/themes/themes/doom-tokyo-night-theme.el

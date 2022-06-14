@@ -1,1 +1,1 @@
-/home/ethan/.emacs.d/straight/repos/swiper/ivy-overlay.el
+/Users/abhijeetsingh/.emacs.d/straight/repos/swiper/ivy-overlay.el

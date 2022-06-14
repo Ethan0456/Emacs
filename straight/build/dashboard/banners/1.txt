@@ -1,1 +1,1 @@
-/home/ethan/.emacs.d/straight/repos/emacs-dashboard/banners/1.txt
+/Users/abhijeetsingh/.emacs.d/straight/repos/emacs-dashboard/banners/1.txt

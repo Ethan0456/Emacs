@@ -1,1 +1,1 @@
-/home/ethan/.emacs.d/straight/repos/themes/themes/doom-lantern-theme.el
+/Users/abhijeetsingh/.emacs.d/straight/repos/themes/themes/doom-lantern-theme.el

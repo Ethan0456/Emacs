@@ -4,7 +4,8 @@
 (tooltip-mode -1)                 ;; disable tooltios
 (set-fringe-mode 10)              ;; gives some breathing room
 (menu-bar-mode -1)                ;; disable menubar
-(set-face-attribute 'default nil :font "JetBrainsMono Nerd Font Mono" :height 100) ;; set font and font-size
+(set-face-attribute 'default nil :font "JetBrainsMono Nerd Font Mono" :height 130) ;; set font and font-size
+(setq ring-bell-function 'ignore)
 
 ;; Other Configurations
 (recentf-mode 1) ;; Maintains a list of recent files
@@ -13,15 +14,15 @@
 (save-place-mode 1) ;; saves cursor location in files
 
 ;; Move customizations variables to a separate file and load it
-(setq custom-file (locate-user-emacs-file "custom-vars.el"))
+(setq custom-file "~/.emacs.d/custom-vars.el")
 (load custom-file 'noerror 'nomessage)
 
 ;; Move package-list to package-list.el
-(setq custom-file (locate-user-emacs-file "package-list.el"))
+(setq custom-file "~/.emacs.d/package-list.el")
 (load custom-file 'noerror 'nomessage)
 
 ;; Move global bindings to bindings.el
-(setq custom-file (locate-user-emacs-file "bindings.el"))
+(setq custom-file "~/.emacs.d/bindings.el")
 (load custom-file 'noerror 'nomessage)
 
 ;; Sync files if the file is edited outside emacs

@@ -1,1 +1,1 @@
-/home/ethan/.emacs.d/straight/repos/use-package/use-package-delight.el
+/Users/abhijeetsingh/.emacs.d/straight/repos/use-package/use-package-delight.el

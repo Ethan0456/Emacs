@@ -1,1 +1,1 @@
-/home/ethan/.emacs.d/straight/repos/evil/evil-types.el
+/Users/abhijeetsingh/.emacs.d/straight/repos/evil/evil-types.el

@@ -1,1 +1,1 @@
-/home/ethan/.emacs.d/straight/repos/f.el/f.el
+/Users/abhijeetsingh/.emacs.d/straight/repos/f.el/f.el

@@ -1,1 +1,1 @@
-/home/ethan/.emacs.d/straight/repos/emacs-dashboard/dashboard-widgets.el
+/Users/abhijeetsingh/.emacs.d/straight/repos/emacs-dashboard/dashboard-widgets.el

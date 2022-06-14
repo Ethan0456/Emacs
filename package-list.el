@@ -13,7 +13,6 @@
 ;; (setq use-package-always-ensure t) ;; ensures that all the packages are downloaded locally
 
 
-
 ;; Bootstrap code to install straight.el
 (defvar bootstrap-version)
 (let ((bootstrap-file
@@ -34,7 +33,29 @@
 (setq straight-use-package-by-default t)
 
 ;; Packages and their configs
-(use-package evil :init (evil-mode))
+(use-package general)
+(use-package evil
+  :init
+  (setq evil-want-integration t)
+  (setq evil-want-keybinding nil)
+  (setq evil-want-C-u-scroll t)
+  (setq evil-want-C-i-jump nil)
+  :config
+  (evil-mode 1)
+  (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state)
+  (define-key evil-insert-state-map (kbd "C-h") 'evil-delete-backward-char-and-join)
+
+  ;; Use visual line motions even outside of visual-line-mode buffers
+  (evil-global-set-key 'motion "j" 'evil-next-visual-line)
+  (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
+
+  (evil-set-initial-state 'messages-buffer-mode 'normal)
+  (evil-set-initial-state 'dashboard-mode 'normal))
+
+(use-package evil-collection
+  :after evil
+  :config
+  (evil-collection-init))
 (use-package rainbow-delimiters :init (rainbow-delimiters-mode))
 (use-package ivy :init (ivy-mode))
 (use-package counsel :init (counsel-mode))
@@ -51,11 +72,14 @@
   :config
   (dashboard-setup-startup-hook))
   (setq initial-buffer-choice (lambda () (get-buffer "*dashboard*")))
-  (setq dashboard-startup-banner [VALUE])
+  (setq dashboard-startup-banner "~/.emacs.d/images/black-hole.png")
  ;; Content is not centered by default. To center, set
   (setq dashboard-center-content t)
   ;; To disable shortcut "jump" indicators for each section, set
   (setq dashboard-show-shortcuts nil)
-(use-package general)
-
-(use-package neotree)
+(use-package ivy-rich :init (ivy-rich))
+(use-package neotree :init (neotree-show))
+(use-package perspective
+  :init (persp-mode)
+  :custom
+  (persp-mode-prefix-key (kbd "C-c M-p"))) 

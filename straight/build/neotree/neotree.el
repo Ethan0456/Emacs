@@ -1,1 +1,1 @@
-/home/ethan/.emacs.d/straight/repos/emacs-neotree/neotree.el
+/Users/abhijeetsingh/.emacs.d/straight/repos/emacs-neotree/neotree.el

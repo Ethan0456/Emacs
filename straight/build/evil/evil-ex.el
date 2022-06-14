@@ -1,1 +1,1 @@
-/home/ethan/.emacs.d/straight/repos/evil/evil-ex.el
+/Users/abhijeetsingh/.emacs.d/straight/repos/evil/evil-ex.el

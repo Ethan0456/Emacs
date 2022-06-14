@@ -1,1 +1,1 @@
-/home/ethan/.emacs.d/straight/repos/helpful/helpful.el
+/Users/abhijeetsingh/.emacs.d/straight/repos/helpful/helpful.el

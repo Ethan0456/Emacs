@@ -1,1 +1,1 @@
-/home/ethan/.emacs.d/straight/repos/dash.el/dash.texi
+/Users/abhijeetsingh/.emacs.d/straight/repos/dash.el/dash.texi
