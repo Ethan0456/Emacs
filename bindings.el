@@ -14,28 +14,35 @@
   ;; Quick Access
   ";" '(eval-region :which-key "eval-region")
   "SPC ;" '(eval-buffer :which-key "eval-buffer")
-  ;;"SPC" '(projectile-find-file :which-key "Projectile find file")
-  ;;"SPC" '(+consult/find-file :which-key "+consult/find-file")
-  "." '(find-file :which-key "Find file")
-  "," '(counsel-switch-buffer :which-key "counsel-switch-buffer")
+  "SPC ." '(find-file :which-key "Find file")
+  "SPC ," '(counsel-switch-buffer :which-key "counsel-switch-buffer")
   ":" '(execute-extended-command :which-key "M-x")
-;;  "x" '(open-scratch-buffer :which-key "Open scratch buffer")
+  "x" '(open-scratch-buffer :which-key "Open scratch buffer")
   "d" '(dired-jump :which-key "dired-jump")
-;;  "/" '(+consult/ripgrep :which-key "+consult/ripgrep")
   "[" '(persp-prev :which-key "persp-prev")
   "]" '(persp-next :which-key "persp-next")
-
+  "," '(evil-window-left :which-key "evil-window-left")
+  "." '(evil-window-right :which-key "evil-window-right")
+  "<" '(evil-window-up :which-key "evil-window-up")
+  ">" '(evil-window-down :which-key "evil-window-down")
+  "k" '(comment-region :whick-key "comment-region")
+  "K" '(uncomment-region :which-key "uncomment-region")
+;  "/" '(+consult/ripgrep :which-key "+consult/ripgrep")
+;;  "SPC" '(projectile-find-file :which-key "Projectile find file")
+;;  "SPC" '(+consult/find-file :which-key "+consult/find-file")
 
   ;; editor
   "e" '(:ignore t :which-key "Editor")
+  "f" '(swiper :whick-key "swiper")
+  "m" '(swiper-mc :which-key "swiper-multi-cursor")
+  "er" '(query-replace :which-key "query-replace")
 ;;  "eu" '(undo-tree-visualize :which-key "undo-tree-visualize")
 ;;  "et" '(hydra-theme/body :which-key "hydra-theme") ; not sure if this is the best place for this, perhaps toggles would be more appropriate?
-  "er" '(query-replace :which-key "query-replace")
 ;;  "ec" '(consult-theme :which-key "consult-theme")
 
   ;; buffer
-  ;"TAB" '(switch-to-prev-buffer :which-key "Prev buffer")
   "b" '(:ignore t :which-key "Buffer")
+  "bp" '(switch-to-prev-buffer :which-key "Prev buffer")
   "bb" '(consult-buffer :which-key "consult-buffer")
   "b[" '(previous-buffer :which-key "Previous buffer")
   "b]" '(next-buffer :which-key "Next buffer")
@@ -49,10 +56,10 @@
   "o" '(:ignore t :which-key "Open")
   "op" '(treemacs :which-key "Treemacs")
   "oP" '(treemacs-find-file :which-key "Treemacs find file")
-  "oc" '(open-init-file :which-key "Open init.el")
   "ov" '(vterm :which-key "Open vterm")
-  "on" '(neotree-show :which-key "Open Neotree")
+  "on" '(neotree-toggle :which-key "Open Neotree")
   "om" '(minimap-mode :which-key "Open Minimap")
+  ;;"oc" '(open-init-file :which-key "Open init.el")
   
   ;; projectile
   "p" '(projectile-command-map :which-key "Projectile")
@@ -67,28 +74,28 @@
   "hw" '(where-is :which-key "where-is")
 
   ;; zoom
-  ;; the hydra is nice but the rest is kind of jank, need to pla around with this more
   "=" '(text-scale-increase :which-key "text-scale-increase")
   "-" '(text-scale-decrease :which-key "text-scale-decrease")
-  "z" '(:ignore t :which-key "zoom")
-  "z=" '(zoom-in :which-key "zoom-in")
-  "z-" '(zoom-out :which-key "zoom-out")
-  "zz" '(hydra-zoom/body :which-key "hydra-zoom")
+  ;; "z" '(:ignore t :which-key "zoom")
+  ;; "z=" '(zoom-in :which-key "zoom-in")
+  ;; "z-" '(zoom-out :which-key "zoom-out")
+  ;; "zz" '(hydra-zoom/body :which-key "hydra-zoom")
+  ;; the hydra is nice but the rest is kind of jank, need to pla around with this more
 
   ;; window
   "w" '(evil-window-map :which-key "Window")
 
   ;; toggles
   "t" '(:ignore t :which-key "Toggles")
-  "ta" '(corfu-mode :which-key "corfu-mode") ;; 'a' for autocomplete
-  "ts" '(flyspell-mode :which-key "flyspell-mode")
-  "tf" '(flyspell-mode :which-key "flyspell-mode")
-  "tc" '(flycheck-mode :which-key "flycheck-mode")
-  "tm" '(minimap-mode :which-key "minimap-mode")
-  "tg" '(evil-goggles-mode :which-key "evil-goggles")
-  "tI" '(toggle-indent-style :which-key "Indent style")
-  "tv" '(visual-line-mode  :which-key "visual-line-mode")
   "th" '(counsel-load-theme :which-key "counsel-load-theme")
+  ;; "ta" '(corfu-mode :which-key "corfu-mode") ;; 'a' for autocomplete
+  ;; "ts" '(flyspell-mode :which-key "flyspell-mode")
+  ;; "tf" '(flyspell-mode :which-key "flyspell-mode")
+  ;; "tc" '(flycheck-mode :which-key "flycheck-mode")
+  ;; "tm" '(minimap-mode :which-key "minimap-mode")
+  ;; "tg" '(evil-goggles-mode :which-key "evil-goggles")
+  ;; "tI" '(toggle-indent-style :which-key "Indent style")
+  ;; "tv" '(visual-line-mode  :which-key "visual-line-mode")
   
   ;; notes/org
   "n" '(:ignore t :which-key "Notes")
@@ -125,8 +132,7 @@
   "9" '((lambda () (interactive) (persp-switch-by-index insert (8))) :which-key nil)
 
   ;; git
-  "g" '(:ignore t :which-key "Git") ; prefix
-  "gg" '(magit-status :which-key "Git status"))
+  ;; "g" '(evil-magit-map :which-key "Git") ; prefix
 
 ;; minibuffer keybindings
 ;; (general-define-key
@@ -163,13 +169,13 @@
 
 ;; insert mode hotkeys
 (general-define-key
-  :states 'insert
+  :states '(insert normal)
   ;"C-SPC" 'company-complete
   "C-SPC" 'completion-at-point ;; bring up corfu completion
   "C-v" 'yank ;; C-v should paste clipboard contents
 
-  "C-<backspace>" 'my-backward-kill-word
-  "M-<backspace>" 'my-backward-kill-line
+  "C-<backspace>" 'backward-kill-word
+  "C-S-<backspace>" 'backward-kill-line
 
   ;; some emacs editing hotkeys inside insert mode
   "C-a" 'evil-beginning-of-visual-line
