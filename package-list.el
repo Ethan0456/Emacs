@@ -1,3 +1,5 @@
+;; ;; package.el initialization code
+
 ;; ;; Initialize package sources
 ;; (require 'package) ;; brings all package management functions in the environment
 ;; (setq package-archives '(("melpa" . "https://melpa.org/packages/") ;; a alist of archives to fetch packages from
@@ -12,6 +14,8 @@
 ;; (require 'use-package) ;; loads use-package
 ;; (setq use-package-always-ensure t) ;; ensures that all the packages are downloaded locally
 
+
+;; ;; straight.el initialization code
 
 ;; Bootstrap code to install straight.el
 (defvar bootstrap-version)
@@ -33,8 +37,8 @@
 (setq straight-use-package-by-default t)
 
 ;; Packages and their configs
-(use-package general)
-(use-package evil
+(use-package general) ;; general.el provides a more convenient method for binding keys in emacs (for both evil and non-evil users). 
+(use-package evil ;; Evil is an extensible vi layer for Emacs. It emulates the main features of Vim, and provides facilities for writing custom extensions. 
   :init
   (setq evil-want-integration t)
   (setq evil-want-keybinding nil)
@@ -52,22 +56,45 @@
   (evil-set-initial-state 'messages-buffer-mode 'normal)
   (evil-set-initial-state 'dashboard-mode 'normal))
 
+;; This is a collection of Evil bindings for the parts of Emacs that Evil does not cover properly by default, such as help-mode, M-x calendar, Eshell and more.
 (use-package evil-collection
   :after evil
   :config
   (evil-collection-init))
-(use-package rainbow-delimiters :init (rainbow-delimiters-mode))
-(use-package ivy :init (ivy-mode))
-(use-package counsel :init (counsel-mode))
-(use-package helpful :config (helpful-mode))
-(use-package doom-modeline :init (doom-modeline-mode))
-(use-package which-key :init (which-key-mode))
+
+;; rainbow-delimiters is a "rainbow parentheses"-like mode which highlights delimiters such as parentheses, brackets or braces according to their depth.
+(use-package rainbow-delimiters
+  :init (rainbow-delimiters-mode))
+
+;; Ivy is a generic completion mechanism for Emacs. 
+(use-package ivy
+  :init (ivy-mode))
+
+;; Counsel takes this further, providing versions of common Emacs commands that are customised to make the best use of Ivy. 
+(use-package counsel
+  :init (counsel-mode))
+
+;; Helpful is an alternative to the built-in Emacs help that provides much more contextual information.
+(use-package helpful
+  :config (helpful-mode))
+
+;; A fancy and fast mode-line inspired by minimalism design.
+(use-package doom-modeline
+  :init (doom-modeline-mode))
+
+;; WhichKey is a lua plugin for Neovim 0.5 that displays a popup with possible key bindings of the command you started typing. Heavily inspired by the original emacs-which-key and vim-which-key.
+(use-package which-key
+  :init (which-key-mode))
+
+;; DOOM Emacs Themes
 (use-package doom-themes
   :config
   ;; Global settings (defaults)
   (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
         doom-themes-enable-italic t) ; if nil, italics is universally disabled
-  (load-theme 'doom-henna t))
+  (load-theme 'doom-city-lights t))
+
+;; An extensible Emacs Dashboard
 (use-package dashboard
   :config
   (dashboard-setup-startup-hook))
@@ -77,9 +104,48 @@
   (setq dashboard-center-content t)
   ;; To disable shortcut "jump" indicators for each section, set
   (setq dashboard-show-shortcuts nil)
-(use-package ivy-rich :init (ivy-rich))
-(use-package neotree :init (neotree-show))
+
+;; This package comes with rich transformers for commands from ivy and counsel. It should be easy enough to define your own transformers too.
+(use-package ivy-rich
+  :after (ivy)
+  :config (ivy-rich-mode))
+
+;; A Emacs Tree plugin like NerdTree for Vim
+(use-package neotree)
+
+;; The Perspective package provides multiple named workspaces (or "perspectives") in Emacs, similar to multiple desktops in window managers like Awesome and XMonad, and Spaces on the Mac.
 (use-package perspective
-  :init (persp-mode)
+  :init (persp-mode))
+
+;; Icons for Emacs
+(use-package all-the-icons)
+
+;; Projectile is a project interaction library for Emacs. Its goal is to provide a nice set of features operating on a project level without introducing external dependencies (when feasible).
+(use-package projectile 
+  :diminish projectile-mode
+  :config (projectile-mode)
+  :custom ((projectile-completion-system 'ivy))
+  :init
+  ;; NOTE: Set this to the folder where you keep your Git repos!
+  (when (file-directory-p "~/Projects/Code")
+    (setq projectile-project-search-path '("~/Projects/Code")))
+  (setq projectile-switch-project-action #'projectile-dired))
+
+;; Projectile has native support for using ivy as its completion system. Counsel-projectile provides further ivy integration into projectile by taking advantage of ivy's support for selecting from a list of actions and applying an action without leaving the completion session.
+(use-package counsel-projectile 
+  :config (counsel-projectile-mode))
+
+;; Terminal for Emacs
+(use-package vterm)
+
+;; Normal Minimap
+(use-package minimap)
+
+;; Magit : git interface for emacs
+(use-package magit
   :custom
-  (persp-mode-prefix-key (kbd "C-c M-p"))) 
+  (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1))
+
+;; Evil bindings for Magit
+(use-package evil-magit
+  :after magit)

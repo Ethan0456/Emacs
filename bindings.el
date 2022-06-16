@@ -10,27 +10,28 @@
 
   ;; map universal argument to SPC-u
   "u" '(universal-argument :which-key "Universal argument")
+
+  ;; Quick Access
   ";" '(eval-region :which-key "eval-region")
-  "SPC" '(projectile-find-file :which-key "Projectile find file")
-  ;"SPC" '(+consult/find-file :which-key "+consult/find-file")
-
-
+  "SPC ;" '(eval-buffer :which-key "eval-buffer")
+  ;;"SPC" '(projectile-find-file :which-key "Projectile find file")
+  ;;"SPC" '(+consult/find-file :which-key "+consult/find-file")
   "." '(find-file :which-key "Find file")
-  "," '(consult-buffer :which-key "consult-buffer")
+  "," '(counsel-switch-buffer :which-key "counsel-switch-buffer")
   ":" '(execute-extended-command :which-key "M-x")
-  "x" '(open-scratch-buffer :which-key "Open scratch buffer")
+;;  "x" '(open-scratch-buffer :which-key "Open scratch buffer")
   "d" '(dired-jump :which-key "dired-jump")
-  "/" '(+consult/ripgrep :which-key "+consult/ripgrep")
+;;  "/" '(+consult/ripgrep :which-key "+consult/ripgrep")
   "[" '(persp-prev :which-key "persp-prev")
   "]" '(persp-next :which-key "persp-next")
 
 
   ;; editor
   "e" '(:ignore t :which-key "Editor")
-  "eu" '(undo-tree-visualize :which-key "undo-tree-visualize")
-  "et" '(hydra-theme/body :which-key "hydra-theme") ; not sure if this is the best place for this, perhaps toggles would be more appropriate?
+;;  "eu" '(undo-tree-visualize :which-key "undo-tree-visualize")
+;;  "et" '(hydra-theme/body :which-key "hydra-theme") ; not sure if this is the best place for this, perhaps toggles would be more appropriate?
   "er" '(query-replace :which-key "query-replace")
-  "ec" '(consult-theme :which-key "consult-theme")
+;;  "ec" '(consult-theme :which-key "consult-theme")
 
   ;; buffer
   ;"TAB" '(switch-to-prev-buffer :which-key "Prev buffer")
@@ -49,10 +50,12 @@
   "op" '(treemacs :which-key "Treemacs")
   "oP" '(treemacs-find-file :which-key "Treemacs find file")
   "oc" '(open-init-file :which-key "Open init.el")
-
-  ;; project
-  "p" '(:ignore t :which-key "Project")
-  "pp" '(projectile-switch-project :which-key "Switch Project")
+  "ov" '(vterm :which-key "Open vterm")
+  "on" '(neotree-show :which-key "Open Neotree")
+  "om" '(minimap-mode :which-key "Open Minimap")
+  
+  ;; projectile
+  "p" '(projectile-command-map :which-key "Projectile")
 
   ;; help
   "h" '(:ignore t :which-key "Help")
@@ -73,10 +76,7 @@
   "zz" '(hydra-zoom/body :which-key "hydra-zoom")
 
   ;; window
-  "w" '(:ignore t :which-key "Window")
-  "wt" '(toggle-window-split :which-key "toggle-window-split")
-  "wa" '(ace-window :which-key "ace-window")
-  "wr" '(hydra-window/body :which-key "hydra-window")
+  "w" '(evil-window-map :which-key "Window")
 
   ;; toggles
   "t" '(:ignore t :which-key "Toggles")
@@ -87,8 +87,9 @@
   "tm" '(minimap-mode :which-key "minimap-mode")
   "tg" '(evil-goggles-mode :which-key "evil-goggles")
   "tI" '(toggle-indent-style :which-key "Indent style")
-  "tv" '(visual-line-mode :which-key "visual-line-mode")
-
+  "tv" '(visual-line-mode  :which-key "visual-line-mode")
+  "th" '(counsel-load-theme :which-key "counsel-load-theme")
+  
   ;; notes/org
   "n" '(:ignore t :which-key "Notes")
   "nf" '(org-roam-node-find :which-key "find-node")
@@ -98,44 +99,45 @@
   "na" '(org-agenda :which-key "org-agenda")
 
   ;; persps
-  "TAB" '(:ignore t :which-key "Perspective")
-  "TAB TAB" '(persp-switch :which-key "persp-switch")
-  "TAB [" '(persp-prev :which-key "persp-prev")
-  "TAB ]" '(persp-next :which-key "persp-next")
-  "TAB n" '(+persp/add-new :which-key "+persp/add-new")
-  "TAB N" '(+persp/add-new-import-buffer :which-key "+persp/add-new-import-buffer")
-  "TAB k" '(+persp/kill-current :which-key "+persp/kill-current")
-  "TAB d" '(+persp/kill-current :which-key "+persp/kill-current")
-  "TAB K" '(+persp/kill-all-except-default :which-key "+persp/kill-all-except-default")
-  "TAB r" '(+persp/rename :which-key "+persp/rename")
-  "TAB a" '(+persp/add-buffer-switch :which-key "+persp/add-buffer-switch")
-  "TAB b" '(persp-ivy-switch-buffer :which-key "list-or-switch-buffer")
+  "TAB" '(perspective-map :which-key "Persp" :config (persp-mode))
+  ;; "TAB" '(:ignore t :which-key "Perspective")
+  ;; "TAB TAB" '(persp-switch :which-key "persp-switch")
+  ;; "TAB [" '(persp-prev :which-key "persp-prev")
+  ;; "TAB ]" '(persp-next :which-key "persp-next")
+  ;; "TAB n" '(+persp/add-new :which-key "+persp/add-new")
+  ;; "TAB N" '(+persp/add-new-import-buffer :which-key "+persp/add-new-import-buffer")
+  ;; "TAB k" '(+persp/kill-current :which-key "+persp/kill-current")
+  ;; "TAB d" '(+persp/kill-current :which-key "+persp/kill-current")
+  ;; "TAB K" '(+persp/kill-all-except-default :which-key "+persp/kill-all-except-default")
+  ;; "TAB r" '(+persp/rename :which-key "+persp/rename")
+  ;; "TAB a" '(+persp/add-buffer-switch :which-key "+persp/add-buffer-switch")
+  ;; "TAB b" '(persp-ivy-switch-buffer :which-key "list-or-switch-buffer")
   
   ;; quick persp switching
-  "1" '((lambda () (interactive) (+persp/switch-by-index 0)) :which-key nil)
-  "2" '((lambda () (interactive) (+persp/switch-by-index 1)) :which-key nil)
-  "3" '((lambda () (interactive) (+persp/switch-by-index 2)) :which-key nil)
-  "4" '((lambda () (interactive) (+persp/switch-by-index 3)) :which-key nil)
-  "5" '((lambda () (interactive) (+persp/switch-by-index 4)) :which-key nil)
-  "6" '((lambda () (interactive) (+persp/switch-by-index 5)) :which-key nil)
-  "7" '((lambda () (interactive) (+persp/switch-by-index 6)) :which-key nil)
-  "8" '((lambda () (interactive) (+persp/switch-by-index 7)) :which-key nil)
-  "9" '((lambda () (interactive) (+persp/switch-by-index 8)) :which-key nil)
+  "1" '((lambda () (interactive) (persp-switch-by-index insert (0))) :which-key nil)
+  "2" '((lambda () (interactive) (persp-switch-by-index insert (1))) :which-key nil)
+  "3" '((lambda () (interactive) (persp-switch-by-index insert (2))) :which-key nil)
+  "4" '((lambda () (interactive) (persp-switch-by-index insert (3))) :which-key nil)
+  "5" '((lambda () (interactive) (persp-switch-by-index insert (4))) :which-key nil)
+  "6" '((lambda () (interactive) (persp-switch-by-index insert (5))) :which-key nil)
+  "7" '((lambda () (interactive) (persp-switch-by-index insert (6))) :which-key nil)
+  "8" '((lambda () (interactive) (persp-switch-by-index insert (7))) :which-key nil)
+  "9" '((lambda () (interactive) (persp-switch-by-index insert (8))) :which-key nil)
 
   ;; git
   "g" '(:ignore t :which-key "Git") ; prefix
   "gg" '(magit-status :which-key "Git status"))
 
 ;; minibuffer keybindings
-(general-define-key
-  :keymaps default-minibuffer-maps
-  [escape] 'abort-recursive-edit ;; escape should always quit
+;; (general-define-key
+;;   :keymaps default-minibuffer-maps
+;;   ;; [escape] 'abort-recursive-edit ;; escape should always quit
 
-  "C-a" 'move-beginning-of-line
-  "C-e" 'move-end-of-line
+;;   "C-a" 'move-beginning-of-line
+;;   "C-e" 'move-end-of-line
 
-  "C-w" 'backward-delete-word
-  "C-v" 'yank)
+;;   "C-w" 'backward-delete-word
+;;   "C-v" 'yank)
 
 ;; evil bindings
 ;; TODO this is a bit of a mess, I need to go through the state hierarchy to define hotkeys in highest priority
@@ -145,6 +147,10 @@
   ;; evil numbers
   "g=" 'evil-numbers/inc-at-pt
   "g-" 'evil-numbers/dec-at-pt
+
+  ;; Comment Text
+  "M-" 'comment-region
+  "M+" 'uncomment-region
 
   ;; flyspell correct
   "z=" 'flyspell-correct-wrapper
@@ -276,24 +282,24 @@
   :states 'motion
   :keymaps 'org-mode-map
   :major-modes t
-  "RET" 'org-return))
-----
-
-
-; LANGUAGES
- lsp
-se-package lsp-mode
-:custom
-(lsp-completion-provider :none) ;; we use Corfu!
-:init
-(defun +lsp-mode-setup-completion ()
-  (setf (alist-get 'styles (alist-get 'lsp-capf completion-category-defaults))
-        '(orderless))) ;; Configure orderless
-:hook ((lsp-mode . lsp-enable-which-key-integration)
-       (lsp-mode . lsp-ui-mode)
-       (rustic-mode . lsp))
-       (lsp-completion-mode . +lsp-mode-setup-completion)
-:commands lsp
-:config
-(setq lsp-headerline-breadcrumb-enable nil
-      lsp-enable-snippet nil)) ;; TODO this is broken
+  "RET" 'org-return)
+;;----
+;;
+;;
+;;; LANGUAGES
+;; lsp
+;;se-package lsp-mode
+;;:custom
+;;(lsp-completion-provider :none) ;; we use Corfu!
+;;:init
+;;(defun +lsp-mode-setup-completion ()
+;;  (setf (alist-get 'styles (alist-get 'lsp-capf completion-category-defaults))
+;;        '(orderless))) ;; Configure orderless
+;;:hook ((lsp-mode . lsp-enable-which-key-integration)
+;;       (lsp-mode . lsp-ui-mode)
+;;       (rustic-mode . lsp))
+;;       (lsp-completion-mode . +lsp-mode-setup-completion)
+;;:commands lsp
+;;:config
+;;(setq lsp-headerline-breadcrumb-enable nil
+;;      lsp-enable-snippet nil)) ;; TODO this is broken
