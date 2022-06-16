@@ -1,1 +1,0 @@
-/Users/abhijeetsingh/.emacs.d/straight/repos/compat/.dir-locals.el

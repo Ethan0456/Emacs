@@ -1,1 +1,0 @@
-/Users/abhijeetsingh/.emacs.d/straight/repos/evil-magit/evil-magit.el

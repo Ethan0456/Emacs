@@ -1,1 +1,0 @@
-/Users/abhijeetsingh/.emacs.d/straight/repos/perspective-el/perspective.el
