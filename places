@@ -1,9 +1,12 @@
 ;;; -*- coding: utf-8; mode: lisp-data -*-
-(("/Users/abhijeetsingh/.emacs.d/bindings.el" . 12143)
- ("/Users/abhijeetsingh/.emacs.d/history" . 3516)
- ("/Users/abhijeetsingh/.emacs.d/package-list.el" . 2004)
+(("/Users/abhijeetsingh/.emacs.d/custom-vars.el" . 593)
+ ("/Users/abhijeetsingh/.emacs.d/init.el" . 2172)
+ ("/Users/abhijeetsingh/.emacs.d/package-list.el" . 6137)
+ ("/Users/abhijeetsingh/.emacs.d/history" . 6874)
+ ("/Users/abhijeetsingh/.emacs.d/"
+  (dired-filename . "/Users/abhijeetsingh/.emacs.d/straight"))
+ ("/Users/abhijeetsingh/.emacs.d/bindings.el" . 6708)
  ("/Users/abhijeetsingh/.emacs.d/.cache/treemacs-persist" . 45)
- ("/Users/abhijeetsingh/.emacs.d/init.el" . 1627)
  ("/Users/abhijeetsingh/.emacs.d/straight/build/treemacs/treemacs-autoloads.el" . 31526)
  ("/Users/abhijeetsingh/.emacs.d/straight/build/cfrs/cfrs-autoloads.el" . 399)
  ("/Users/abhijeetsingh/.emacs.d/straight/build/posframe/posframe-autoloads.el" . 7915)

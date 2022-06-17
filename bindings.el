@@ -64,18 +64,18 @@
   ;; projectile
   "p" '(projectile-command-map :which-key "Projectile")
 
-  ;; ;; help
-  ;; "h" '(:ignore t :which-key "Help")
-  ;; "hf" '(helpful-callable :which-key "describe-function")
-  ;; "hk" '(helpful-key :which-key "describe-key")
-  ;; "hv" '(helpful-variable :which-key "describe-variable")
-  ;; "hm" '(describe-mode :which-key "describe-mode")
-  ;; "hF" '(describe-face :which-key "describe-face")
-  ;; "hw" '(where-is :which-key "where-is")
+  ;; help
+  "h" '(:ignore t :which-key "Help")
+  "hf" '(helpful-callable :which-key "describe-function")
+  "hk" '(helpful-key :which-key "describe-key")
+  "hv" '(helpful-variable :which-key "describe-variable")
+  "hm" '(describe-mode :which-key "describe-mode")
+  "hF" '(describe-face :which-key "describe-face")
+  "hw" '(where-is :which-key "where-is")
 
-  ;; ;; zoom
-  ;; "=" '(text-scale-increase :which-key "text-scale-increase")
-  ;; "-" '(text-scale-decrease :which-key "text-scale-decrease")
+  ;; zoom
+  "=" '(text-scale-increase :which-key "text-scale-increase")
+  "-" '(text-scale-decrease :which-key "text-scale-decrease")
   ;; ;; "z" '(:ignore t :which-key "zoom")
   ;; ;; "z=" '(zoom-in :which-key "zoom-in")
   ;; ;; "z-" '(zoom-out :which-key "zoom-out")
@@ -121,29 +121,29 @@
   ;; "TAB b" '(persp-ivy-switch-buffer :which-key "list-or-switch-buffer")
   
   ;; quick persp switching
-  ;; "1" '((lambda () (interactive) (persp-switch-by-index insert (0))) :which-key nil)
-  ;; "2" '((lambda () (interactive) (persp-switch-by-index insert (1))) :which-key nil)
-  ;; "3" '((lambda () (interactive) (persp-switch-by-index insert (2))) :which-key nil)
-  ;; "4" '((lambda () (interactive) (persp-switch-by-index insert (3))) :which-key nil)
-  ;; "5" '((lambda () (interactive) (persp-switch-by-index insert (4))) :which-key nil)
-  ;; "6" '((lambda () (interactive) (persp-switch-by-index insert (5))) :which-key nil)
-  ;; "7" '((lambda () (interactive) (persp-switch-by-index insert (6))) :which-key nil)
-  ;; "8" '((lambda () (interactive) (persp-switch-by-index insert (7))) :which-key nil)
-  ;; "9" '((lambda () (interactive) (persp-switch-by-index insert (8))) :which-key nil)
+  "1" '((lambda () (interactive) (persp-switch-by-number 1)) :which-key "switch-to-persp-1")
+  "2" '((lambda () (interactive) (persp-switch-by-number 2)) :which-key "switch-to-persp-2")
+  "3" '((lambda () (interactive) (persp-switch-by-number 3)) :which-key "switch-to-persp-3")
+  "4" '((lambda () (interactive) (persp-switch-by-number 4)) :which-key "switch-to-persp-4")
+  "5" '((lambda () (interactive) (persp-switch-by-number 5)) :which-key "switch-to-persp-5")
+  "6" '((lambda () (interactive) (persp-switch-by-number 6)) :which-key "switch-to-persp-6")
+  "7" '((lambda () (interactive) (persp-switch-by-number 7)) :which-key "switch-to-persp-7")
+  "8" '((lambda () (interactive) (persp-switch-by-number 8)) :which-key "switch-to-persp-8")
+  "9" '((lambda () (interactive) (persp-switch-by-number 9)) :which-key "switch-to-persp-9")
 
   ;; git
   "g" '(magit-status-here :which-key "Git")) ; prefix
 
 ;; minibuffer keybindings
-;; (general-define-key
-;;   :keymaps default-minibuffer-maps
-;;   ;; [escape] 'abort-recursive-edit ;; escape should always quit
+(general-define-key
+  :keymaps minibuffer-local-map
+  ;; [escape] 'abort-recursive-edit ;; escape should always quit
+  "C-j" 'move
+  "C-a" 'move-beginning-of-line
+  "C-e" 'move-end-of-line
 
-;;   "C-a" 'move-beginning-of-line
-;;   "C-e" 'move-end-of-line
-
-;;   "C-w" 'backward-delete-word
-;;   "C-v" 'yank)
+  "C-w" 'backward-delete-word
+  "C-v" 'yank)
 
 ;; evil bindings
 ;; TODO this is a bit of a mess, I need to go through the state hierarchy to define hotkeys in highest priority
@@ -174,47 +174,47 @@
 ;;   "s" 'avy-goto-char)
 
 ;; insert mode hotkeys
-(general-define-key
-  :states 'insert
-  ;"C-SPC" 'company-complete
-  "C-SPC" 'completion-at-point ;; bring up corfu completion
-  "C-v" 'yank ;; C-v should paste clipboard contents
+;; (general-define-key
+;;   :states 'insert
+;;   ;"C-SPC" 'company-complete
+;;   "C-SPC" 'completion-at-point ;; bring up corfu completion
+;;   "C-v" 'yank ;; C-v should paste clipboard contents
 
-  "C-<backspace>" 'backward-kill-word
-  "C-S-<backspace>" 'backward-kill-line
+;;   "C-<backspace>" 'backward-kill-word
+;;   "C-S-<backspace>" 'backward-kill-line
 
-  ;; some emacs editing hotkeys inside insert mode
-  "C-a" 'evil-beginning-of-visual-line
-  "C-e" 'evil-end-of-visual-line
-  "C-n" 'evil-next-visual-line
-  "C-p" 'evil-previous-visual-line)
+;;   ;; some emacs editing hotkeys inside insert mode
+;;   "C-a" 'evil-beginning-of-visual-line
+;;   "C-e" 'evil-end-of-visual-line
+;;   "C-n" 'evil-next-visual-line
+;;   "C-p" 'evil-previous-visual-line)
 
 ;; motion mode hotkeys, inherited by normal/visual
-(general-define-key
-  :states 'motion
-  "?" '+consult-line
+;; (general-define-key
+;;   :states 'motion
+;;   "?" '+consult-line
 
-  ;; window management
-  "C-w C-u" 'winner-undo
-  "C-w u" 'winner-undo
+;;   ;; window management
+;;   "C-w C-u" 'winner-undo
+;;   "C-w u" 'winner-undo
 
-  "C-w a" 'ace-window
-  "C-w C-w" 'ace-window
-  "C-w w" 'ace-window
+;;   "C-w a" 'ace-window
+;;   "C-w C-w" 'ace-window
+;;   "C-w w" 'ace-window
 
-  "C-w C-l" 'evil-window-right
-  "C-w C-h" 'evil-window-left)
+;;   "C-w C-l" 'evil-window-right
+;;   "C-w C-h" 'evil-window-left)
 
 ;; company
 ;; DELETEME keeping for now to help configure corfu
-(general-define-key
-  :keymaps '(company-active-map)
-  "C-w" nil ; allow C-w to act normally during completion
-  "C-h" nil
-  "C-n" #'company-select-next
-  "C-p" #'company-select-previous
-  "TAB" #'company-complete-selection
-  "<tab>" #'company-complete-selection)
+;; (general-define-key
+;;   :keymaps '(company-active-map)
+;;   "C-w" nil ; allow C-w to act normally during completion
+;;   "C-h" nil
+;;   "C-n" #'company-select-next
+;;   "C-p" #'company-select-previous
+;;   "TAB" #'company-complete-selection
+;;   "<tab>" #'company-complete-selection)
 
 ;; unbind C-z from evil
 (general-unbind '(motion insert treemacs) "C-z")
@@ -236,31 +236,31 @@
   "C-M--" 'zoom-out
 
    ;; C-v to paste (or "yank" in emacs jargon) from clipboard, useful for minibuffers (such as query-replace and M-x)
-  "C-v" 'yank
+  "C-v" 'yank)
 
   ;; buffer management
   ;"C-a" 'bury-buffer
   ;"C-S-a" 'unbury-buffer
-  "C-a" '+persp/previous-buffer
-  "C-S-a" '+persp/next-buffer
+  ;; "C-a" '+persp/previous-buffer
+  ;; "C-S-a" '+persp/next-buffer
   ;"C-z" 'consult-buffer
 
   ;; persp cycling
-  "C-<tab>" 'persp-next
-  "C-<iso-lefttab>" 'persp-prev
-  "C-S-<tab>" 'persp-prev
-  "<backtab>" '+persp/switch-to-last-accessed
+  ;; "C-<tab>" 'persp-next
+  ;; "C-<iso-lefttab>" 'persp-prev
+  ;; "C-S-<tab>" 'persp-prev
+  ;; "<backtab>" '+persp/switch-to-last-accessed
 
   ;; quick persp switching
-  "M-1" (lambda () (interactive) (+persp/switch-by-index 0))
-  "M-2" (lambda () (interactive) (+persp/switch-by-index 1))
-  "M-3" (lambda () (interactive) (+persp/switch-by-index 2))
-  "M-4" (lambda () (interactive) (+persp/switch-by-index 3))
-  "M-5" (lambda () (interactive) (+persp/switch-by-index 4))
-  "M-6" (lambda () (interactive) (+persp/switch-by-index 5))
-  "M-7" (lambda () (interactive) (+persp/switch-by-index 6))
-  "M-8" (lambda () (interactive) (+persp/switch-by-index 7))
-  "M-9" (lambda () (interactive) (+persp/switch-by-index 8)))
+  ;; "M-1" (lambda () (interactive) (+persp/switch-by-index 0))
+  ;; "M-2" (lambda () (interactive) (+persp/switch-by-index 1))
+  ;; "M-3" (lambda () (interactive) (+persp/switch-by-index 2))
+  ;; "M-4" (lambda () (interactive) (+persp/switch-by-index 3))
+  ;; "M-5" (lambda () (interactive) (+persp/switch-by-index 4))
+  ;; "M-6" (lambda () (interactive) (+persp/switch-by-index 5))
+  ;; "M-7" (lambda () (interactive) (+persp/switch-by-index 6))
+  ;; "M-8" (lambda () (interactive) (+persp/switch-by-index 7))
+  ;; "M-9" (lambda () (interactive) (+persp/switch-by-index 8)))
 
 ;; magit
 (general-define-key
@@ -274,18 +274,18 @@
   :states '(normal visual)
   :keymaps 'magit-mode-map
   ;; rebind "q" in magit-status to kill the magit buffers instead of burying them
-  "q" '+magit/quit
+  "q" '+magit/quit)
 
   ;; persp switching within magit
-  "M-1" (lambda () (interactive) (+persp/switch-by-index 0))
-  "M-2" (lambda () (interactive) (+persp/switch-by-index 1))
-  "M-3" (lambda () (interactive) (+persp/switch-by-index 2))
-  "M-4" (lambda () (interactive) (+persp/switch-by-index 3))
-  "M-5" (lambda () (interactive) (+persp/switch-by-index 4))
-  "M-6" (lambda () (interactive) (+persp/switch-by-index 5))
-  "M-7" (lambda () (interactive) (+persp/switch-by-index 6))
-  "M-8" (lambda () (interactive) (+persp/switch-by-index 7))
-  "M-9" (lambda () (interactive) (+persp/switch-by-index 8)))
+  ;; "M-1" (lambda () (interactive) (+persp/switch-by-index 0))
+  ;; "M-2" (lambda () (interactive) (+persp/switch-by-index 1))
+  ;; "M-3" (lambda () (interactive) (+persp/switch-by-index 2))
+  ;; "M-4" (lambda () (interactive) (+persp/switch-by-index 3))
+  ;; "M-5" (lambda () (interactive) (+persp/switch-by-index 4))
+  ;; "M-6" (lambda () (interactive) (+persp/switch-by-index 5))
+  ;; "M-7" (lambda () (interactive) (+persp/switch-by-index 6))
+  ;; "M-8" (lambda () (interactive) (+persp/switch-by-index 7))
+  ;; "M-9" (lambda () (interactive) (+persp/switch-by-index 8)))
 
 ;; org mode specific evil binding
 ;; unbind the return (enter) key so it becomes org-return
