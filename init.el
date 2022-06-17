@@ -27,7 +27,8 @@
       kept-old-versions      5) ; and how many of the old
 
 ;; Disable line numbers for some modes
-(dolist (mode '(org-mode-hook
+(dolist (mode '(treemacs-mode-hook
+		org-mode-hook
 		vterm-mode-hook
 		neotree-mode-hook
 		eshell-mode-hook))

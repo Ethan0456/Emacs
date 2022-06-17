@@ -33,8 +33,8 @@
 
   ;; editor
   "e" '(:ignore t :which-key "Editor")
-  "f" '(swiper :whick-key "swiper")
-  "m" '(swiper-mc :which-key "swiper-multi-cursor")
+  "ef" '(swiper :whick-key "swiper")
+  "em" '(swiper-mc :which-key "swiper-multi-cursor")
   "er" '(query-replace :which-key "query-replace")
 ;;  "eu" '(undo-tree-visualize :which-key "undo-tree-visualize")
 ;;  "et" '(hydra-theme/body :which-key "hydra-theme") ; not sure if this is the best place for this, perhaps toggles would be more appropriate?
@@ -54,8 +54,8 @@
 
   ;; open
   "o" '(:ignore t :which-key "Open")
-  "op" '(treemacs :which-key "Treemacs")
-  "oP" '(treemacs-find-file :which-key "Treemacs find file")
+  "ot" '(treemacs :which-key "Treemacs")
+  "oT" '(treemacs-find-file :which-key "Treemacs find file")
   "ov" '(vterm :which-key "Open vterm")
   "on" '(neotree-toggle :which-key "Open Neotree")
   "om" '(minimap-mode :which-key "Open Minimap")
@@ -64,23 +64,23 @@
   ;; projectile
   "p" '(projectile-command-map :which-key "Projectile")
 
-  ;; help
-  "h" '(:ignore t :which-key "Help")
-  "hf" '(helpful-callable :which-key "describe-function")
-  "hk" '(helpful-key :which-key "describe-key")
-  "hv" '(helpful-variable :which-key "describe-variable")
-  "hm" '(describe-mode :which-key "describe-mode")
-  "hF" '(describe-face :which-key "describe-face")
-  "hw" '(where-is :which-key "where-is")
+  ;; ;; help
+  ;; "h" '(:ignore t :which-key "Help")
+  ;; "hf" '(helpful-callable :which-key "describe-function")
+  ;; "hk" '(helpful-key :which-key "describe-key")
+  ;; "hv" '(helpful-variable :which-key "describe-variable")
+  ;; "hm" '(describe-mode :which-key "describe-mode")
+  ;; "hF" '(describe-face :which-key "describe-face")
+  ;; "hw" '(where-is :which-key "where-is")
 
-  ;; zoom
-  "=" '(text-scale-increase :which-key "text-scale-increase")
-  "-" '(text-scale-decrease :which-key "text-scale-decrease")
-  ;; "z" '(:ignore t :which-key "zoom")
-  ;; "z=" '(zoom-in :which-key "zoom-in")
-  ;; "z-" '(zoom-out :which-key "zoom-out")
-  ;; "zz" '(hydra-zoom/body :which-key "hydra-zoom")
-  ;; the hydra is nice but the rest is kind of jank, need to pla around with this more
+  ;; ;; zoom
+  ;; "=" '(text-scale-increase :which-key "text-scale-increase")
+  ;; "-" '(text-scale-decrease :which-key "text-scale-decrease")
+  ;; ;; "z" '(:ignore t :which-key "zoom")
+  ;; ;; "z=" '(zoom-in :which-key "zoom-in")
+  ;; ;; "z-" '(zoom-out :which-key "zoom-out")
+  ;; ;; "zz" '(hydra-zoom/body :which-key "hydra-zoom")
+  ;; ;; the hydra is nice but the rest is kind of jank, need to pla around with this more
 
   ;; window
   "w" '(evil-window-map :which-key "Window")
@@ -121,18 +121,18 @@
   ;; "TAB b" '(persp-ivy-switch-buffer :which-key "list-or-switch-buffer")
   
   ;; quick persp switching
-  "1" '((lambda () (interactive) (persp-switch-by-index insert (0))) :which-key nil)
-  "2" '((lambda () (interactive) (persp-switch-by-index insert (1))) :which-key nil)
-  "3" '((lambda () (interactive) (persp-switch-by-index insert (2))) :which-key nil)
-  "4" '((lambda () (interactive) (persp-switch-by-index insert (3))) :which-key nil)
-  "5" '((lambda () (interactive) (persp-switch-by-index insert (4))) :which-key nil)
-  "6" '((lambda () (interactive) (persp-switch-by-index insert (5))) :which-key nil)
-  "7" '((lambda () (interactive) (persp-switch-by-index insert (6))) :which-key nil)
-  "8" '((lambda () (interactive) (persp-switch-by-index insert (7))) :which-key nil)
-  "9" '((lambda () (interactive) (persp-switch-by-index insert (8))) :which-key nil)
+  ;; "1" '((lambda () (interactive) (persp-switch-by-index insert (0))) :which-key nil)
+  ;; "2" '((lambda () (interactive) (persp-switch-by-index insert (1))) :which-key nil)
+  ;; "3" '((lambda () (interactive) (persp-switch-by-index insert (2))) :which-key nil)
+  ;; "4" '((lambda () (interactive) (persp-switch-by-index insert (3))) :which-key nil)
+  ;; "5" '((lambda () (interactive) (persp-switch-by-index insert (4))) :which-key nil)
+  ;; "6" '((lambda () (interactive) (persp-switch-by-index insert (5))) :which-key nil)
+  ;; "7" '((lambda () (interactive) (persp-switch-by-index insert (6))) :which-key nil)
+  ;; "8" '((lambda () (interactive) (persp-switch-by-index insert (7))) :which-key nil)
+  ;; "9" '((lambda () (interactive) (persp-switch-by-index insert (8))) :which-key nil)
 
   ;; git
-  ;; "g" '(evil-magit-map :which-key "Git") ; prefix
+  "g" '(magit-status-here :which-key "Git")) ; prefix
 
 ;; minibuffer keybindings
 ;; (general-define-key
@@ -149,27 +149,33 @@
 ;; TODO this is a bit of a mess, I need to go through the state hierarchy to define hotkeys in highest priority
 ;; normal/visual mode hotkeys
 (general-define-key
-  :states '(normal visual)
-  ;; evil numbers
-  "g=" 'evil-numbers/inc-at-pt
-  "g-" 'evil-numbers/dec-at-pt
+ :states '(normal visual)
+ "U" 'evil-scroll-up
+ "Y" 'evil-scroll-down)
 
-  ;; Comment Text
-  "M-" 'comment-region
-  "M+" 'uncomment-region
+ 
+;; (general-define-key
+;;   :states '(normal visual)
+;;   ;; evil numbers
+;;   "g=" 'evil-numbers/inc-at-pt
+;;   "g-" 'evil-numbers/dec-at-pt
 
-  ;; flyspell correct
-  "z=" 'flyspell-correct-wrapper
-  "C-;" 'flyspell-correct-wrapper
+;;   ;; Comment Text
+;;   "M-" 'comment-region
+;;   "M+" 'uncomment-region
 
-  ;; movement
-  "C-n" 'evil-next-visual-line ;; TODO should be in motion? doesn't seem to go down to these states?
-  "C-p" 'evil-previous-visual-line
-  "s" 'avy-goto-char)
+;;   ;; flyspell correct
+;;   "z=" 'flyspell-correct-wrapper
+;;   "C-;" 'flyspell-correct-wrapper
+
+;;   ;; movement
+;;   "C-n" 'evil-next-visual-line ;; TODO should be in motion? doesn't seem to go down to these states?
+;;   "C-p" 'evil-previous-visual-line
+;;   "s" 'avy-goto-char)
 
 ;; insert mode hotkeys
 (general-define-key
-  :states '(insert normal)
+  :states 'insert
   ;"C-SPC" 'company-complete
   "C-SPC" 'completion-at-point ;; bring up corfu completion
   "C-v" 'yank ;; C-v should paste clipboard contents
@@ -289,6 +295,45 @@
   :keymaps 'org-mode-map
   :major-modes t
   "RET" 'org-return)
+
+;; neotree
+(general-define-key
+ :states 'neotree
+ :keymaps 'override
+ "RET" 'neotree-enter
+ "j" 'neotree-next-line
+ "k" 'neotree-previous-line
+ "p" 'neotree-select-up-node
+ "d" 'neotree-select-down-node
+ "c" 'neotree-create-node
+ "r" 'neotree-rename-node
+ "f" 'neotree-find
+ "o" 'neotree-collapse-all
+ "C" 'neotree-copy-node
+ "R" 'neotree-refresh
+ "J" 'neotree-select-next-sibling-node
+ "K" 'neotree-select-previous-sibling-node
+ "P" 'neotree-copy-filepath-to-yank-ring
+ "D" 'neotree-delete-node)
+
+;; treemacs
+(general-define-key
+ :states 'treemacs-mode
+ "RET" 'treemacs-RET-action
+ "j" 'treemacs-next-line
+ "k" 'treemacs-previous-line
+ "F" 'treemacs-create-file
+ "d" 'treemacs-create-dir
+ "D" 'treemacs-delete-file
+ "W" 'treemacs-create-workspace
+ "r" 'treemacs-rename-file
+ "c" 'treemacs-collapse-parent-node
+ "i" 'treemacs-increase-width
+ "I" 'treemacs-decrease-width
+ "C" 'treemacs-copy-file
+ "M" 'treemacs-move-file
+ "R" 'treemacs-refresh)
+
 ;;----
 ;;
 ;;
