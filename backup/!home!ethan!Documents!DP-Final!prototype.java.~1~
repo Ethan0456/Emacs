@@ -1,0 +1,53 @@
+import java.lang.reflect.Method;
+import java.sql.ShardingKey;
+
+class Shape {
+    private int width;
+    private int height;
+    private int radius;
+    private String color;
+
+    Shape(Shape source){
+        this.width = source.width;
+        this.height = source.height;
+        this.color = source.color;
+    }
+    abstract Shape clone() {}
+}
+
+class Rectangle extends Shape {
+    private int width;
+    private int height;
+
+    Rectangle(Rectangle source){
+        super(source);
+        this.width = source.width;
+        this.height = source.height;
+    }
+
+    @Override
+    Shape clone(){
+        return new Rectangle(this);
+    }
+}
+
+class Circle extends Shape {
+    private int radius;
+
+    Circle(Circle source){
+        super(source);
+        this.radius = source.radius;
+    }
+
+    @Override
+    Shape clone(){
+        return new Circle(this);
+    }
+}
+
+class prototype {
+    public static void main() {
+        Rectangle r = new Rectangle();
+        r
+    }
+}

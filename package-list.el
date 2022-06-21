@@ -92,7 +92,7 @@
   ;; Global settings (defaults)
   (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
         doom-themes-enable-italic t) ; if nil, italics is universally disabled
-  (load-theme 'doom-challenger-deep t))
+  (load-theme 'darkokai t))
 
 ;; An extensible Emacs Dashboard
 (use-package dashboard
@@ -127,8 +127,8 @@
   :custom ((projectile-completion-system 'ivy))
   :init
   ;; NOTE: Set this to the folder where you keep your Git repos!
-  (when (file-directory-p "Users/abhijeetsingh/Projects")
-    (setq projectile-project-search-path '("Users/abhijeetsingh/Projects")))
+  (when (file-directory-p "/home/ethan/Projects")
+    (setq projectile-project-search-path '("/home/ethan/Projects")))
   (setq projectile-switch-project-action #'projectile-dired))
 
 ;; Projectile has native support for using ivy as its completion system. Counsel-projectile provides further ivy integration into projectile by taking advantage of ivy's support for selecting from a list of actions and applying an action without leaving the completion session.
@@ -304,6 +304,12 @@
   :hook (lsp-mode . lsp-ui-mode)
   :custom
   (lsp-ui-doc-position 'bottom))
+
+;; Flycheck for errors before compiling
+(use-package flycheck)
+
+;; yasnippet
+(use-package yasnippet :config (yas-global-mode))
 
 ;; Treemacs to view different methods and variables of file in a tree view
 (use-package lsp-treemacs

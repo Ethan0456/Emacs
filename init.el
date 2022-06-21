@@ -6,7 +6,7 @@
 (tooltip-mode -1)                 ;; disable tooltios
 (set-fringe-mode 10)              ;; gives some breathing room
 ;; (menu-bar-mode -1)                ;; disable menubar
-(set-face-attribute 'default nil :font "JetBrainsMono Nerd Font Mono" :height 130) ;; set font and font-size
+(set-face-attribute 'default nil :font "JetBrainsMono Nerd Font Mono" :height 100) ;; set font and font-size
 (setq ring-bell-function 'ignore)
 (setq persp-suppress-no-prefix-key-warning t)
 (recentf-mode 1) ;; Maintains a list of recent files
@@ -17,6 +17,7 @@
 (setq global-auto-revert-non-file-buffers t) ;; Revert Dired and other buffers (same as above for dired and non file buffers)
 (column-number-mode) ;; Make column number visible in modeline
 (global-display-line-numbers-mode t) ;; Enable line numbers
+(add-to-list 'load-path "~/.emacs.d/themes/")
 
 ;; Write backups to ~/.emacs.d/backup/
 (setq backup-directory-alist '(("." . "~/.emacs.d/backup"))
