@@ -135,15 +135,15 @@
   "g" '(magit-status-here :which-key "Git")) ; prefix
 
 ;; minibuffer keybindings
-(general-define-key
-  :keymaps minibuffer-local-map
-  ;; [escape] 'abort-recursive-edit ;; escape should always quit
-  "C-j" 'move
-  "C-a" 'move-beginning-of-line
-  "C-e" 'move-end-of-line
+;; (general-define-key
+;;   :keymaps minibuffer-local-map
+;;   ;; [escape] 'abort-recursive-edit ;; escape should always quit
+;;   "C-j" 'move
+;;   "C-a" 'move-beginning-of-line
+;;   "C-e" 'move-end-of-line
 
-  "C-w" 'backward-delete-word
-  "C-v" 'yank)
+;;   "C-w" 'backward-delete-word
+;;   "C-v" 'yank)
 
 ;; evil bindings
 ;; TODO this is a bit of a mess, I need to go through the state hierarchy to define hotkeys in highest priority
@@ -354,3 +354,15 @@
 ;;:config
 ;;(setq lsp-headerline-breadcrumb-enable nil
 ;;      lsp-enable-snippet nil)) ;; TODO this is broken
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(org-agenda-files nil))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )

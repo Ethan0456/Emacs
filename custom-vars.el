@@ -1,46 +1,56 @@
-(defcustom +minimap-highlight-line nil
-  "Whether minimap should highlight the current line more prominent."
-  :set (lambda (sym value)
-         (set sym value)
-         (if (null value) (+minimap-set-highlight-line--off) (+minimap-set-highlight-line--on)))
-  :type 'boolean
-  :group 'minimap)
+(defun efs/org-font-setup ()
+  ;; Replace list hyphen with dot
+  (font-lock-add-keywords 'org-mode
+                          '(("^ *\\([-]\\) "
+                             (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
 
-(setq
- ;; Configure minimap position
- minimap-window-location 'right ; Minimap on the right side
- minimap-width-fraction 0.0 ; slightly smaller minimap
- minimap-minimum-width 20 ; also slightly smaller minimap
+  ;; Set faces for heading levels
+  (dolist (face '((org-level-1 . 1.2)
+                  (org-level-2 . 1.1)
+                  (org-level-3 . 1.05)
+                  (org-level-4 . 1.0)
+                  (org-level-5 . 1.1)
+                  (org-level-6 . 1.1)
+                  (org-level-7 . 1.1)
+                  (org-level-8 . 1.1)))
+    (set-face-attribute (car face) nil :font "Cantarell" :weight 'regular :height (cdr face)))
 
- minimap-dedicated-window t ; seems to work better
- minimap-enlarge-certain-faces nil ; enlarge breaks BlockFont
- )
+  ;; Ensure that anything that should be fixed-pitch in Org files appears that way
+  (set-face-attribute 'org-block nil :foreground nil :inherit 'fixed-pitch)
+  (set-face-attribute 'org-code nil   :inherit '(shadow fixed-pitch))
+  (set-face-attribute 'org-table nil   :inherit '(shadow fixed-pitch))
+  (set-face-attribute 'org-verbatim nil :inherit '(shadow fixed-pitch))
+  (set-face-attribute 'org-special-keyword nil :inherit '(font-lock-comment-face fixed-pitch))
+  (set-face-attribute 'org-meta-line nil :inherit '(font-lock-comment-face fixed-pitch))
+  (set-face-attribute 'org-checkbox nil :inherit 'fixed-pitch))
 
-(map!
- (:leader
-   (:prefix-map ("t" . "toggle")
-     (:prefix-map ("m" . "minimap")
-     :desc "Toggle minimap" "m" #'+minimap-toggle
-     :desc "Toggle line highlighting" "l" #'+minimap-toggle-highlight-line))))
+(defun efs/org-mode-setup ()
+  (org-indent-mode)
+  (variable-pitch-mode 1)
+  (visual-line-mode 1))
 
+(defun efs/org-mode-visual-fill ()
+  (setq visual-fill-column-width 100
+        visual-fill-column-center-text t)
+  (visual-fill-column-mode 1))
 
-;; Disable modeline in minimap buffer
-(add-hook! 'minimap-sb-mode-hook #'hide-mode-line-mode)
+;; This is needed as of Org 9.2
+(require 'org-tempo)
 
-;; Change colors of minimap
-(custom-set-faces
- ;; Change background
- '(minimap-active-region-background
-   ((((background dark)) (:background "#494949"))
-    (t (:background "#D6D6D6")))
-   :group 'minimap))
+(add-to-list 'org-structure-template-alist '("sh" . "src shell"))
+(add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
+(add-to-list 'org-structure-template-alist '("py" . "src python"))
 
-;; Set Blockfont as minimap font
-(custom-set-faces!
-  '(minimap-font-face :family "BlockFont" :height 30 :group 'minimap))
+;; Automatically tangle our Emacs.org config file when we save it
+(defun efs/org-babel-tangle-config ()
+  (when (string-equal (buffer-file-name)
+                      (expand-file-name "~/Projects/Code/emacs-from-scratch/Emacs.org"))
+    ;; Dynamic scoping to the rescue
+    (let ((org-confirm-babel-evaluate nil))
+      (org-babel-tangle))))
 
-;; Enable minimap on startup
-(minimap-mode 1)
+(add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'efs/org-babel-tangle-config)))
 
-;; Enable minimap for some major modes which don't derive from prog-mode
-(add-to-list 'minimap-major-modes 'markdown-mode)
+(defun efs/lsp-mode-setup ()
+  (setq lsp-headerline-breadcrumb-segments '(path-up-to-project file symbols))
+  (lsp-headerline-breadcrumb-mode))

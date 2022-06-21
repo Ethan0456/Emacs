@@ -18,7 +18,7 @@
 (column-number-mode) ;; Make column number visible in modeline
 (global-display-line-numbers-mode t) ;; Enable line numbers
 
-;; qWrite backups to ~/.emacs.d/backup/
+;; Write backups to ~/.emacs.d/backup/
 (setq backup-directory-alist '(("." . "~/.emacs.d/backup"))
       backup-by-copying      t  ; Don't de-link hard links
       version-control        t  ; Use version numbers on backups
@@ -34,14 +34,14 @@
 		eshell-mode-hook))
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
-;; Move customizations variables to a separate file and load it
-(setq custom-file "~/.emacs.d/custom-vars.el")
-(load custom-file 'noerror 'nomessage)
-
 ;; Move package-list to package-list.el
 (setq custom-file "~/.emacs.d/package-list.el")
-(load custom-file 'noerror 'nomessage)
+(load custom-file 'nomessage)
+
+;; Move customizations variables to a separate file and load it
+(setq custom-file "~/.emacs.d/custom-vars.el")
+(load custom-file 'nomessage)
 
 ;; Move global bindings to bindings.el
 (setq custom-file "~/.emacs.d/bindings.el")
-(load custom-file 'noerror 'nomessage)
+(load custom-file 'nomessage)
