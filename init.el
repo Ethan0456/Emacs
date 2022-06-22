@@ -6,7 +6,7 @@
 (tooltip-mode -1)                 ;; disable tooltios
 (set-fringe-mode 10)              ;; gives some breathing room
 ;; (menu-bar-mode -1)                ;; disable menubar
-(set-face-attribute 'default nil :font "JetBrainsMono Nerd Font Mono" :height 100) ;; set font and font-size
+(set-face-attribute 'default nil :font "JetBrainsMono Nerd Font Mono" :height 120) ;; set font and font-size
 (setq ring-bell-function 'ignore)
 (setq persp-suppress-no-prefix-key-warning t)
 (recentf-mode 1) ;; Maintains a list of recent files
