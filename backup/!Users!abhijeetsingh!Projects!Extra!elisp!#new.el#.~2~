@@ -1,0 +1,14 @@
+(setq num 10)
+(setq flag nil)
+
+(dotimes (countOuter num)
+  (setq countInner 2)
+  (while (< countInner countOuter)
+    (when (equal (% countOuter countInner) 0)
+      (setq flag t))
+    (1+ countInner))
+  (if (equal flag t)
+      (format "%d not Prime" countOuter)
+    (format "%d Prime" countOuter))
+  (1+ countOuter))
+  

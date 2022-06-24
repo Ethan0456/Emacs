@@ -1,0 +1,15 @@
+import os
+import random as rn
+
+cur_dir = os.getcwd()
+ls_dir = os.listdir(cur_dir)
+count = 1
+progress_bar = []
+
+print(len(progress_bar))
+for i in ls_dir:
+    print(count/len(ls_dir)*100 , "% Done !")
+    print(progress_bar)
+    random_int = rn.randint(0,len(ls_dir))
+    os.rename(i, str(random_int))
+    count+=1

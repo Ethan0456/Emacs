@@ -136,7 +136,7 @@
 
 ;; minibuffer keybindings
 ;; (general-define-key
-;;   :keymaps minibuffer-local-map
+;;   :keymaps  
 ;;   ;; [escape] 'abort-recursive-edit ;; escape should always quit
 ;;   "C-j" 'move
 ;;   "C-a" 'move-beginning-of-line

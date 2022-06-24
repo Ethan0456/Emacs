@@ -16,7 +16,6 @@
 
 
 ;; ;; straight.el initialization code
-
 ;; Bootstrap code to install straight.el
 (defvar bootstrap-version)
 (let ((bootstrap-file
@@ -92,7 +91,7 @@
   ;; Global settings (defaults)
   (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
         doom-themes-enable-italic t) ; if nil, italics is universally disabled
-  (load-theme 'doom-ir-black t))
+  (load-theme 'doom-moonlight t))
 
 ;; An extensible Emacs Dashboard
 (use-package dashboard
@@ -338,11 +337,13 @@
 (use-package dired
   :straight nil
   :commands (dired dired-jump)
-  ;; :custom ((dired-listing-switches "-agho --group-directories-first"))
+  :custom ((dired-listing-switches "-al"))
   :config
   (evil-collection-define-key 'normal 'dired-mode-map
     "h" 'dired-single-up-directory
     "l" 'dired-single-buffer))
+
+(use-package ranger)
 
 (use-package dired-single)
 

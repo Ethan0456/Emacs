@@ -1,16 +1,85 @@
 ;;; -*- coding: utf-8; mode: lisp-data -*-
-(("/Users/abhijeetsingh/.emacs.d/package-list.el" . 13171)
+(("/Users/abhijeetsingh/Projects/Extra/elisp/"
+  (dired-filename . "/Users/abhijeetsingh/Projects/Extra/elisp/armstrong.el"))
+ ("/Users/abhijeetsingh/Projects/Extra/"
+  (dired-filename . "/Users/abhijeetsingh/Projects/Extra/elisp"))
+ ("/Users/abhijeetsingh/Projects/"
+  (dired-filename . "/Users/abhijeetsingh/Projects/Extra"))
+ ("/Users/abhijeetsingh/"
+  (dired-filename . "/Users/abhijeetsingh/Projects"))
+ ("/Users/"
+  (dired-filename . "/Users/abhijeetsingh"))
+ ("/"
+  (dired-filename . "/Users"))
+ ("/Users/abhijeetsingh/.emacs.d/package-list.el" . 1036)
+ ("/Users/abhijeetsingh/Projects/Shell/commonCompiler/"
+  (dired-filename . "/Users/abhijeetsingh/Projects/Shell/commonCompiler/cc"))
+ ("/Users/abhijeetsingh/Downloads/"
+  (dired-filename . "/Users/abhijeetsingh/Downloads/terminalThemes"))
+ ("/Users/abhijeetsingh/Downloads/terminalThemes/"
+  (dired-filename . "/Users/abhijeetsingh/Downloads/terminalThemes/Breeze.itermcolors"))
+ ("/Users/abhijeetsingh/Projects/Shell/"
+  (dired-filename . "/Users/abhijeetsingh/Projects/Shell/commonCompiler"))
+ ("/Users/abhijeetsingh/tmp/" . 49)
+ ("/Users/abhijeetsingh/pemacs/" . 49)
+ ("/Users/abhijeetsingh/doom/" . 49)
+ ("/Users/abhijeetsingh/Public/"
+  (dired-filename . "/Users/abhijeetsingh/Public/Drop Box"))
+ ("/Users/abhijeetsingh/Pictures/"
+  (dired-filename . "/Users/abhijeetsingh/Pictures/Photo Booth Library"))
+ ("/Users/abhijeetsingh/Music/"
+  (dired-filename . "/Users/abhijeetsingh/Music/Music"))
+ ("/Users/abhijeetsingh/Movies/"
+  (dired-filename . "/Users/abhijeetsingh/Movies/TV"))
+ ("/Users/abhijeetsingh/Library/"
+  (dired-filename . "/Users/abhijeetsingh/Library/Accounts"))
+ ("/Users/abhijeetsingh/Projects/Data-Structures/"
+  (dired-filename . "/Users/abhijeetsingh/Projects/Data-Structures/1merge_sort.c"))
+ ("/Users/abhijeetsingh/.emacs.d/straight/build/ranger/ranger-autoloads.el" . 2292)
+ ("/Users/abhijeetsingh/.emacs.d/" . 1421)
+ ("/Applications/Emacs.app/Contents/Resources/lisp/dired.el.gz" . 17863)
+ ("/Users/abhijeetsingh/Documents/"
+  (dired-filename . "/Users/abhijeetsingh/Documents/Sem4"))
+ ("/Users/abhijeetsingh/Documents/Sem4/"
+  (dired-filename . "/Users/abhijeetsingh/Documents/Sem4/DBMS"))
+ ("/Users/abhijeetsingh/.emacs.d/straight/build/counsel/counsel.el" . 50351)
+ ("/Users/abhijeetsingh/Projects/Extra/c++/multiplication_table.cpp" . 43)
+ ("/Users/abhijeetsingh/.emacs.d/bindings.el" . 7124)
+ ("/Users/abhijeetsingh/.emacs.d/lsp.el" . 388)
+ ("/Users/abhijeetsingh/doom/.emacs.d/modules/completion/ivy/"
+  (dired-filename . "/Users/abhijeetsingh/doom/.emacs.d/modules/completion/ivy/packages.el"))
+ ("/Users/abhijeetsingh/doom/.emacs.d/modules/completion/"
+  (dired-filename . "/Users/abhijeetsingh/doom/.emacs.d/modules/completion/vertico"))
+ ("/Users/abhijeetsingh/doom/.emacs.d/modules/config/"
+  (dired-filename . "/Users/abhijeetsingh/doom/.emacs.d/modules/config/default"))
+ ("/Users/abhijeetsingh/doom/.emacs.d/modules/emacs/"
+  (dired-filename . "/Users/abhijeetsingh/doom/.emacs.d/modules/emacs/dired"))
+ ("/Users/abhijeetsingh/doom/.emacs.d/modules/email/"
+  (dired-filename . "/Users/abhijeetsingh/doom/.emacs.d/modules/email/mu4e"))
+ ("/Users/abhijeetsingh/doom/.emacs.d/modules/lang/cc/"
+  (dired-filename . "/Users/abhijeetsingh/doom/.emacs.d/modules/lang/cc/config.el"))
+ ("/Users/abhijeetsingh/doom/.emacs.d/modules/lang/cc/config.el" . 2348)
+ ("/Users/abhijeetsingh/.emacs.d/straight/build/ivy/ivy.el" . 11103)
+ ("/Users/abhijeetsingh/doom/.emacs.d/modules/lang/"
+  (dired-filename . "/Users/abhijeetsingh/doom/.emacs.d/modules/lang/cc"))
+ ("/Users/abhijeetsingh/doom/.emacs.d/modules/"
+  (dired-filename . "/Users/abhijeetsingh/doom/.emacs.d/modules/lang"))
+ ("/Users/abhijeetsingh/Projects/Extra/py/wordman/functions.py" . 608)
+ ("/Users/abhijeetsingh/Projects/Extra/py/wordman/"
+  (dired-filename . "/Users/abhijeetsingh/Projects/Extra/py/wordman/main.py"))
+ ("/Users/abhijeetsingh/Projects/Extra/py/wordman/main.py" . 1051)
+ ("/Users/abhijeetsingh/Projects/Extra/c/"
+  (dired-filename . "/Users/abhijeetsingh/Projects/Extra/c/power.c"))
+ ("/Users/abhijeetsingh/Documents/Sem4/DP-Final/"
+  (dired-filename . "/Users/abhijeetsingh/Documents/Sem4/DP-Final/factory"))
+ ("/Users/abhijeetsingh/Documents/Sem4/DP-Final/factory/"
+  (dired-filename . "/Users/abhijeetsingh/Documents/Sem4/DP-Final/factory/Main.java"))
+ ("/Applications/Emacs.app/Contents/Resources/lisp/loaddefs.el" . 146767)
  ("/Users/abhijeetsingh/.emacs.d/straight/build/dap-mode/dap-mode-autoloads.el" . 11340)
  ("/Users/abhijeetsingh/.emacs.d/straight/build/bui/bui-autoloads.el" . 251)
  ("/Users/abhijeetsingh/.emacs.d/init.el" . 1393)
- ("/Users/abhijeetsingh/.emacs.d/"
-  (dired-filename . "/Users/abhijeetsingh/.emacs.d/history"))
  ("/Users/abhijeetsingh/.emacs.d/straight/build/yasnippet/yasnippet-autoloads.el" . 2226)
  ("/Users/abhijeetsingh/.emacs.d/straight/build/flycheck/flycheck-autoloads.el" . 10518)
  ("/Users/abhijeetsingh/.emacs.d/straight/build/let-alist/let-alist-autoloads.el" . 1270)
  ("/Users/abhijeetsingh/.emacs.d/straight/build/pkg-info/pkg-info-autoloads.el" . 3746)
- ("/Users/abhijeetsingh/.emacs.d/straight/build/epl/epl-autoloads.el" . 244)
- ("/home/"
-  (dired-filename . "/home/ethan"))
- ("/"
-  (dired-filename . "/home")))
+ ("/Users/abhijeetsingh/.emacs.d/straight/build/epl/epl-autoloads.el" . 244))
