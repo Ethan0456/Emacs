@@ -1,5 +1,11 @@
 ;;; -*- coding: utf-8; mode: lisp-data -*-
-(("/Users/abhijeetsingh/Projects/Extra/elisp/"
+(("/Users/abhijeetsingh/.emacs.d/bindings.el" . 7316)
+ ("/Users/abhijeetsingh/.emacs.d/package-list.el" . 8818)
+ ("/Users/abhijeetsingh/.emacs.d/.cache/treemacs-persist" . 45)
+ ("/Users/abhijeetsingh/.emacs.d/init.el" . 223)
+ ("/Users/abhijeetsingh/.emacs.d/straight/build/minimap/minimap.el" . 6182)
+ ("/Users/abhijeetsingh/.emacs.d/straight/build/beacon/beacon-autoloads.el" . 1521)
+ ("/Users/abhijeetsingh/Projects/Extra/elisp/"
   (dired-filename . "/Users/abhijeetsingh/Projects/Extra/elisp/armstrong.el"))
  ("/Users/abhijeetsingh/Projects/Extra/"
   (dired-filename . "/Users/abhijeetsingh/Projects/Extra/elisp"))
@@ -11,11 +17,8 @@
   (dired-filename . "/Users/abhijeetsingh"))
  ("/"
   (dired-filename . "/Users"))
- ("/Users/abhijeetsingh/.emacs.d/package-list.el" . 1036)
  ("/Users/abhijeetsingh/Projects/Shell/commonCompiler/"
   (dired-filename . "/Users/abhijeetsingh/Projects/Shell/commonCompiler/cc"))
- ("/Users/abhijeetsingh/Downloads/"
-  (dired-filename . "/Users/abhijeetsingh/Downloads/terminalThemes"))
  ("/Users/abhijeetsingh/Downloads/terminalThemes/"
   (dired-filename . "/Users/abhijeetsingh/Downloads/terminalThemes/Breeze.itermcolors"))
  ("/Users/abhijeetsingh/Projects/Shell/"
@@ -44,7 +47,6 @@
   (dired-filename . "/Users/abhijeetsingh/Documents/Sem4/DBMS"))
  ("/Users/abhijeetsingh/.emacs.d/straight/build/counsel/counsel.el" . 50351)
  ("/Users/abhijeetsingh/Projects/Extra/c++/multiplication_table.cpp" . 43)
- ("/Users/abhijeetsingh/.emacs.d/bindings.el" . 7124)
  ("/Users/abhijeetsingh/.emacs.d/lsp.el" . 388)
  ("/Users/abhijeetsingh/doom/.emacs.d/modules/completion/ivy/"
   (dired-filename . "/Users/abhijeetsingh/doom/.emacs.d/modules/completion/ivy/packages.el"))
@@ -77,7 +79,6 @@
  ("/Applications/Emacs.app/Contents/Resources/lisp/loaddefs.el" . 146767)
  ("/Users/abhijeetsingh/.emacs.d/straight/build/dap-mode/dap-mode-autoloads.el" . 11340)
  ("/Users/abhijeetsingh/.emacs.d/straight/build/bui/bui-autoloads.el" . 251)
- ("/Users/abhijeetsingh/.emacs.d/init.el" . 1393)
  ("/Users/abhijeetsingh/.emacs.d/straight/build/yasnippet/yasnippet-autoloads.el" . 2226)
  ("/Users/abhijeetsingh/.emacs.d/straight/build/flycheck/flycheck-autoloads.el" . 10518)
  ("/Users/abhijeetsingh/.emacs.d/straight/build/let-alist/let-alist-autoloads.el" . 1270)

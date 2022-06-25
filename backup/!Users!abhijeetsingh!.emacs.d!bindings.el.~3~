@@ -132,8 +132,10 @@
   "9" '((lambda () (interactive) (persp-switch-by-number 9)) :which-key "switch-to-persp-9")
 
   ;; git
-  "g" '(magit-status-here :which-key "Git")) ; prefix
+  "g" '(magit-status-here :which-key "Git") ; prefix
 
+  "U" (lambda () (interactive) (evil-scroll-up)(beacon-blink))
+  "Y" (lambda () (interactive) (evil-scroll-down)(beacon-blink)))
 ;; minibuffer keybindings
 ;; (general-define-key
 ;;   :keymaps  
@@ -150,8 +152,7 @@
 ;; normal/visual mode hotkeys
 (general-define-key
  :states '(normal visual)
-  "U" (lambda () (interactive) (evil-scroll-up)(beacon-blink))
-  "Y" (lambda () (interactive) (evil-scroll-down)(beacon-blink)))
+ 
 ;; (general-define-key
 ;;   :states '(normal visual)
 ;;   ;; evil numbers

@@ -150,8 +150,9 @@
 ;; normal/visual mode hotkeys
 (general-define-key
  :states '(normal visual)
-  "U" (lambda () (interactive) (evil-scroll-up)(beacon-blink))
-  "Y" (lambda () (interactive) (evil-scroll-down)(beacon-blink)))
+ "U" '((lambda () (interactive) (evil-scroll-up)(beacon-blink)) :which-key "evil-scroll-up")
+ "Y" '((lambda () (interactive) (evil-scroll-down)(beacon-blink)) :which-key "evil-scroll-down")
+ 
 ;; (general-define-key
 ;;   :states '(normal visual)
 ;;   ;; evil numbers

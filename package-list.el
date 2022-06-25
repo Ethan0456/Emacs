@@ -91,7 +91,7 @@
   ;; Global settings (defaults)
   (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
         doom-themes-enable-italic t) ; if nil, italics is universally disabled
-  (load-theme 'doom-moonlight t))
+  (load-theme 'doom-henna t))
 
 ;; An extensible Emacs Dashboard
 (use-package dashboard
@@ -381,3 +381,20 @@
     :keymaps 'lsp-mode-map
     :prefix lsp-keymap-prefix
     "d" '(dap-hydra t :wk "debugger")))
+
+(use-package beacon
+  :custom
+  ((beacon-color "#009f00")
+  (beacon-size 100)
+  (beacon-blink-when-window-scrolls t)
+  (beacon-blink-when-window-changes t)
+  (beacon-blink-when-point-moves t)
+  (beacon-mode t)))
+
+(use-package minimap
+  :custom
+  (( minimap-window-location 'right) ; Minimap on the right side
+  (minimap-width-fraction 0.0) ; slightly smaller minimap
+  (minimap-minimum-width 20) ; also slightly smaller minimap
+  (minimap-dedicated-window t) ; seems to work better
+  (minimap-enlarge-certain-faces nil))) ; enlarge breaks BlockFont
