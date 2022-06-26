@@ -150,8 +150,8 @@
 ;; normal/visual mode hotkeys
 (general-define-key
  :states '(normal visual)
-  "U" '(evil-scroll-up)
-  "Y" '(evil-scroll-down)) 
+  "U" 'evil-scroll-up
+  "Y" 'evil-scroll-down) 
 ;; (general-define-key
 ;;   :states '(normal visual)
 ;;   ;; evil numbers
