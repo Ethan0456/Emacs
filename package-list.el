@@ -110,7 +110,9 @@
   :config (ivy-rich-mode))
 
 ;; A Emacs Tree plugin like NerdTree for Vim
-(use-package neotree)
+(use-package neotree
+  :custom
+  ((neo-theme 'icons)))
 
 ;; The Perspective package provides multiple named workspaces (or "perspectives") in Emacs, similar to multiple desktops in window managers like Awesome and XMonad, and Spaces on the Mac.
 (use-package perspective

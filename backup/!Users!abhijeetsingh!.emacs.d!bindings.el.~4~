@@ -150,8 +150,8 @@
 ;; normal/visual mode hotkeys
 (general-define-key
  :states '(normal visual)
-  "U" '(evil-scroll-up)
-  "Y" '(evil-scroll-down)) 
+  "U" (lambda () (interactive) (evil-scroll-up))
+  "Y" (lambda () (interactive) (evil-scroll-down))
 ;; (general-define-key
 ;;   :states '(normal visual)
 ;;   ;; evil numbers
@@ -296,8 +296,8 @@
 
 ;; neotree
 (general-define-key
- :states '(normal visual insert)
- :keymaps 'neotree-mode-map
+ :states 'neotree
+ :keymaps 'override
  "RET" 'neotree-enter
  "j" 'neotree-next-line
  "k" 'neotree-previous-line
@@ -314,23 +314,23 @@
  "P" 'neotree-copy-filepath-to-yank-ring
  "D" 'neotree-delete-node)
 
-;; ;; treemacs
-;; (general-define-key
-;;  :states 'treemacs-mode
-;;  "RET" 'treemacs-RET-action
-;;  "j" 'treemacs-next-line
-;;  "k" 'treemacs-previous-line
-;;  "F" 'treemacs-create-file
-;;  "d" 'treemacs-create-dir
-;;  "D" 'treemacs-delete-file
-;;  "W" 'treemacs-create-workspace
-;;  "r" 'treemacs-rename-file
-;;  "c" 'treemacs-collapse-parent-node
-;;  "i" 'treemacs-increase-width
-;;  "I" 'treemacs-decrease-width
-;;  "C" 'treemacs-copy-file
-;;  "M" 'treemacs-move-file
-;;  "R" 'treemacs-refresh)
+;; treemacs
+(general-define-key
+ :states 'treemacs-mode
+ "RET" 'treemacs-RET-action
+ "j" 'treemacs-next-line
+ "k" 'treemacs-previous-line
+ "F" 'treemacs-create-file
+ "d" 'treemacs-create-dir
+ "D" 'treemacs-delete-file
+ "W" 'treemacs-create-workspace
+ "r" 'treemacs-rename-file
+ "c" 'treemacs-collapse-parent-node
+ "i" 'treemacs-increase-width
+ "I" 'treemacs-decrease-width
+ "C" 'treemacs-copy-file
+ "M" 'treemacs-move-file
+ "R" 'treemacs-refresh)
 
 ;;----
 ;;
