@@ -1,0 +1,6 @@
+fun main(){
+    var num : Int = 371
+    for (i in num){
+	println(i)
+    }
+}

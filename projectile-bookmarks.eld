@@ -1,1 +1,1 @@
-("~/.emacs.d/" "~/" "~/Projects/")
+("~/.emacs.d/" "~/" "~/Projects/git-repos/qtile/" "~/Projects/")

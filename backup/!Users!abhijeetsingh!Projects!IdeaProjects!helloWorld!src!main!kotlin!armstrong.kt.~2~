@@ -1,0 +1,9 @@
+fun main(){
+    var num : Int = 371
+    var sum : Int = 0
+    for (i in "$num"){
+	val x : Int = i as Int
+	sum += x*x*x
+    }
+    println(if (sum == num) "Yes" else "No")
+}

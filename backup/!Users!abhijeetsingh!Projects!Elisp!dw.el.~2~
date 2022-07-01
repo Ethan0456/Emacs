@@ -1,0 +1,7 @@
+(defvar default-download-location "~/Downloads/DW/")
+(defun create-default-directory
+    (when (not (file-exists-p default-download-location))
+      (make-directory default-download-location t)))
+
+(defun wget-download (link &optional args)
+  )

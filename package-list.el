@@ -1,21 +1,21 @@
 ;; ;; package.el initialization code
 
-;; ;; Initialize package sources
-;; (require 'package) ;; brings all package management functions in the environment
-;; (setq package-archives '(("melpa" . "https://melpa.org/packages/") ;; a alist of archives to fetch packages from
+;; Initialize package sources
+;; (require 'package) brings all package management functions in the environment
+;; (setq package-archives '(("melpa" . "https://melpa.org/packages/") a alist of archives to fetch packages from
 ;; 			 ("org"   . "https://orgmode.org/elpa/")
 ;; 	       		 ("elpa"  . "https://elpa.gnu.org/packages/")))
-;; (package-initialize) ;; Initializes the package system and prepares it to be used
-;; (unless package-archive-contents (package-refresh-contents)) ;; checks if packages is already cloned or not
+;; (package-initialize) Initializes the package system and prepares it to be used
+;; (unless package-archive-contents (package-refresh-contents)) checks if packages is already cloned or not
 
-;; ;; Initialize use-package on Non Linux Platforms
-;; (unless (package-installed-p 'use-package) (package-install 'use-package)) ;; downloads use-package if not already installed (Note : -p after function return true or nil)
+;; Initialize use-package on Non Linux Platforms
+;; (unless (package-installed-p 'use-package) (package-install 'use-package)) downloads use-package if not already installed (Note : -p after function return true or nil)
 
-;; (require 'use-package) ;; loads use-package
-;; (setq use-package-always-ensure t) ;; ensures that all the packages are downloaded locally
+;; (require 'use-package) loads use-package
+;; (setq use-package-always-ensure t) ensures that all the packages are downloaded locally
 
 
-;; ;; straight.el initialization code
+;; straight.el initialization code
 ;; Bootstrap code to install straight.el
 (defvar bootstrap-version)
 (let ((bootstrap-file
@@ -36,8 +36,8 @@
 (setq straight-use-package-by-default t)
 
 ;; Packages and their configs
-(use-package general) ;; general.el provides a more convenient method for binding keys in emacs (for both evil and non-evil users). 
-(use-package evil ;; Evil is an extensible vi layer for Emacs. It emulates the main features of Vim, and provides facilities for writing custom extensions. 
+(use-package general) ;; general.el provides a more convenient method for binding keys in emacs (for both evil and non-evil users)
+(use-package evil ;; Evil is an extensible vi layer for Emacs. It emulates the main features of Vim, and provides facilities for writing custom extensions
   :init
   (setq evil-want-integration t)
   (setq evil-want-keybinding nil)
@@ -91,7 +91,7 @@
   ;; Global settings (defaults)
   (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
         doom-themes-enable-italic t) ; if nil, italics is universally disabled
-  (load-theme 'doom-henna t))
+  (load-theme 'doom-moonlight t))
 
 ;; An extensible Emacs Dashboard
 (use-package dashboard
@@ -125,7 +125,9 @@
 (use-package projectile 
   :diminish projectile-mode
   :config (projectile-mode)
-  :custom ((projectile-completion-system 'ivy))
+  :custom ((projectile-completion-system 'ivy)
+  (add-to-list 'straight-x-pinned-packages
+               '("projectile" . "4d6da873ae54dbf6043b015efd9b737e2ce152c6")))
   :init
   ;; NOTE: Set this to the folder where you keep your Git repos!
   (when (file-directory-p "/home/ethan/Projects")
@@ -291,45 +293,95 @@
 (use-package visual-fill-column
   :hook (org-mode . efs/org-mode-visual-fill))
 
+(add-hook 'prog-mode-hook 'lsp-mode)
 ;; Language Server Protocol Mode 
+
 (use-package lsp-mode
   :commands (lsp lsp-deferred)
   :hook (lsp-mode . efs/lsp-mode-setup)
   :init
   (setq lsp-keymap-prefix "C-c l")  ;; Or 'C-l', 's-l'
-  :config
-  (lsp-enable-which-key-integration t))
+  :custom
+  ((lsp-server-trace t)
+  (lsp-log-io-mode t)
+  (lsp-enable-which-key-integration t)
+  (setq lsp-clients-clangd-args '("-j=4" "-background-index" "-log=error"))
+;; if you are adding the support for your language server in separate repo use
+;; Use shopify-cli / theme-check-language-server for Shopify's liquid syntax
+  (add-to-list 'lsp-language-id-configuration '(kotlin-mode . "kotlin-ls"))
+  (lsp-register-client
+   (make-lsp-client :new-connection (lsp-stdio-connection "kotlin-language-server")
+                     :activation-fn (lsp-activate-on "kotlin-ls")
+                     :server-id 'kotlin-ls))))
 
 ;; Gives various ui features for lsp mode
 (use-package lsp-ui
-  :hook (lsp-mode . lsp-ui-mode)
+  :hook (prog-mode . lsp-ui-mode)
   :custom
+  (lsp-ui-doc-enable t)
+  (lsp-ui-doc-use-childframe t)
+  (lsp-ui-doc-position 'top)
+  (lsp-ui-doc-include-signature t)
+  (lsp-ui-sideline-enable t)
+  (lsp-ui-flycheck-enable t)
+  (lsp-ui-flycheck-list-position 'right)
+  (lsp-ui-flycheck-live-reporting t)
+  (lsp-ui-peek-enable t)
+  (lsp-ui-peek-list-width 60)
+  (lsp-ui-peek-peek-height 25)
   (lsp-ui-doc-position 'bottom))
 
 ;; Flycheck for errors before compiling
-(use-package flycheck)
+(use-package flycheck
+  :hook (prog-mode . flycheck-mode))
 
+(add-to-list 'load-path "~/.emacs.d/snippets")
 ;; yasnippet
-(use-package yasnippet :config (yas-global-mode))
+(use-package yasnippet
+  :hook (prog-mode . yas-minor-mode)
+  :custom
+   ((yas-snippet-dirs '("~/.emacs.d/snippets"))
+    (yas-global-mode 1)))
+
+(use-package yasnippet-snippets)
 
 ;; Treemacs to view different methods and variables of file in a tree view
 (use-package lsp-treemacs
+  :hook (prog-mode . lsp-treemacs-sync-mode)
   :after lsp)
 
 ;; Better lsp viewer
 (use-package lsp-ivy)
 
-;; Nice Completions 
+;; Nice Completions
 (use-package company
   :after lsp-mode
-  :hook (lsp-mode . company-mode)
+  :hook (prog-mode . company-mode)
   :bind (:map company-active-map
          ("<tab>" . company-complete-selection))
         (:map lsp-mode-map
          ("<tab>" . company-indent-or-complete-common))
   :custom
-  (company-minimum-prefix-length 1)
-  (company-idle-delay 0.0))
+  ((company-minimum-prefix-length 1)
+  (company-idle-delay 0.0)))
+(setq company-backends
+    '((company-files :with company-yasnippet)
+      (company-capf :with company-yasnippet)
+      (company-dabbrev-code company-gtags company-etags company-keywords :with company-yasnippet)
+      (company-dabbrev :with company-yasnippet)))
+;; (setq company-backends '(company-capf
+;;                       company-keywords
+;;                       company-semantic
+;;                       company-files
+;;                       company-etags
+;;                       company-elisp
+;;                       company-clang
+;;                       company-irony-c-headers
+;;                       company-irony
+;;                       company-jedi
+;;                       company-cmake
+;;                       company-ispell
+;;                       company-yasnippet))
 
 ;; Nice Completions viewer for lsp
 (use-package company-box
@@ -339,13 +391,12 @@
 (use-package dired
   :straight nil
   :commands (dired dired-jump)
-  :custom ((dired-listing-switches "-al"))
+  :custom ((insert-directory-program "gls" dired-use-ls-dired t)
+	   (dired-listing-switches "-alhg --group-directories-first"))
   :config
   (evil-collection-define-key 'normal 'dired-mode-map
     "h" 'dired-single-up-directory
     "l" 'dired-single-buffer))
-
-(use-package ranger)
 
 (use-package dired-single)
 
@@ -387,7 +438,7 @@
 (use-package beacon
   :custom
   ((beacon-color "#009f00")
-  (beacon-size 100)
+  (beacon-size 40)
   (beacon-blink-when-window-scrolls t)
   (beacon-blink-when-window-changes t)
   (beacon-blink-when-point-moves t)
@@ -400,3 +451,16 @@
   (minimap-minimum-width 20) ; also slightly smaller minimap
   (minimap-dedicated-window t) ; seems to work better
   (minimap-enlarge-certain-faces nil))) ; enlarge breaks BlockFont
+
+(use-package ranger)
+
+;; (use-package shanty-themes)
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
+
+;; (use-package lorisan-theme
+;;   :ensure nil
+;;   :if (not (custom-theme-enabled-p 'lorisan))
+;;   :init
+;;   (setq custom-theme-directory "~/.emacs.d/themes/")
+;;   (load-theme 'lorisan t)
+;;   (add-hook 'after-init-hook (lambda () (enable-theme 'lorisan))))

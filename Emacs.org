@@ -1,0 +1,24 @@
+* Emacs Configuration
+** Basic Configuration
+#+begin_src emacs-lisp
+  (setq inhibit-startup-message t) ;; stops showing startup screen when we start emacs
+  (setq pixel-scroll-mode 1)            ;; pixel scrolling
+  (scroll-bar-mode -1)             ;; disable scroll scrool
+  (tool-bar-mode -1)                 ;; disable toolbar
+  (tooltip-mode -1)                 ;; disable tooltios
+  (set-fringe-mode 10)              ;; gives some breathing room
+  ;; (menu-bar-mode -1)                ;; disable menubar
+  (set-face-attribute 'default nil :font "JetBrainsMono Nerd Font Mono" :height 120) ;; set font and font-size
+  (setq ring-bell-function 'ignore)
+  (setq persp-suppress-no-prefix-key-warning t)
+  (recentf-mode 1) ;; Maintains a list of recent files
+  (setq history-length 25) ;; saves history of minibuffer upto 25 length
+  (savehist-mode 1) ;; initiate above mode
+  (save-place-mode 1) ;; saves cursor location in files
+  (global-auto-revert-mode 1) ;; Sync files if the file is edited outside emacs
+  (setq global-auto-revert-non-file-buffers t) ;; Revert Dired and other buffers (same as above for dired and non file buffers)
+  (column-number-mode) ;; Make column number visible in modeline
+  (global-display-line-numbers-mode t) ;; Enable line numbers
+  (add-to-list 'load-path "~/.emacs.d/themes/")
+
+#+end_src

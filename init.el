@@ -1,10 +1,12 @@
 ;; Basic Configurations
 
 (setq inhibit-startup-message t) ;; stops showing startup screen when we start emacs
+(setq pixel-scroll-mode 1)            ;; pixel scrolling
 (scroll-bar-mode -1)             ;; disable scroll scrool
 (tool-bar-mode -1)                 ;; disable toolbar
 (tooltip-mode -1)                 ;; disable tooltios
 (set-fringe-mode 10)              ;; gives some breathing room
+(electric-pair-mode 1)           ;; Pair Parentheses
 ;; (menu-bar-mode -1)                ;; disable menubar
 (set-face-attribute 'default nil :font "JetBrainsMono Nerd Font Mono" :height 120) ;; set font and font-size
 (setq ring-bell-function 'ignore)
@@ -20,6 +22,7 @@
 (add-to-list 'load-path "~/.emacs.d/themes/")
 
 ;; Write backups to ~/.emacs.d/backup/
+
 (setq backup-directory-alist '(("." . "~/.emacs.d/backup"))
       backup-by-copying      t  ; Don't de-link hard links
       version-control        t  ; Use version numbers on backups

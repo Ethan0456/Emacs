@@ -66,12 +66,14 @@
 
   ;; help
   "h" '(:ignore t :which-key "Help")
-  "hf" '(helpful-callable :which-key "describe-function")
-  "hk" '(helpful-key :which-key "describe-key")
-  "hv" '(helpful-variable :which-key "describe-variable")
   "hm" '(describe-mode :which-key "describe-mode")
   "hF" '(describe-face :which-key "describe-face")
   "hw" '(where-is :which-key "where-is")
+  "hf" '(helpful-callable :which-key "helpful-callable")
+  "hk" '(helpful-key :which-key "helpful-key")
+  "hv" '(helpful-variable :which-key "helpful-variable")
+  "hs" '(helpful-symbol :which-key "helpful-symbol")
+  "hp" '(helpful-at-point :which-key "helpful-at-point")
 
   ;; zoom
   "=" '(text-scale-increase :which-key "text-scale-increase")
@@ -88,11 +90,11 @@
   ;; toggles
   "t" '(:ignore t :which-key "Toggles")
   "th" '(counsel-load-theme :which-key "counsel-load-theme")
-  ;; "ta" '(corfu-mode :which-key "corfu-mode") ;; 'a' for autocomplete
+  "tf" '(flyspell-mode :which-key "flyspell-mode")
+  "tc" '(flycheck-mode :which-key "flycheck-mode")
+  "tm" '(minimap-mode :which-key "minimap-mode")
   ;; "ts" '(flyspell-mode :which-key "flyspell-mode")
-  ;; "tf" '(flyspell-mode :which-key "flyspell-mode")
-  ;; "tc" '(flycheck-mode :which-key "flycheck-mode")
-  ;; "tm" '(minimap-mode :which-key "minimap-mode")
+  ;; "ta" '(corfu-mode :which-key "corfu-mode") ;; 'a' for autocomplete
   ;; "tg" '(evil-goggles-mode :which-key "evil-goggles")
   ;; "tI" '(toggle-indent-style :which-key "Indent style")
   ;; "tv" '(visual-line-mode  :which-key "visual-line-mode")

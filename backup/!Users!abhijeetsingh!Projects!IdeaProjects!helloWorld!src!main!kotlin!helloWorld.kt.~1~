@@ -1,0 +1,6 @@
+fun inFloatRange(num: Double) = num in 1.0..10.0
+fun main(){
+    println(inFloatRange(1.0))
+    println(inFloatRange(1.5))
+    println(inFloatRange(5.999))
+}
