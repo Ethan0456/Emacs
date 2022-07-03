@@ -1,7 +1,28 @@
 ;;; -*- coding: utf-8; mode: lisp-data -*-
-(("/Users/abhijeetsingh/.emacs.d/straight/build/projectile/projectile-autoloads.el" . 21884)
- ("/Users/abhijeetsingh/.emacs.d/init.el" . 1771)
+(("/Users/abhijeetsingh/.emacs.d/packages.el" . 754)
+ ("/Users/abhijeetsingh/Projects/IdeaProjects/helloWorld/src/main/kotlin/armstrong.kt" . 1427)
+ ("/Users/abhijeetsingh/.emacs.d/config.el" . 13836)
+ ("/Users/abhijeetsingh/.emacs.d/straight/build/straight/straight-autoloads.el" . 16102)
+ ("/Users/abhijeetsingh/.emacs.d/straight/repos/themes/"
+  (dired-filename . "/Users/abhijeetsingh/.emacs.d/straight/repos/themes/extensions"))
+ ("/Users/abhijeetsingh/.emacs.d/straight/repos/"
+  (dired-filename . "/Users/abhijeetsingh/.emacs.d/straight/repos/company-mode"))
+ ("/Users/abhijeetsingh/.emacs.d/straight/"
+  (dired-filename . "/Users/abhijeetsingh/.emacs.d/straight/build"))
+ ("/Users/abhijeetsingh/.emacs.d/"
+  (dired-filename . "/Users/abhijeetsingh/.emacs.d/smex-items"))
+ ("/Users/abhijeetsingh/.emacs.d/straight/repos/straight.el/straight.el" . 22611)
+ ("/Users/abhijeetsingh/.emacs.d/elpa/"
+  (dired-filename . "/Users/abhijeetsingh/.emacs.d/elpa/archives"))
+ ("/Users/abhijeetsingh/.emacs.d/straight/build/"
+  (dired-filename . "/Users/abhijeetsingh/.emacs.d/straight/build/visual-fill-column"))
+ ("/Users/abhijeetsingh/.emacs.d/bindings.el" . 13854)
+ ("/Users/abhijeetsingh/.emacs.d/history" . 7127)
+ ("/Users/abhijeetsingh/.emacs.d/init.el" . 1926)
  ("/Users/abhijeetsingh/.emacs.d/custom-vars.el" . 1552)
+ ("/Users/abhijeetsingh/.emacs.d/.cache/treemacs-persist" . 45)
+ ("/Users/abhijeetsingh/.emacs.d/straight/build/smex/smex-autoloads.el" . 467)
+ ("/Users/abhijeetsingh/.emacs.d/straight/build/projectile/projectile-autoloads.el" . 21884)
  ("/Users/abhijeetsingh/.emacs.d/straight/build/company-box/company-box-autoloads.el" . 927)
  ("/Users/abhijeetsingh/.emacs.d/straight/build/frame-local/frame-local-autoloads.el" . 292)
  ("/Users/abhijeetsingh/.emacs.d/straight/build/company/company-autoloads.el" . 3180)
@@ -22,7 +43,6 @@
  ("/Users/abhijeetsingh/.emacs.d/straight/build/ht/ht-autoloads.el" . 234)
  ("/Users/abhijeetsingh/.emacs.d/straight/build/visual-fill-column/visual-fill-column-autoloads.el" . 2694)
  ("/Users/abhijeetsingh/.emacs.d/straight/build/org-bullets/org-bullets-autoloads.el" . 942)
- ("/Users/abhijeetsingh/.emacs.d/bindings.el" . 6577)
  ("/Users/abhijeetsingh/.emacs.d/straight/build/magit/magit-autoloads.el" . 88775)
  ("/Users/abhijeetsingh/.emacs.d/straight/build/magit-section/magit-section-autoloads.el" . 404)
  ("/Users/abhijeetsingh/.emacs.d/straight/build/git-commit/git-commit-autoloads.el" . 618)
@@ -56,8 +76,4 @@
  ("/Users/abhijeetsingh/.emacs.d/straight/build/goto-chg/goto-chg-autoloads.el" . 1859)
  ("/Users/abhijeetsingh/.emacs.d/straight/build/general/general-autoloads.el" . 20493)
  ("/Users/abhijeetsingh/.emacs.d/straight/build/use-package/use-package-autoloads.el" . 8066)
- ("/Users/abhijeetsingh/.emacs.d/straight/build/bind-key/bind-key-autoloads.el" . 2477)
- ("/Users/abhijeetsingh/.emacs.d/straight/build/straight/straight-autoloads.el" . 16102)
- ("/Users/abhijeetsingh/.emacs.d/history" . 6874)
- ("/Users/abhijeetsingh/.emacs.d/"
-  (dired-filename . "/Users/abhijeetsingh/.emacs.d/straight")))
+ ("/Users/abhijeetsingh/.emacs.d/straight/build/bind-key/bind-key-autoloads.el" . 2477))

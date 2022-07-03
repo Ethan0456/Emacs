@@ -30,4 +30,4 @@
 		       ("body" "<body$1>\n  $0\n</body>" "<body>...</body>" nil nil nil "/Users/abhijeetsingh/.emacs.d/snippets/nxml-mode/body" nil nil)))
 
 
-;;; Do not edit! File generated at Fri Jul  1 13:47:58 2022
+;;; Do not edit! File generated at Sat Jul  2 23:20:11 2022

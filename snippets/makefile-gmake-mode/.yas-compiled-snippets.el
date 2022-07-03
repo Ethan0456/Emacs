@@ -16,4 +16,4 @@
 		       ("abs" "\\$(abspath ${1:\\$(${2:paths})})$0" "abspath" nil nil nil "/Users/abhijeetsingh/.emacs.d/snippets/makefile-gmake-mode/abspath" nil nil)))
 
 
-;;; Do not edit! File generated at Fri Jul  1 13:47:58 2022
+;;; Do not edit! File generated at Sat Jul  2 23:20:11 2022

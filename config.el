@@ -362,13 +362,18 @@
         (:map lsp-mode-map
          ("<tab>" . company-indent-or-complete-common))
   :custom
-  ((company-minimum-prefix-length 1)
-  (company-idle-delay 0.0)))
-(setq company-backends
-    '((company-files :with company-yasnippet)
-      (company-capf :with company-yasnippet)
-      (company-dabbrev-code company-gtags company-etags company-keywords :with company-yasnippet)
-      (company-dabbrev :with company-yasnippet)))
+  (yas-recompile-all)
+  (yas-reload-all)
+  (company-minimum-prefix-length 1)
+  (company-idle-delay 0.0))
+  (setq company-backends
+        '((company-yasnippet
+	   :with company-files
+	   :with company-capf
+	   :with company-dabbrev-code
+	   :with company-gtags
+	   :with company-etags
+	   :with company-keywords)))
 ;; (setq company-backends '(company-capf
 ;;                       company-keywords
 ;;                       company-semantic

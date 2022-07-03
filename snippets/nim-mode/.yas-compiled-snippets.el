@@ -22,4 +22,4 @@
 		       ("array" "array[${1:length}, ${2:type}]$0" "array" nil nil nil "/Users/abhijeetsingh/.emacs.d/snippets/nim-mode/array" nil nil)))
 
 
-;;; Do not edit! File generated at Fri Jul  1 13:47:58 2022
+;;; Do not edit! File generated at Sat Jul  2 23:20:11 2022

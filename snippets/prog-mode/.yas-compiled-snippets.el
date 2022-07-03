@@ -51,4 +51,4 @@ Otherwise the reversed output of function `yas-trimmed-comment-start' is returne
 		       ("co" "`(yas-trimmed-comment-start)` ${1:comment}`(unless (eq (length comment-end) 0) (concat \" \" (yas-trimmed-comment-end)))`$0" "comment" nil nil nil "/Users/abhijeetsingh/.emacs.d/snippets/prog-mode/comment" nil nil)))
 
 
-;;; Do not edit! File generated at Fri Jul  1 13:47:58 2022
+;;; Do not edit! File generated at Sat Jul  2 23:20:11 2022

@@ -27,4 +27,4 @@
 		       ("ifi" "if ${1:condition} {\n  $2\n} elsif ${3:condition} {\n  $4\n} else {\n  $5\n}\n" "elsif" nil nil nil "/Users/abhijeetsingh/.emacs.d/snippets/raku-mode/elsif" nil nil)))
 
 
-;;; Do not edit! File generated at Fri Jul  1 13:47:58 2022
+;;; Do not edit! File generated at Sat Jul  2 23:20:11 2022

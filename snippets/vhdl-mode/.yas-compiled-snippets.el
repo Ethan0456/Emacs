@@ -21,4 +21,4 @@
 		       ("arch" "architecture ${1:Type} of ${2:Name} is\nbegin\n  $0\nend $1;\n" "architecture" nil nil nil "/Users/abhijeetsingh/.emacs.d/snippets/vhdl-mode/architecture" nil nil)))
 
 
-;;; Do not edit! File generated at Fri Jul  1 13:47:58 2022
+;;; Do not edit! File generated at Sat Jul  2 23:20:11 2022
