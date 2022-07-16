@@ -22,4 +22,4 @@
 		       ("comment" "(*\n$0\n*)" "comment" nil nil nil "/Users/abhijeetsingh/.emacs.d/snippets/applescript-mode/comment" nil nil)))
 
 
-;;; Do not edit! File generated at Sat Jul  2 23:20:11 2022
+;;; Do not edit! File generated at Mon Jul 11 21:53:39 2022

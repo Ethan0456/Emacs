@@ -42,4 +42,3 @@
   :hook (kotlin-mode .  lsp-deferred)) 
 (use-package flycheck-kotlin
   :hook (flycheck-mode . lsp--buffer-deferred))
-

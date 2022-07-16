@@ -39,4 +39,4 @@
 		       ("bench" "(dotimes [_ 5 ]$>\n  (time (dotimes [i 1000000]$>\n  $0$>\n  )))$>" "bench" nil nil nil "/Users/abhijeetsingh/.emacs.d/snippets/clojure-mode/bench" nil nil)))
 
 
-;;; Do not edit! File generated at Sat Jul  2 23:20:11 2022
+;;; Do not edit! File generated at Mon Jul 11 21:53:39 2022

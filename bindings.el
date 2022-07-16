@@ -27,6 +27,7 @@
   ">" '(evil-window-down :which-key "evil-window-down")
   "k" '(comment-region :whick-key "comment-region")
   "K" '(uncomment-region :which-key "uncomment-region")
+  "c" '(copy-region-as-kill :which-key "copy-region-as-kill")
 ;  "/" '(+consult/ripgrep :which-key "+consult/ripgrep")
 ;;  "SPC" '(projectile-find-file :which-key "Projectile find file")
 ;;  "SPC" '(+consult/find-file :which-key "+consult/find-file")

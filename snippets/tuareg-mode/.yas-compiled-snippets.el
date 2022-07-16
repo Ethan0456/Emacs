@@ -24,4 +24,4 @@
 		       ("as" "assert $0;;" "assert" nil nil nil "/Users/abhijeetsingh/.emacs.d/snippets/tuareg-mode/assert" nil nil)))
 
 
-;;; Do not edit! File generated at Sat Jul  2 23:20:11 2022
+;;; Do not edit! File generated at Mon Jul 11 21:53:40 2022

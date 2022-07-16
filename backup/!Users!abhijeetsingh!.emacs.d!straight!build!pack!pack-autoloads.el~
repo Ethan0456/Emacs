@@ -1,0 +1,43 @@
+;;; pack-autoloads.el --- automatically extracted autoloads  -*- lexical-binding: t -*-
+;;
+;;; Code:
+
+
+;;;### (autoloads nil "pack" "pack.el" (0 0 0 0))
+;;; Generated autoloads from pack.el
+
+(autoload 'pack-dired-dwim "pack" "\
+Pack or unpack FILES in dired.
+
+If selecting one file and that has a archive suffix defined in
+`pack-program-alist', unpack that.
+Otherwise, creates archive from marked files, prompting user for archive filename.
+
+\(fn &rest FILES)" t nil)
+
+(autoload 'pack-dired-do-unpack "pack" "\
+Unpack FILES.
+
+Prompt user to unpack files for sure.
+
+\(fn &rest FILES)" t nil)
+
+(autoload 'pack-dired-do-pack "pack" "\
+Pack FILES.
+
+Prompt user for archive filename.
+
+\(fn &rest FILES)" t nil)
+
+(register-definition-prefixes "pack" '("pack-"))
+
+;;;***
+
+(provide 'pack-autoloads)
+;; Local Variables:
+;; version-control: never
+;; no-byte-compile: t
+;; no-update-autoloads: t
+;; coding: utf-8
+;; End:
+;;; pack-autoloads.el ends here

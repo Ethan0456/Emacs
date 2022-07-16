@@ -17,4 +17,4 @@
 		       ("exe" "add_executable($1 ${2:main.cpp})\ntarget_link_libraries($1 $3)" "add_executable" nil nil nil "/Users/abhijeetsingh/.emacs.d/snippets/cmake-mode/add_executable" nil nil)))
 
 
-;;; Do not edit! File generated at Sat Jul  2 23:20:11 2022
+;;; Do not edit! File generated at Mon Jul 11 21:53:39 2022

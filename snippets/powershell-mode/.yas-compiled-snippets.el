@@ -8,4 +8,4 @@
 		       ("cmd" "[cmdletbinding()]\nParam (\n  $0\n)" "cmdletbinding" nil nil nil "/Users/abhijeetsingh/.emacs.d/snippets/powershell-mode/cmdletbinding" nil nil)))
 
 
-;;; Do not edit! File generated at Sat Jul  2 23:20:11 2022
+;;; Do not edit! File generated at Mon Jul 11 21:53:40 2022

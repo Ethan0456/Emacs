@@ -30,13 +30,14 @@
 		       ("entry_" "#+begin_html\n---\nlayout: ${1:default}\ntitle: ${2:title}\n---\n#+end_html\n" "entry" nil nil nil "/Users/abhijeetsingh/.emacs.d/snippets/org-mode/entry" nil nil)
 		       ("emb_" "src_${1:lang}${2:[${3:where}]}{${4:code}}" "embedded" nil nil nil "/Users/abhijeetsingh/.emacs.d/snippets/org-mode/embedded" nil nil)
 		       ("<em" "#+email: $0" "email" nil nil nil "/Users/abhijeetsingh/.emacs.d/snippets/org-mode/email" nil nil)
-		       ("emacs-lisp_" "#+begin_src emacs-lisp :tangle yes\n$0\n#+end_src" "emacs-lisp" nil nil nil "/Users/abhijeetsingh/.emacs.d/snippets/org-mode/emacs-lisp" nil nil)
+		       ("emacs-lisp_" "#+begin_src emacs-lisp :tangle yes\n\n$0\n\n#+end_src" "emacs-lisp" nil nil nil "/Users/abhijeetsingh/.emacs.d/snippets/org-mode/emacs-lisp" nil nil)
 		       ("elisp_" "#+begin_src emacs-lisp :tangle yes\n$0\n#+end_src" "elisp" nil nil nil "/Users/abhijeetsingh/.emacs.d/snippets/org-mode/elisp" nil nil)
 		       ("dot_" "#+begin_src dot :file ${1:file} :cmdline -t${2:pdf} :exports none :results silent\n$0\n#+end_src\n[[file:${3:path}]]" "dot" nil nil nil "/Users/abhijeetsingh/.emacs.d/snippets/org-mode/dot" nil nil)
 		       ("desc" "#+description: $0" "description" nil nil nil "/Users/abhijeetsingh/.emacs.d/snippets/org-mode/description" nil nil)
 		       ("<da" "#+date: ${1:year}:${2:month}:${3:day}" "date" nil nil nil "/Users/abhijeetsingh/.emacs.d/snippets/org-mode/date" nil nil)
 		       ("<c" "#+begin_center\n$0\n#+end_center" "center" nil nil nil "/Users/abhijeetsingh/.emacs.d/snippets/org-mode/center" nil nil)
+		       ("<beg" "#+begin_src $0\n $1\n#+end_src" "begin" nil nil nil "/Users/abhijeetsingh/.emacs.d/snippets/org-mode/begin" nil nil)
 		       ("<au" "#+author: $0" "author" nil nil nil "/Users/abhijeetsingh/.emacs.d/snippets/org-mode/author" nil nil)))
 
 
-;;; Do not edit! File generated at Sat Jul  2 23:20:11 2022
+;;; Do not edit! File generated at Mon Jul 11 21:53:40 2022

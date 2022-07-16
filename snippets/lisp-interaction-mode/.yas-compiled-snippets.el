@@ -5,4 +5,4 @@
 		     '(("defun" "(defun ${1:fun} (${2:args})\n       $0\n)" "defun" nil nil nil "/Users/abhijeetsingh/.emacs.d/snippets/lisp-interaction-mode/defun" nil nil)))
 
 
-;;; Do not edit! File generated at Sat Jul  2 23:20:11 2022
+;;; Do not edit! File generated at Mon Jul 11 21:53:40 2022

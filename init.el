@@ -17,12 +17,13 @@
 (save-place-mode 1) ;; saves cursor location in files
 (global-auto-revert-mode 1) ;; Sync files if the file is edited outside emacs
 (setq global-auto-revert-non-file-buffers t) ;; Revert Dired and other buffers (same as above for dired and non file buffers)
-(column-number-mode) ;; Make column number visible in modeline
-(global-display-line-numbers-mode t) ;; Enable line numbers
+(column-number-mode 1) ;; Make column number visible in modeline
+(global-display-line-numbers-mode t)
+(setq display-line-numbers-type 'relative)
+
 (add-to-list 'load-path "~/.emacs.d/themes/")
 
 ;; Write backups to ~/.emacs.d/backup/
-
 (setq backup-directory-alist '(("." . "~/.emacs.d/backup"))
       backup-by-copying      t  ; Don't de-link hard links
       version-control        t  ; Use version numbers on backups
@@ -38,12 +39,8 @@
 		eshell-mode-hook))
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
-;; ;; Move packages to packages.el
-;; (setq custom-file "~/.emacs.d/packages.el")
-;; (load custom-file 'nomessage)
-
 ;; Move package-list to config.el
-(setq custom-file "~/.emacs.d/config.el")
+(setq custom-file "~/.emacs.d/package-list.el")
 (load custom-file 'nomessage)
 
 ;; Move customizations variables to a separate file and load it

@@ -90,8 +90,7 @@
   :config
   ;; Global settings (defaults)
   (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
-        doom-themes-enable-italic t) ; if nil, italics is universally disabled
-  (load-theme 'doom-moonlight t))
+        doom-themes-enable-italic t)) ; if nil, italics is universally disabled
 
 ;; An extensible Emacs Dashboard
 (use-package dashboard
@@ -311,8 +310,8 @@
   (add-to-list 'lsp-language-id-configuration '(kotlin-mode . "kotlin-ls"))
   (lsp-register-client
    (make-lsp-client :new-connection (lsp-stdio-connection "kotlin-language-server")
-                     :activation-fn (lsp-activate-on "kotlin-ls")
-                     :server-id 'kotlin-ls))))
+                     :activation-fn (lsp-activate-on "kotlin")
+                     :server-id 'kotlin))))
 
 ;; Gives various ui features for lsp mode
 (use-package lsp-ui
@@ -362,13 +361,18 @@
         (:map lsp-mode-map
          ("<tab>" . company-indent-or-complete-common))
   :custom
-  ((company-minimum-prefix-length 1)
-  (company-idle-delay 0.0)))
-(setq company-backends
-    '((company-files :with company-yasnippet)
-      (company-capf :with company-yasnippet)
-      (company-dabbrev-code company-gtags company-etags company-keywords :with company-yasnippet)
-      (company-dabbrev :with company-yasnippet)))
+  (yas-recompile-all)
+  (yas-reload-all)
+  (company-minimum-prefix-length 1)
+  (company-idle-delay 0.0))
+  (setq company-backends
+        '((company-yasnippet
+	   :with company-files
+	   :with company-capf
+	   :with company-dabbrev-code
+	   :with company-gtags
+	   :with company-etags
+	   :with company-keywords)))
 ;; (setq company-backends '(company-capf
 ;;                       company-keywords
 ;;                       company-semantic
@@ -454,9 +458,6 @@
 
 (use-package ranger)
 
-;; (use-package shanty-themes)
-(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
-
 ;; (use-package lorisan-theme
 ;;   :ensure nil
 ;;   :if (not (custom-theme-enabled-p 'lorisan))
@@ -464,3 +465,7 @@
 ;;   (setq custom-theme-directory "~/.emacs.d/themes/")
 ;;   (load-theme 'lorisan t)
 ;;   (add-hook 'after-init-hook (lambda () (enable-theme 'lorisan))))
+
+(use-package shanty-themes)
+(use-package moe-theme)
+(use-package afternoon-theme)

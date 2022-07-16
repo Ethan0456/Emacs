@@ -1,0 +1,10 @@
+\#lsp.el\#
+.cache/
+.extension/
+.lsp-session-v1
+auto-save-list/
+elpa/spacemacs-theme-0.2.signed
+elpa/spacemacs-theme-0.2/
+straight/
+transient/
+url/
