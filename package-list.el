@@ -1,7 +1,7 @@
 ;; ;; package.el initialization code
 
 ;; Initialize package sources
-;; (require 'package) brings all package management functions in the environment
+;; (require 'package) brings all package management functionsn the environment
 ;; (setq package-archives '(("melpa" . "https://melpa.org/packages/") a alist of archives to fetch packages from
 ;; 			 ("org"   . "https://orgmode.org/elpa/")
 ;; 	       		 ("elpa"  . "https://elpa.gnu.org/packages/")))
@@ -298,8 +298,12 @@
 (use-package lsp-mode
   :commands (lsp lsp-deferred)
   :hook (lsp-mode . efs/lsp-mode-setup)
-  :init
-  (setq lsp-keymap-prefix "C-c l")  ;; Or 'C-l', 's-l'
+  ;; :init
+  ;; (setq lsp-keymap-prefix "SPC")  ;; Or 'C-l', 's-l'
+  :general(
+	   :states '(lsp-mode)
+	   :prefix "SPC"
+	   "l" '(lsp-command-map :which-key "Lsp"))
   :custom
   ((lsp-server-trace t)
   (lsp-log-io-mode t)
@@ -373,19 +377,6 @@
 	   :with company-gtags
 	   :with company-etags
 	   :with company-keywords)))
-;; (setq company-backends '(company-capf
-;;                       company-keywords
-;;                       company-semantic
-;;                       company-files
-;;                       company-etags
-;;                       company-elisp
-;;                       company-clang
-;;                       company-irony-c-headers
-;;                       company-irony
-;;                       company-jedi
-;;                       company-cmake
-;;                       company-ispell
-;;                       company-yasnippet))
 
 ;; Nice Completions viewer for lsp
 (use-package company-box
@@ -395,7 +386,7 @@
 (use-package dired
   :straight nil
   :commands (dired dired-jump)
-  :custom ((insert-directory-program "gls" dired-use-ls-dired t)
+  :custom ((insert-directory-program "ls" dired-use-ls-dired t)
 	   (dired-listing-switches "-alhg --group-directories-first"))
   :config
   (evil-collection-define-key 'normal 'dired-mode-map
@@ -450,22 +441,20 @@
 
 (use-package minimap
   :custom
-  (( minimap-window-location 'right) ; Minimap on the right side
-  (minimap-width-fraction 0.0) ; slightly smaller minimap
-  (minimap-minimum-width 20) ; also slightly smaller minimap
-  (minimap-dedicated-window t) ; seems to work better
-  (minimap-enlarge-certain-faces nil))) ; enlarge breaks BlockFont
+  ((minimap-window-location 'right) ; Minimap on the right side
+   (minimap-width-fraction 0.0) ; slightly smaller minimap
+   (minimap-minimum-width 20) ; also slightly smaller minimap
+   (minimap-dedicated-window t) ; seems to work better
+   (minimap-enlarge-certain-faces nil))) ; enlarge breaks BlockFont
 
 (use-package ranger)
-
-;; (use-package lorisan-theme
-;;   :ensure nil
-;;   :if (not (custom-theme-enabled-p 'lorisan))
-;;   :init
-;;   (setq custom-theme-directory "~/.emacs.d/themes/")
-;;   (load-theme 'lorisan t)
-;;   (add-hook 'after-init-hook (lambda () (enable-theme 'lorisan))))
-
+;; (use-package spacemacs-theme
+;;   :config (show-paren-mode t)
+;;   :custom (show-paren-style 'expression))
 (use-package shanty-themes)
-(use-package moe-theme)
+(use-package moe-theme
+  :config (show-paren-mode t)
+  :custom (show-paren-style 'expression)
+          (moe-theme-mode-line-color nil))
 (use-package afternoon-theme)
+(use-package multi-vterm)

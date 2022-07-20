@@ -57,7 +57,7 @@
   "o" '(:ignore t :which-key "Open")
   "ot" '(treemacs :which-key "Treemacs")
   "oT" '(treemacs-find-file :which-key "Treemacs find file")
-  "ov" '(vterm :which-key "Open vterm")
+  "ov" '(multi-vterm :which-key "Open multi-vterm")
   "on" '(neotree-toggle :which-key "Open Neotree")
   "om" '(minimap-mode :which-key "Open Minimap")
   ;;"oc" '(open-init-file :which-key "Open init.el")
@@ -85,6 +85,8 @@
   ;; ;; "zz" '(hydra-zoom/body :which-key "hydra-zoom")
   ;; ;; the hydra is nice but the rest is kind of jank, need to pla around with this more
 
+  ;; lsp
+  "l" '(lsp-ma)
   ;; window
   "w" '(evil-window-map :which-key "Window")
 
@@ -99,6 +101,11 @@
   ;; "tg" '(evil-goggles-mode :which-key "evil-goggles")
   ;; "tI" '(toggle-indent-style :which-key "Indent style")
   ;; "tv" '(visual-line-mode  :which-key "visual-line-mode")
+
+  ;; file
+  "f" '(:ignore t :whick-key "File")
+  "fc" '(compile :whick-key "compile-file")
+  "fr" '(recompile :which-key "recompile-file")
   
   ;; notes/org
   "n" '(:ignore t :which-key "Notes")
