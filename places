@@ -1,12 +1,68 @@
 ;;; -*- coding: utf-8; mode: lisp-data -*-
-(("/home/ethan/Projects/IdeaProjects/hello/src/main/kotlin/hello.kt" . 1431)
- ("/home/ethan/.emacs.d/package-list.el" . 11873)
- ("/home/ethan/.emacs.d/bindings.el" . 3950)
+(("/home/ethan/.emacs.d/package-list.el" . 16384)
+ ("/home/ethan/Projects/IdeaProjects/hello/src/main/kotlin/hello.kt" . 1431)
+ ("/home/ethan/org/"
+  (dired-filename . "/home/ethan/org/Users"))
+ ("/home/ethan/Pictures/" . 49)
+ ("/home/ethan/PlayOnLinux's virtual drives/"
+  (dired-filename . "/home/ethan/PlayOnLinux's virtual drives/default"))
+ ("/home/ethan/powerlevel10k/"
+  (dired-filename . "/home/ethan/powerlevel10k/config"))
+ ("/home/ethan/Projects/"
+  (dired-filename . "/home/ethan/Projects/IdeaProjects"))
+ ("/home/ethan/Public/" . 49)
+ ("/home/ethan/Templates/" . 49)
+ ("/home/ethan/tmp/"
+  (dired-filename . "/home/ethan/tmp/DahuaConsole"))
+ ("/home/ethan/Tokens/"
+  (dired-filename . "/home/ethan/Tokens/gitlabtoken"))
+ ("/home/ethan/Videos/" . 49)
+ ("/home/ethan/snap/"
+  (dired-filename . "/home/ethan/snap/intellij-idea-community"))
+ ("/"
+  (dired-filename . "/home"))
+ ("/home/"
+  (dired-filename . "/home/ethan"))
+ ("/home/ethan/"
+  (dired-filename . "/home/ethan/snap"))
+ ("/usr/share/emacs/28.1/lisp/font-lock.el.gz" . 94400)
+ ("/usr/share/emacs/28.1/lisp/faces.el.gz" . 105566)
+ ("/home/ethan/.emacs.d/bindings.el" . 954)
+ ("/home/ethan/Projects/IdeaProjects/hello/src/"
+  (dired-filename . "/home/ethan/Projects/IdeaProjects/hello/src/main"))
+ ("/home/ethan/Projects/IdeaProjects/hello/src/main/kotlin/"
+  (dired-filename . "/home/ethan/Projects/IdeaProjects/hello/src/main/kotlin/hello.kt"))
+ ("/home/ethan/Projects/IdeaProjects/hello/src/main/"
+  (dired-filename . "/home/ethan/Projects/IdeaProjects/hello/src/main/kotlin"))
+ ("/home/ethan/Projects/IdeaProjects/"
+  (dired-filename . "/home/ethan/Projects/IdeaProjects/hello"))
+ ("/home/ethan/Projects/IdeaProjects/hello/"
+  (dired-filename . "/home/ethan/Projects/IdeaProjects/hello/src"))
+ ("/home/ethan/Projects/IdeaProjects/hello/src/test/"
+  (dired-filename . "/home/ethan/Projects/IdeaProjects/hello/src/test/kotlin"))
+ ("/home/ethan/Projects/IdeaProjects/hello/src/test/kotlin/" . 49)
+ ("/home/ethan/bin/" . 49)
+ ("/home/ethan/Desktop/" . 49)
+ ("/home/ethan/Documents/"
+  (dired-filename . "/home/ethan/Documents/1.frm"))
+ ("/home/ethan/Downloads/"
+  (dired-filename . "/home/ethan/Downloads/app"))
+ ("/home/ethan/go/"
+  (dired-filename . "/home/ethan/go/pkg"))
+ ("/home/ethan/iTubeGo/"
+  (dired-filename . "/home/ethan/iTubeGo/Download"))
+ ("/home/ethan/jd2/"
+  (dired-filename . "/home/ethan/jd2/build.json"))
+ ("/home/ethan/Library/"
+  (dired-filename . "/home/ethan/Library/ssdtPRGen"))
+ ("/home/ethan/Music/" . 49)
+ ("/home/ethan/Projects/Code/"
+  (dired-filename . "/home/ethan/Projects/Code/emacs-from-scratch"))
+ ("/home/ethan/Projects/IdeaProjects/hello/src/test/resources/" . 49)
+ ("/home/ethan/Projects/IdeaProjects/hello/src/main/resources/" . 49)
  ("/home/ethan/org/Users/abhijeetsingh/Projects/Code/emacs-from-scratch/OrgFiles/Journal.org" . 28)
  ("/home/ethan/.emacs.d/straight/build/lsp-mode/lsp-mode.el" . 102707)
  ("/home/ethan/Projects/IdeaProjects/hello/src/main/kotlin/.dir-locals.el" . 164)
- ("/home/ethan/Projects/IdeaProjects/hello/src/main/kotlin/"
-  (dired-filename . "/home/ethan/Projects/IdeaProjects/hello/src/main/kotlin/.dir-locals.el"))
  ("/home/ethan/.emacs.d/"
   (dired-filename . "/home/ethan/.emacs.d/package-list.el"))
  ("/usr/share/emacs/28.1/lisp/loaddefs.el" . 810854)
