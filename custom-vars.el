@@ -62,5 +62,6 @@
   (interactive)
   (lambda () (interactive) (flush-lines "^[[:space:]]*")))
 
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 ;; Set theme
 (load-theme 'moe-dark t)

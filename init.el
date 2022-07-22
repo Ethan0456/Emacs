@@ -43,6 +43,10 @@
 (setq custom-file "~/.emacs.d/package-list.el")
 (load custom-file 'nomessage)
 
+;; Move themes to separate files
+(setq custom-file "~/.emacs.d/themes.el")
+(load custom-file 'nomessage)
+
 ;; Move customizations variables to a separate file and load it
 (setq custom-file "~/.emacs.d/custom-vars.el")
 (load custom-file 'nomessage)
