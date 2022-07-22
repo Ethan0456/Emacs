@@ -21,6 +21,7 @@
   ":" '(execute-extended-command :which-key "M-x")
   "x" '(open-scratch-buffer :which-key "Open scratch buffer")
   "d" '(dired-jump :which-key "dired-jump")
+  "r" '(ranger :which-key "ranger") 
   "[" '(persp-prev :which-key "persp-prev")
   "]" '(persp-next :which-key "persp-next")
   "," '(evil-window-left :which-key "evil-window-left")
@@ -295,17 +296,3 @@
 ;;   "C-p" #'company-select-previous
 ;;   "TAB" #'company-complete-selection
 ;;   "<tab>" #'company-complete-selection)
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(custom-safe-themes
-   '("8060ecf1193c1c4b428d6f6fe671c3e98417d416188054de54e866f3e472e7d7" default))
- '(org-agenda-files nil))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
