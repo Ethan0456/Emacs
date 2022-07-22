@@ -14,6 +14,12 @@
   :config
   (require 'dap-python))
 
+;; Kotlin
+(use-package kotlin-mode
+  :hook (kotlin-mode .  lsp-deferred)) 
+(use-package flycheck-kotlin
+  :hook (flycheck-mode . lsp--buffer-deferred))
+
 ;; C/C++
 ;; (use-package ccls
 ;;   :if (not *sys/win32*)
@@ -36,9 +42,3 @@
 ;;             ("$ccls/publishSemanticHighlight" #'ccls--publish-semantic-highlight))
 ;;     :initialization-options (lambda () ccls-initialization-options)
 ;;     :library-folders-fn nil)))
-
-;; Kotlin
-(use-package kotlin-mode
-  :hook (kotlin-mode .  lsp-deferred)) 
-(use-package flycheck-kotlin
-  :hook (flycheck-mode . lsp--buffer-deferred))

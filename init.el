@@ -39,7 +39,7 @@
 		eshell-mode-hook))
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
-;; Move package-list to config.el
+;; Move package-list to separate file 
 (setq custom-file "~/.emacs.d/package-list.el")
 (load custom-file 'nomessage)
 

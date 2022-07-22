@@ -1,0 +1,309 @@
+#!/usr/bin/env python\n
+
+import pyjokes
+import datetime
+import os
+import random
+import smtplib
+import time
+import webbrowser as wb
+#import pyttsx3
+import speech_recognition as sr
+import wikipedia
+import pyautogui
+
+
+# engine=pyttsx3.init()
+
+def jarvis(query):
+    if 'jarvis' in query:
+        return True
+    else:
+        return False
+
+
+def time_():
+
+    Time = datetime.datetime.now().strftime("%H:%M:%S")
+    speak("The current time is")
+    speak(Time)
+
+
+def date_():
+
+    year = datetime.datetime.now().year
+    month = datetime.datetime.now().month
+    date = datetime.datetime.now().day
+    speak("The current date is")
+    speak(date)
+    speak(month)
+    speak(year)
+
+
+def wishme():
+
+    speak("Welcome Back Sir!")
+    speak("What can I do for you,SIR!")
+    # hour=datetime.datetime.now().hour
+    # if hour>=6 and hour<=12:
+    #speak("Good Morning SIR")
+
+
+def speak(audio):
+    os.system("/home/ethan/speech.sh {}".format(audio))
+    # engine.say(audio)
+    # engine.runAndWait()
+
+
+def screenshot():
+
+    img = pyautogui.screenshot()
+    speak("What you want to name it ,SIR?")
+    ans = take_command()
+    img.save('C:/Users/admee/Documents/screenshots/screenshot{}.png'.format(ans))
+    speak("Task Completed!")
+
+
+def ls_dir(dir):
+
+    ls = os.listdir(dir)
+    for i in range(len(ls)):
+        print(i, ls[i])
+
+
+def go_to(dir, index):
+    ls = os.listdir(dir)
+    for i in range(len(ls)):
+        print(i, ls[i])
+    cur_dir = os.getcwd()
+    if os.path.isdir(ls[int(index)]):
+        ch_dir = os.chdir(os.path.abspath(cur_dir)+"/"+ls[int(index)])
+        ls_dir(cur_dir)
+    elif os.path.isfile(ls[int(index)]):
+        os.system('xdg-open {}'.format(ls[int(index)]))
+
+
+def take_command():
+
+    r = sr.Recognizer()
+    with sr.Microphone() as source:
+        print("I am listening...")
+        # speak("Listening...")
+        r.pause_threshold = 1
+        audio = r.listen(source)
+
+    try:
+        print("Understanding...")
+        # speak("Understanding...")
+        query = r.recognize_google(audio, language='en=US')
+        print(query)
+
+    except Exception as e:
+        print(e)
+        print("Google Speech Recognition could not Understand")
+        #speak("say that again please")
+        return "None"
+    return query
+
+
+def sendEmail(to, content):
+
+    server = smtplib.SMTP('smtp.gamil.com', 587)
+    server.ehlo()
+    server.starttls()
+    server.login('username@gmail', 'password')
+    server.sendmail('senderemail@gmail.com', to, content)
+    server.close()
+
+
+def joke():
+
+    speak(pyjokes.get_joke())
+
+
+def quit():
+    pyautogui.press('ctrl', 'c')
+
+
+if __name__ == "__main__":
+    wishme()
+
+    while True:
+        query = take_command().lower()
+
+        if 'time' in query:
+            time_()
+
+        elif 'date' in query:
+            date_()
+
+        elif 'wikipedia' in query:
+            speak("Searching.....")
+            query = query.replace('wikipedia', '')
+            result = wikipedia.summary(query, sentences=3)
+            speak("according to wikipedia")
+            print(result)
+            speak(result)
+
+        elif 'send email' in query:
+
+            try:
+
+                speak("what should I say?")
+                content = take_command()
+                reciever = input("Enter Reciever's Email:")
+                reciever = 'reciever@gmail.com'
+                to = reciever
+                sendEmail(to, content)
+                speak("Email has been sent")
+
+            except Exception as e:
+
+                print(e)
+                speak("Unable to send Email")
+
+        elif 'present directory' in query:
+            print(os.getcwd())
+
+        elif 'list directory' in query:
+            ls_dir = os.listdir(os.getcwd())
+
+        elif 'go to' in query:
+            cur_dir = os.getcwd()
+            ls_dir(cur_dir)
+            speak("Index?")
+            index = take_command().lower()
+            go_to(cur_dir, index)
+
+        elif 'open youtube' in query:
+
+            speak("What should I search?")
+            search_Term = take_command().lower()
+            if search_Term == "nothing":
+                os.system('xdg-open https://www.youtube.com')
+                speak("Opening Youtube")
+            else:
+                os.system(
+                    'xdg-open https://www.youtube.com/results?search_query='+search_Term)
+                speak("Opening..")
+
+        elif 'open google' in query:
+
+            speak("What should I search?")
+            search_Term = take_command().lower()
+            if search_Term == "nothing":
+                os.system('xdg-open https://www.google.com/')
+                speak("Opening Google")
+            else:
+                os.system(
+                    'xdg-open https://www.google.com/search?q='+search_Term)
+                speak("Opening..")
+
+        elif 'joke' in query:
+
+            joke()
+
+        elif 'go offline' in query:
+
+            speak('Going Offline Sir!')
+            quit()
+
+        # elif 'launch' in query:
+        #     cur_dir=os.chdir('/usr/share/applications/')
+        #     ls_dir=os.listdir(cur_dir)
+        #     speak("What to launch?")
+        #     program=take_command().lower()
+        #     for i in ls_dir:
+        #         if i.lower()==program:
+        #             print("Opening ",i)
+        #             os.system('xdg-open {}'.format(os.path.abspath(program)+"/"+i))
+
+        #         else:
+        #             speak("No such Program found!")
+
+        elif 'make a note' in query:
+
+            speak("What should I write,Sir?")
+            notes = take_command()
+            file = open('notes.txt', 'w')
+            speak("Sir,Should I include date and time?")
+            ans = take_command()
+
+            if 'yes' or 'sure' in ans:
+                strTime = datetime.datetime.now().strftime("%H:%M:%S")
+                file.write(strTime)
+                file.write(':-')
+                file.write(notes)
+                speak("Done Taking Notes,SIR!")
+
+            else:
+                file.write(notes)
+
+        elif 'show notes' in query:
+            speak('showing notes')
+            file = open('notes.txt', 'r')
+            print(file.read())
+            speak(file.read())
+
+        elif 'screenshot' in query:
+            screenshot()
+
+        elif 'copy' in query:
+            pyautogui.hotkey('ctrl', 'c')
+            speak("Copied!")
+
+        elif 'paste' in query:
+            pyautogui.hotkey('ctrl', 'v')
+            speak("pasteing")
+
+        elif 'find' in query:
+            pyautogui.hotkey('ctrl', 'f')
+            speak("What to find,Sir?")
+            ans = take_command()
+            print(ans)
+
+        elif 'music' in query:
+            os.system('spotify')
+
+        elif 'filter' in query:
+            # if 'this directory' in query:
+            speak('filtering')
+            os.system('filter.py')
+
+        elif 'remember' in query:
+
+            speak("What should I remember?")
+            memory = take_command()
+            speak("You asked me to remember that"+memory)
+            remember = open('memory.txt', 'w')
+            remember.write(memory)
+            remember.close()
+
+        elif 'do you remember anything' in query:
+            remember = open('memory.txt', 'r')
+            speak("You asked me to remember that"+remember.read())
+
+        elif 'where is' in query:
+            query = query.replace("where is", "")
+            location = query
+            speak("locating"+location+"on google map")
+            wb.open_new_tab("https://www.google.com/maps/place/"+location)
+
+        elif 'sleep' in query:
+            speak("For how many seconds do you want me to sleep?")
+            ans = int(take_command())
+            speak("Going to sleep for"+ans+"seconds")
+            time.sleep(ans)
+
+        elif 'list' in query:
+            cur_dir = os.getcwd()
+            ls_dir(cur_dir)
+
+        elif 'log out' in query:
+            os.system("shutdown -l")
+
+        elif 'restart' in query:
+            os.system("reboot")
+
+        elif 'shut down' in query:
+            os.system("shutdown")
