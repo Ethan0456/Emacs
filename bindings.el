@@ -55,6 +55,7 @@
   "bl" '(evil-switch-to-windows-last-buffer :which-key "Switch to last buffer")
   "br" '(revert-buffer-no-confirm :which-key "Revert buffer")
   "bK" '(kill-other-buffers :which-key "Kill other buffers")
+  "bs" '(save-buffer :which-key "Save Buffer")
 
   ;; buffer management
   "ba" '(bury-buffer :which-key "Bury Buffer")

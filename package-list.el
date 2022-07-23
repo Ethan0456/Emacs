@@ -85,13 +85,6 @@
 (use-package which-key
   :init (which-key-mode))
 
-;; DOOM Emacs Themes
-(use-package doom-themes
-  :config
-  ;; Global settings (defaults)
-  (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
-        doom-themes-enable-italic t)) ; if nil, italics is universally disabled
-
 ;; An extensible Emacs Dashboard
 (use-package dashboard
   :config
@@ -386,7 +379,7 @@
 (use-package dired
   :straight nil
   :commands (dired dired-jump)
-  :custom ((insert-directory-program "gls" dired-use-ls-dired t)
+  :custom ((insert-directory-program "ls" dired-use-ls-dired t)
 	   (dired-listing-switches "-alhg --group-directories-first"))
   :config
   (evil-collection-define-key 'normal 'dired-mode-map
@@ -448,91 +441,5 @@
    (minimap-enlarge-certain-faces nil))) ; enlarge breaks BlockFont
 
 (use-package ranger)
-;; (use-package spacemacs-theme
-;;   :config (show-paren-mode t)
-;;   :custom (show-paren-style 'expression))
-
-(use-package shanty-themes)
-
-(use-package moe-theme
-  :config (show-paren-mode t)
-  :custom (show-paren-style 'expression)
-          (moe-theme-mode-line-color nil))
-
-(use-package afternoon-theme)
 
 (use-package multi-vterm)
-
-(use-package color-theme-modern)
-
-(use-package material-theme)
-
-(use-package kaolin-themes)
-
-(use-package cyberpunk-theme)
-
-(use-package zerodark-theme)
-
-(use-package color-theme-sanityinc-tomorrow)
-
-(use-package ujelly-theme)
-
-(use-package atom-one-dark-theme)
-
-(use-package darktooth-theme)
-
-(use-package twilight-theme)
-
-(use-package bespoke-themes
-  :straight (:host github :repo "mclear-tools/bespoke-themes" :branch "main")
-  :config
-  ;; Set evil cursor colors
-  (setq bespoke-set-evil-cursors t)
-  ;; Set use of italics
-  (setq bespoke-set-italic-comments t
-        bespoke-set-italic-keywords t)
-  ;; Set variable pitch
-  (setq bespoke-set-variable-pitch t)
-  ;; Set initial theme variant
-  (setq bespoke-set-theme 'dark)
-  ;; Load theme
-  (load-theme 'bespoke t))
-
-;; (use-package frame
-;;   :straight (:type built-in)
-;;   :custom
-;;   (window-divider-default-right-width 12)
-;;   (window-divider-default-bottom-width 1)
-;;   (window-divider-default-places 'right-only)
-;;   (window-divider-mode t))
-;; ;; Make sure new frames use window-divider
-;; (add-hook 'before-make-frame-hook 'window-divider-mode)
-
-(use-package lambda-themes
-  :straight (:type git :host github :repo "lambda-emacs/lambda-themes") 
-  :custom
-  (lambda-themes-set-italic-comments t)
-  (lambda-themes-set-italic-keywords t)
-  (lambda-themes-set-variable-pitch t) 
-  :config
-  ;; load preferred theme 
-  (load-theme 'lambda-dark t))
-
-;; ;; Dim inactive windows
-;; (use-package dimmer
-;;   :straight (:host github :repo "gonewest818/dimmer.el")
-;;   :hook (after-init . dimmer-mode)
-;;   :config
-;;   (setq dimmer-fraction 0.5)
-;;   (setq dimmer-adjustment-mode :foreground)
-;;   (setq dimmer-use-colorspace :rgb)
-;;   (setq dimmer-watch-frame-focus-events nil)
-;;   (dimmer-configure-which-key)
-;;   (dimmer-configure-magit)
-;;   (dimmer-configure-posframe))
-
-(use-package ample-theme)
-
-(use-package sublime-themes)
-
-(use-package base16-theme)
