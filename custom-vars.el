@@ -62,5 +62,30 @@
   (interactive)
   (lambda () (interactive) (flush-lines "^[[:space:]]*")))
 
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 ;; Set theme
-(load-theme 'moe-dark t)
+(load-theme 'base16-atlas t)
+
+(defun file-compile-command ()
+  (interactive)
+  (setq file-name-full buffer-file-name)
+  (setq file-ext (file-name-extension buffer-file-name))
+  (setq file-name-without-extension (file-name-sans-extension buffer-file-name))
+  (setq file-name-without-extension-and-path (file-name-base buffer-file-name))
+  
+  (cond ((string= file-ext "c")      (setq ccommand (format "gcc -o %s %s && ./%s"
+			  		        file-name-without-extension
+			  		        file-name-full
+			  		        file-name-without-extension-and-path)))
+         ((string= file-ext "cpp")   (setq ccommand (format "g++ -o %s %s && ./%s"
+					        file-name-without-extension
+					        file-name-full
+					        file-name-without-extension-and-path))) 
+	  ((string= file-ext "java")  (setq ccommand (format "javac %s && java %s"
+						  file-name-full
+						  file-name-without-extension)))
+          ((string= file-ext "kt")    (setq ccommand (format "kotlinc %s -include-runtime -d %s.jar && java -jar %s.jar"
+							     file-name-full
+							     file-name-without-extension
+							     file-name-without-extension))))
+(setq compile-command ccommand))

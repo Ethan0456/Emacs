@@ -1,0 +1,5 @@
+(let (fext file-name-extension)
+(cond ((equal fext  '"el") (message "yes its el"))
+      ((equal fext '"c") (message "yes its c"))))
+
+((nil . (compile-command ())))
