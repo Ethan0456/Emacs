@@ -1,8 +1,8 @@
 ;; Basic Configurations
 (defun ethan-font-size-func ()
   (interactive)
-  (setq ethan-font-size (cond ((string= system-type "gnu/linux") 120)
-				  ((string= system-type "mac") 130))))
+  (setq ethan-font-size (cond ((string= system-type "gnu/linux") 115)
+				  ((string= system-type "darwin") 130))))
 (setq inhibit-startup-message t) ;; stops showing startup screen when we start emacs
 (setq pixel-scroll-mode 1)            ;; pixel scrolling
 (scroll-bar-mode -1)             ;; disable scroll scrool
