@@ -1,0 +1,3 @@
+((nil .
+     ((make-variable-buffer-local . 'compile-command)
+      (compile-command . (format "gcc -o %s %s" buffer-file-name (file-name-sans-extension buffer-file-name))))))

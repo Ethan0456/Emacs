@@ -1,22 +1,3 @@
-;; ;; package.el initialization code
-
-;; Initialize package sources
-;; (require 'package) brings all package management functionsn the environment
-;; (setq package-archives '(("melpa" . "https://melpa.org/packages/") a alist of archives to fetch packages from
-;; 			 ("org"   . "https://orgmode.org/elpa/")
-;; 	       		 ("elpa"  . "https://elpa.gnu.org/packages/")))
-;; (package-initialize) Initializes the package system and prepares it to be used
-;; (unless package-archive-contents (package-refresh-contents)) checks if packages is already cloned or not
-
-;; Initialize use-package on Non Linux Platforms
-;; (unless (package-installed-p 'use-package) (package-install 'use-package)) downloads use-package if not already installed (Note : -p after function return true or nil)
-
-;; (require 'use-package) loads use-package
-;; (setq use-package-always-ensure t) ensures that all the packages are downloaded locally
-
-
-;; straight.el initialization code
-;; Bootstrap code to install straight.el
 (defvar bootstrap-version)
 (let ((bootstrap-file
        (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
@@ -290,13 +271,9 @@
 
 (use-package lsp-mode
   :commands (lsp lsp-deferred)
-  :hook (lsp-mode . efs/lsp-mode-setup)
-  ;; :init
-  ;; (setq lsp-keymap-prefix "SPC")  ;; Or 'C-l', 's-l'
-  :general(
-	   :states '(lsp-mode)
-	   :prefix "SPC"
-	   "l" '(lsp-command-map :which-key "Lsp"))
+
+  :hook ((lsp-mode . efs/lsp-mode-setup)
+	 (lsp-mode . lsp-enable-which-key-integration))
   :custom
   ((lsp-server-trace t)
   (lsp-log-io-mode t)
@@ -354,9 +331,9 @@
   :after lsp-mode
   :hook (prog-mode . company-mode)
   :bind (:map company-active-map
-         ("<tab>" . company-complete-selection))
-        (:map lsp-mode-map
-         ("<tab>" . company-indent-or-complete-common))
+	      ("<tab>" . company-complete-selection))
+  (:map lsp-mode-map
+	      ("<tab>" . company-indent-or-complete-common))
   :custom
   (yas-recompile-all)
   (yas-reload-all)
@@ -380,7 +357,7 @@
   :straight nil
   :commands (dired dired-jump)
   :custom ((insert-directory-program "ls" dired-use-ls-dired t)
-	   (dired-listing-switches "-alhg --group-directories-first"))
+	   (dired-listing-switches "-alhg"))
   :config
   (evil-collection-define-key 'normal 'dired-mode-map
     "h" 'dired-single-up-directory
@@ -443,3 +420,5 @@
 (use-package ranger)
 
 (use-package multi-vterm)
+
+(use-package multiple-cursors)

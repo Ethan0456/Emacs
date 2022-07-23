@@ -11,8 +11,7 @@
   ;; (python-shell-interpreter "python3")
   ;; (dap-python-executable "python3")
   (dap-python-debugger 'debugpy)
-  :config
-  (require 'dap-python))
+  :config (require 'dap-python))
 
 ;; Kotlin
 (use-package kotlin-mode

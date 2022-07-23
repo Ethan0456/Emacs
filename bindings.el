@@ -4,11 +4,11 @@
 (defconst my-leader "SPC")
 (general-create-definer my-leader-def
   :prefix my-leader)
-(general-override-mode) ;; https://github.com/noctuid/general.el/issues/99#issuecomment-360914335
-;; doomesque hotkeys using spacebar as prefix
+(general-override-mode)
+
 (my-leader-def
-  :states '(motion normal visual treemacs) ;; NOTE the treemacs state
-  :keymaps 'override ;; https://github.com/noctuid/general.el/issues/99#issuecomment-360914335
+  :states '(motion normal visual treemacs)
+  :keymaps 'override
 
   ;; map universal argument to SPC-u
   "u" '(universal-argument :which-key "Universal argument")
@@ -36,6 +36,17 @@
 ;;  "SPC" '(projectile-find-file :which-key "Projectile find file")
 ;;  "SPC" '(+consult/find-file :which-key "+consult/find-file")
 
+  ;; quick persp switching
+  "1" '((lambda () (interactive) (persp-switch-by-number 1)) :which-key "switch-to-persp-1")
+  "2" '((lambda () (interactive) (persp-switch-by-number 2)) :which-key "switch-to-persp-2")
+  "3" '((lambda () (interactive) (persp-switch-by-number 3)) :which-key "switch-to-persp-3")
+  "4" '((lambda () (interactive) (persp-switch-by-number 4)) :which-key "switch-to-persp-4")
+  "5" '((lambda () (interactive) (persp-switch-by-number 5)) :which-key "switch-to-persp-5")
+  "6" '((lambda () (interactive) (persp-switch-by-number 6)) :which-key "switch-to-persp-6")
+  "7" '((lambda () (interactive) (persp-switch-by-number 7)) :which-key "switch-to-persp-7")
+  "8" '((lambda () (interactive) (persp-switch-by-number 8)) :which-key "switch-to-persp-8")
+  "9" '((lambda () (interactive) (persp-switch-by-number 9)) :which-key "switch-to-persp-9")
+
   ;; editor
   "e" '(:ignore t :which-key "Editor")
   "ef" '(swiper :whick-key "swiper")
@@ -45,7 +56,7 @@
 ;;  "et" '(hydra-theme/body :which-key "hydra-theme") ; not sure if this is the best place for this, perhaps toggles would be more appropriate?
 ;;  "ec" '(consult-theme :which-key "consult-theme")
 
-  ;; buffer
+  ;; buffer management
   "b" '(:ignore t :which-key "Buffer")
   "bp" '(switch-to-prev-buffer :which-key "Prev buffer")
   "b[" '(previous-buffer :which-key "Previous buffer")
@@ -56,8 +67,6 @@
   "br" '(revert-buffer-no-confirm :which-key "Revert buffer")
   "bK" '(kill-other-buffers :which-key "Kill other buffers")
   "bs" '(save-buffer :which-key "Save Buffer")
-
-  ;; buffer management
   "ba" '(bury-buffer :which-key "Bury Buffer")
   "bA" '(unbury-buffer :which-key "Unbury Buffer")
   ;; "bb" '(consult-buffer :which-key "consult-buffer")
@@ -65,6 +74,12 @@
   ;; "C-S-a" '+persp/next-buffer
   ;; "C-z" 'consult-buffer
 
+  ;; file
+  "f" '(:ignore t :whick-key "Files")
+  "fc" '((lambda () compile file-compile-command) :whick-key "compile-file")
+  "fr" '(recompile :which-key "recompile-file")
+  "fd" '(delete-blank-lines :which-key "delete-blank-lines")
+  
   ;; open
   "o" '(:ignore t :which-key "Open")
   "ot" '(treemacs :which-key "Treemacs")
@@ -72,7 +87,6 @@
   "ov" '(multi-vterm :which-key "Open multi-vterm")
   "on" '(neotree-toggle :which-key "Open Neotree")
   "om" '(minimap-mode :which-key "Open Minimap")
-  ;;"oc" '(open-init-file :which-key "Open init.el")
   
   ;; projectile
   "p" '(projectile-command-map :which-key "Projectile")
@@ -98,7 +112,8 @@
   ;; ;; the hydra is nice but the rest is kind of jank, need to pla around with this more
 
   ;; lsp
-  "l" '(lsp-ma)
+  "l" '((lambda () (lsp-command-map)) :which-key "LSP")
+
   ;; window
   "w" '(evil-window-map :which-key "Window")
 
@@ -108,18 +123,11 @@
   "tf" '(flyspell-mode :which-key "flyspell-mode")
   "tc" '(flycheck-mode :which-key "flycheck-mode")
   "tm" '(minimap-mode :which-key "minimap-mode")
-  ;; "ts" '(flyspell-mode :which-key "flyspell-mode")
-  ;; "ta" '(corfu-mode :which-key "corfu-mode") ;; 'a' for autocomplete
-  ;; "tg" '(evil-goggles-mode :which-key "evil-goggles")
-  ;; "tI" '(toggle-indent-style :which-key "Indent style")
-  ;; "tv" '(visual-line-mode  :which-key "visual-line-mode")
+  "ts" '(toggle-scroll-bar :which-key "toggle-scroll-bar")
+  "tl" '(lsp :which-key "toggle-lsp")
+  "tc" '(company-mode :which-key "toggle-company-mode")
+  "ty" '(yas-minor-mode :whick-key "toggle-yas-mode")
 
-  ;; file
-  "f" '(:ignore t :whick-key "Files")
-  "fc" '(compile :whick-key "compile-file")
-  "fr" '(recompile :which-key "recompile-file")
-  "fd" '(delete-blank-lines :which-key "delete-blank-lines")
-  
   ;; notes/org
   "n" '(:ignore t :which-key "Notes")
   "nf" '(org-roam-node-find :which-key "find-node")
@@ -131,23 +139,17 @@
   ;; persps
   "TAB" '(perspective-map :which-key "Persp" :config (persp-mode))
   
-  ;; quick persp switching
-  "1" '((lambda () (interactive) (persp-switch-by-number 1)) :which-key "switch-to-persp-1")
-  "2" '((lambda () (interactive) (persp-switch-by-number 2)) :which-key "switch-to-persp-2")
-  "3" '((lambda () (interactive) (persp-switch-by-number 3)) :which-key "switch-to-persp-3")
-  "4" '((lambda () (interactive) (persp-switch-by-number 4)) :which-key "switch-to-persp-4")
-  "5" '((lambda () (interactive) (persp-switch-by-number 5)) :which-key "switch-to-persp-5")
-  "6" '((lambda () (interactive) (persp-switch-by-number 6)) :which-key "switch-to-persp-6")
-  "7" '((lambda () (interactive) (persp-switch-by-number 7)) :which-key "switch-to-persp-7")
-  "8" '((lambda () (interactive) (persp-switch-by-number 8)) :which-key "switch-to-persp-8")
-  "9" '((lambda () (interactive) (persp-switch-by-number 9)) :which-key "switch-to-persp-9")
   ;; git
   "g" '(magit-status-here :which-key "Git")) ; prefix
+
+;; Other bindings
+
 ;; normal/visual mode hotkeys
 (general-define-key
  :states '(normal visual)
   "U" 'evil-scroll-up
   "Y" 'evil-scroll-down) 
+
 ;; Some Other Evil And Flycheck Bindings
 (general-define-key
   :states '(normal visual)
@@ -164,8 +166,10 @@
   "C-n" 'evil-next-visual-line ;; TODO should be in motion? doesn't seem to go down to these states?
   "C-p" 'evil-previous-visual-line
   "s" 'avy-goto-char)
+
 ;; unbind C-z from evil
 (general-unbind '(motion insert treemacs) "C-z")
+
 ;; key bindings for evil search ('/')
 ;; there could be a better way to do this, but this works so whatever
 (general-define-key
@@ -173,6 +177,7 @@
   :keymaps 'evil-ex-search-keymap
   ;; C-v should paste clipboard contents
   "C-v" 'yank)
+
 ;; global
 (general-define-key
   ;; more traditional zoom keys
@@ -182,16 +187,19 @@
   "C-M--" 'zoom-out
    ;; C-v to paste (or "yank" in emacs jargon) from clipboard, useful for minibuffers (such as query-replace and M-x)
   "C-v" 'yank)
+
 ;; magit
 (general-define-key
   ;; https://github.com/emacs-evil/evil-magit/issues/14#issuecomment-626583736
   :keymaps 'transient-base-map
   "<escape>" 'transient-quit-one)
+
 (general-define-key
   :states '(normal visual)
   :keymaps 'magit-mode-map
   ;; rebind "q" in magit-status to kill the magit buffers instead of burying them
   "q" '+magit/quit)
+
 ;; org mode specific evil binding
 ;; unbind the return (enter) key so it becomes org-return
 ;; the return key is not that useful here anyways
@@ -200,6 +208,7 @@
   :keymaps 'org-mode-map
   :major-modes t
   "RET" 'org-return)
+
 ;; neotree
 (general-define-key
  :states '(normal visual insert)
@@ -219,6 +228,7 @@
  "K" 'neotree-select-previous-sibling-node
  "P" 'neotree-copy-filepath-to-yank-ring
  "D" 'neotree-delete-node)
+
 ;; treemacs
 (general-define-key
  :states 'treemacs-mode
@@ -236,6 +246,7 @@
  "C" 'treemacs-copy-file
  "M" 'treemacs-move-file
  "R" 'treemacs-refresh)
+
                ;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;; Old Config ;;;;;;;;;;;;;;;;;;;
                ;;;;;;;;;;;;;;;;

@@ -1,0 +1,23 @@
+#include<iostream>
+import<format>;
+using namespace std;
+
+int main(int argc, char const *argv[])
+{
+    float num {};
+    int counter {};
+    float total {};
+    float average {};
+    average = total/counter;
+    cout << "Enter number : " << endl;
+    cin >> num;
+    while ( num != 0 ) {
+        total += num;
+        counter++;
+        cout << "Enter number : " << endl;
+        cin >> num;
+    }
+    cout << "Total = " << total << endl;
+    cout << "Average = " << average << endl;
+    return 0;
+}

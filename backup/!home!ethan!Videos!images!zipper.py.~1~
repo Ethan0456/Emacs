@@ -1,0 +1,69 @@
+#!/usr/bin/env python3
+# modules
+from unicodedata import name
+from zipfile import ZipFile
+import sys
+import os
+import random as rn
+
+# declarations
+pwd = os.getcwd()
+ls_dir = os.listdir(os.getcwd())
+number_of_files = 0
+dir = "."
+name_format = []
+name_order = ""
+order = ""
+flags = [0,0,0,0]
+# flags[0] = -d (copy to dir)
+# flags[1] = -r (randomize_flag = 0)
+# flags[2] = -a (rename_with_archieve_flag = 0)
+# flags[3] = -c (custom filename format)
+
+# syncing flags
+if "-d" in sys.argv:
+    flags[0] = 1
+    dir = sys.argv[sys.argv.index("-d") + 1]
+    sys.argv.remove("-d")
+    sys.argv.remove(dir)
+if "-r" in sys.argv:
+    flags[1] = 1
+    randomize_flag = 1
+    sys.argv.remove("-r")
+if "-a" in sys.argv:
+    flags[2] = 1
+    rename_with_archieve_flag = 1
+    sys.argv.remove("-a")
+if "-c" in sys.argv:
+    flags[3] = 1
+    name_format = sys.argv[sys.argv.index("-c") + 1].split("#")
+    name_order = name_format[1].split(",")
+    sys.argv.remove(sys.argv[sys.argv.index("-c") + 1])
+    sys.argv.remove("-c")
+# finalizing format of filename
+if flags[3] == 0:
+    if flags[1] == 1:
+        format += "{}_"
+    if flags[2] == 1:
+        format += "{}_"
+
+# extraction directory
+print("Extracting To : ",dir)
+
+# total number of files
+for i in range(1,len(sys.argv)):
+    with ZipFile(sys.argv[i]) as zip:
+        number_of_files += len(zip.infolist())
+print("Total Number of Files : ", number_of_files)
+
+# extraction program
+count=0
+for i in range(1,len(sys.argv)):
+    with ZipFile(sys.argv[i]) as zip:
+        for j, f in enumerate(zip.filelist):
+            random_int = rn.randint(0, number_of_files)
+            f_name = f.filename
+            # if flags[3] == 1:
+            f.filename = str(count)+zip.filename+f_name
+            zip.extract(f,dir)
+        print('Done zip - {}!'.format(sys.argv[i]))

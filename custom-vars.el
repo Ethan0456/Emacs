@@ -64,7 +64,7 @@
 
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 ;; Set theme
-(load-theme 'base16-atlas t)
+(load-theme 'base16-flat t)
 
 (defun file-compile-command ()
   (interactive)
@@ -87,5 +87,5 @@
           ((string= file-ext "kt")    (setq ccommand (format "kotlinc %s -include-runtime -d %s.jar && java -jar %s.jar"
 							     file-name-full
 							     file-name-without-extension
-							     file-name-without-extension))))
-(setq compile-command ccommand))
+							     file-name-without-extension)))))
+(setq debug-on-error t)
