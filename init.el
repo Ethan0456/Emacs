@@ -1,5 +1,8 @@
 ;; Basic Configurations
-
+(defun ethan-font-size-func ()
+  (interactive)
+  (setq ethan-font-size (cond ((string= system-type "gnu/linux") 120)
+				  ((string= system-type "mac") 130))))
 (setq inhibit-startup-message t) ;; stops showing startup screen when we start emacs
 (setq pixel-scroll-mode 1)            ;; pixel scrolling
 (scroll-bar-mode -1)             ;; disable scroll scrool
@@ -10,8 +13,7 @@
 ;; (menu-bar-mode -1)                ;; disable menubar
 (set-face-attribute 'default nil
 		    :font "JetBrainsMono Nerd Font Mono"
-		    :height (cond ((string= system-type "gnu/linux") (120))
-				  ((string= system-type "mac") (130)))) ;; set font and font-size
+		    :height (eval (ethan-font-size-func))) ;; set font and font-size
 (setq ring-bell-function 'ignore)
 (setq persp-suppress-no-prefix-key-warning t)
 (recentf-mode 1) ;; Maintains a list of recent files
