@@ -17,9 +17,7 @@
 (setq straight-use-package-by-default t)
 
 ;; Packages and their configs
-
 (use-package general) ;; general.el provides a more convenient method for binding keys in emacs (for both evil and non-evil users)
-
 (use-package evil ;; Evil is an extensible vi layer for Emacs. It emulates the main features of Vim, and provides facilities for writing custom extensions
   :init
   (setq evil-want-integration t)
@@ -138,6 +136,123 @@
   :straight (:type built-in)
   :hook (org-mode . ethan/org-mode-setup)
   :config
+  (setq org-ellipsis " ▾")
+
+  (setq org-agenda-start-with-log-mode t)
+  (setq org-log-done 'time)
+  (setq org-log-into-drawer t)
+
+  (setq org-agenda-files
+        '("Users/abhijeetsingh/Projects/Code/emacs-from-scratch/OrgFiles/Tasks.org"
+          "Users/abhijeetsingh/Projects/Code/emacs-from-scratch/OrgFiles/Habits.org"
+          "Users/abhijeetsingh/Projects/Code/emacs-from-scratch/OrgFiles/Birthdays.org"))
+
+  (require 'org-habit)
+  (add-to-list 'org-modules 'org-habit)
+  (setq org-habit-graph-column 60)
+
+  (setq org-todo-keywords
+    '((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d!)")
+      (sequence "BACKLOG(b)" "PLAN(p)" "READY(r)" "ACTIVE(a)" "REVIEW(v)" "WAIT(w@/!)" "HOLD(h)" "|" "COMPLETED(c)" "CANC(k@)")))
+
+  (setq org-refile-targets
+    '(("Archive.org" :maxlevel . 1)
+      ("Tasks.org" :maxlevel . 1)))
+
+  ;; Save Org buffers after refiling!
+  (advice-add 'org-refile :after 'org-save-all-org-buffers)
+
+  (setq org-tag-alist
+    '((:startgroup)
+       ; Put mutually exclusive tags here
+       (:endgroup)
+       ("@errand" . ?E)
+       ("@home" . ?H)
+       ("@work" . ?W)
+       ("agenda" . ?a)
+       ("planning" . ?p)
+       ("publish" . ?P)
+       ("batch" . ?b)
+       ("note" . ?n)
+       ("idea" . ?i)))
+
+  ;; Configure custom agenda views
+  (setq org-agenda-custom-commands
+   '(("d" "Dashboard"
+     ((agenda "" ((org-deadline-warning-days 7)))
+      (todo "NEXT"
+        ((org-agenda-overriding-header "Next Tasks")))
+      (tags-todo "agenda/ACTIVE" ((org-agenda-overriding-header "Active Projects")))))
+
+    ("n" "Next Tasks"
+     ((todo "NEXT"
+        ((org-agenda-overriding-header "Next Tasks")))))
+
+    ("W" "Work Tasks" tags-todo "+work-email")
+
+    ;; Low-effort next actions
+    ("e" tags-todo "+TODO=\"NEXT\"+Effort<15&+Effort>0"
+     ((org-agenda-overriding-header "Low Effort Tasks")
+      (org-agenda-max-todos 20)
+      (org-agenda-files org-agenda-files)))
+
+    ("w" "Workflow Status"
+     ((todo "WAIT"
+            ((org-agenda-overriding-header "Waiting on External")
+             (org-agenda-files org-agenda-files)))
+      (todo "REVIEW"
+            ((org-agenda-overriding-header "In Review")
+             (org-agenda-files org-agenda-files)))
+      (todo "PLAN"
+            ((org-agenda-overriding-header "In Planning")
+             (org-agenda-todo-list-sublevels nil)
+             (org-agenda-files org-agenda-files)))
+      (todo "BACKLOG"
+            ((org-agenda-overriding-header "Project Backlog")
+             (org-agenda-todo-list-sublevels nil)
+             (org-agenda-files org-agenda-files)))
+      (todo "READY"
+            ((org-agenda-overriding-header "Ready for Work")
+             (org-agenda-files org-agenda-files)))
+      (todo "ACTIVE"
+            ((org-agenda-overriding-header "Active Projects")
+             (org-agenda-files org-agenda-files)))
+      (todo "COMPLETED"
+            ((org-agenda-overriding-header "Completed Projects")
+             (org-agenda-files org-agenda-files)))
+      (todo "CANC"
+            ((org-agenda-overriding-header "Cancelled Projects")
+             (org-agenda-files org-agenda-files)))))))
+
+  (setq org-capture-templates
+    `(("t" "Tasks / Projects")
+      ("tt" "Task" entry (file+olp "Users/abhijeetsingh/Projects/Code/emacs-from-scratch/OrgFiles/Tasks.org" "Inbox")
+           "* TODO %?\n  %U\n  %a\n  %i" :empty-lines 1)
+
+      ("j" "Journal Entries")
+      ("jj" "Journal" entry
+           (file+olp+datetree "Users/abhijeetsingh/Projects/Code/emacs-from-scratch/OrgFiles/Journal.org")
+           "\n* %<%I:%M %p> - Journal :journal:\n\n%?\n\n"
+           ;; ,(dw/read-file-as-string "~/Notes/Templates/Daily.org")
+           :clock-in :clock-resume
+           :empty-lines 1)
+      ("jm" "Meeting" entry
+           (file+olp+datetree "Users/abhijeetsingh/Projects/Code/emacs-from-scratch/OrgFiles/Journal.org")
+           "* %<%I:%M %p> - %a :meetings:\n\n%?\n\n"
+           :clock-in :clock-resume
+           :empty-lines 1)
+
+      ("w" "Workflows")
+      ("we" "Checking Email" entry (file+olp+datetree "Users/abhijeetsingh/Projects/Code/emacs-from-scratch/OrgFiles/Journal.org")
+           "* Checking Email :email:\n\n%?" :clock-in :clock-resume :empty-lines 1)
+
+      ("m" "Metrics Capture")
+      ("mw" "Weight" table-line (file+headline "Users/abhijeetsingh/Projects/Code/emacs-from-scratch/OrgFiles/Metrics.org" "Weight")
+       "| %U | %^{Weight} | %^{Notes} |" :kill-buffer t)))
+
+  (define-key global-map (kbd "C-c j")
+    (lambda () (interactive) (org-capture nil "jj")))
+
   (ethan/org-font-setup))
 
 ;; Org Bullets
@@ -151,12 +266,14 @@
 (use-package visual-fill-column
   :hook (org-mode . ethan/org-mode-visual-fill))
 
-;; Hook to run lsp-mode for all prog-mode's
 (add-hook 'prog-mode-hook 'lsp-mode)
-
 ;; Language Server Protocol Mode 
+
 (use-package lsp-mode
   :commands (lsp lsp-deferred)
+  :init (with-eval-after-load 'lsp-mode
+	  (evil-leader/set-key
+	   "l" lsp-command-map))
   :hook ((lsp-mode . ethan/lsp-mode-setup)
 	 (lsp-mode . lsp-enable-which-key-integration))
   :custom
@@ -194,7 +311,6 @@
   :hook (prog-mode . flycheck-mode))
 
 (add-to-list 'load-path "~/.emacs.d/snippets")
-
 ;; yasnippet
 (use-package yasnippet
   :hook (prog-mode . yas-minor-mode)
@@ -202,7 +318,6 @@
    ((yas-snippet-dirs '("~/.emacs.d/snippets"))
     (yas-global-mode 1)))
 
-;; Predefined yasnippets
 (use-package yasnippet-snippets)
 
 ;; Treemacs to view different methods and variables of file in a tree view
@@ -243,21 +358,18 @@
 (use-package dired
   :straight nil
   :commands (dired dired-jump)
-  :custom ((insert-directory-program ethan/set-ls-variable dired-use-ls-dired t) 
-	   (dired-listing-switches "-alhg --group-directories-first"))
+  :custom ((insert-directory-program "ls" dired-use-ls-dired t)
+	   (dired-listing-switches "-alhg"))
   :config
   (evil-collection-define-key 'normal 'dired-mode-map
     "h" 'dired-single-up-directory
     "l" 'dired-single-buffer))
 
-;; To open only single dired buffer
 (use-package dired-single)
 
-;; Icon pack for dired
 (use-package all-the-icons-dired
   :hook (dired-mode . all-the-icons-dired-mode))
 
-;; To open other files with appropriate app
 (use-package dired-open)
   ;; :config
   ;; Doesn't work as expected!
@@ -265,20 +377,20 @@
   ;; (setq dired-open-extensions '(("png" . "feh")
   ;;                               ("mkv" . "mpv"))))
 
-;; To hide dotfiles
+
 (use-package dired-hide-dotfiles
   :hook (dired-mode . dired-hide-dotfiles-mode)
   :config
   (evil-collection-define-key 'normal 'dired-mode-map
     "H" 'dired-hide-dotfiles-mode))
 
-;; Debugger package
 (use-package dap-mode
   ;; Uncomment the config below if you want all UI panes to be hidden by default!
   ;; :custom
   ;; (lsp-enable-dap-auto-configure nil)
   ;; :config
   ;; (dap-ui-mode 1)
+
   :config
   ;; Set up Node debugging
   (require 'dap-node)
@@ -290,7 +402,6 @@
     :prefix lsp-keymap-prefix
     "d" '(dap-hydra t :wk "debugger")))
 
-;; To illuminate the cursor position
 (use-package beacon
   :custom
   ((beacon-color "#009f00")
@@ -300,7 +411,6 @@
   (beacon-blink-when-point-moves t)
   (beacon-mode t)))
 
-;; Minimap for quick buffer overview
 (use-package minimap
   :custom
   ((minimap-window-location 'right) ; Minimap on the right side
@@ -309,20 +419,8 @@
    (minimap-dedicated-window t) ; seems to work better
    (minimap-enlarge-certain-faces nil))) ; enlarge breaks BlockFont
 
-;; Ranger file manager
 (use-package ranger)
 
-;; Package to support Multi vterm
 (use-package multi-vterm)
 
-;; Multiple cursor package
 (use-package multiple-cursors)
-
-;; Pulsing cursor animation
-(use-package pulsing-cursor
-  :straight (pulsing-cursor
-	       :type git
-	       :host github
-	       :repo "jasonjckn/pulsing-cursor")
-  :config
-  (pulsing-cursor-mode +1))

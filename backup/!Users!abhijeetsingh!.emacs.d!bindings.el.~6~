@@ -111,8 +111,8 @@
   ;; ;; "zz" '(hydra-zoom/body :which-key "hydra-zoom")
   ;; ;; the hydra is nice but the rest is kind of jank, need to pla around with this more
 
-  ;; ;; lsp
-  ;; "l" '(lsp-command-map :which-key "LSP")
+  ;; lsp
+  "l" '((lambda () (lsp-command-map)) :which-key "LSP")
 
   ;; window
   "w" '(evil-window-map :which-key "Window")
@@ -314,7 +314,9 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(org-agenda-files nil)
- '(safe-local-variable-values '((eval ethan/file-compile-command))))
+ '(safe-local-variable-values
+   '((eval ethan/file-compile-command)
+     (eval file-compile-command))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

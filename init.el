@@ -1,32 +1,25 @@
 ;; Basic Configurations
-(defun ethan-font-size-func ()
-  (interactive)
-  (setq ethan-font-size (cond ((string= system-type "gnu/linux") 120)
-				  ((string= system-type "mac") 130))))
 (setq inhibit-startup-message t) ;; stops showing startup screen when we start emacs
-(setq pixel-scroll-mode 1)            ;; pixel scrolling
+(setq pixel-scroll-mode 1)       ;; pixel scrolling
 (scroll-bar-mode -1)             ;; disable scroll scrool
-(tool-bar-mode -1)                 ;; disable toolbar
-(tooltip-mode -1)                 ;; disable tooltios
-(set-fringe-mode 10)              ;; gives some breathing room
+(tool-bar-mode -1)               ;; disable toolbar
+(tooltip-mode -1)                ;; disable tooltios
+(set-fringe-mode 10)             ;; gives some breathing room
 (electric-pair-mode 1)           ;; Pair Parentheses
-;; (menu-bar-mode -1)                ;; disable menubar
-(set-face-attribute 'default nil
-		    :font "JetBrainsMono Nerd Font Mono"
-		    :height (eval (ethan-font-size-func))) ;; set font and font-size
+;; (menu-bar-mode -1)              ;; disable menubar
+(set-face-attribute 'default nil :font "JetBrainsMono Nerd Font Mono" :height (eval (ethan-font-size-func))) ;; set font and font-size
 (setq ring-bell-function 'ignore)
 (setq persp-suppress-no-prefix-key-warning t)
-(recentf-mode 1) ;; Maintains a list of recent files
-(setq history-length 25) ;; saves history of minibuffer upto 25 length
-(savehist-mode 1) ;; initiate above mode
-(save-place-mode 1) ;; saves cursor location in files
-(global-auto-revert-mode 1) ;; Sync files if the file is edited outside emacs
+(recentf-mode 1)                 ;; Maintains a list of recent files
+(setq history-length 25)         ;; saves history of minibuffer upto 25 length
+(savehist-mode 1)                ;; initiate above mode
+(save-place-mode 1)              ;; saves cursor location in files
+(global-auto-revert-mode 1)      ;; Sync files if the file is edited outside emacs
 (setq global-auto-revert-non-file-buffers t) ;; Revert Dired and other buffers (same as above for dired and non file buffers)
-(column-number-mode 1) ;; Make column number visible in modeline
-(global-display-line-numbers-mode t)
-(setq display-line-numbers-type 'relative)
-
-(add-to-list 'load-path "~/.emacs.d/themes/")
+(column-number-mode 1)           ;; Make column number visible in modeline
+(global-display-line-numbers-mode t)         ;; Display line numbers
+(setq display-line-numbers-type 'relative)   ;; Line numbers type relative
+(setq debug-on-error t)
 
 ;; Write backups to ~/.emacs.d/backup/
 (setq backup-directory-alist '(("." . "~/.emacs.d/backup"))

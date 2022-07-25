@@ -1,0 +1,6 @@
+#include<stdio.h>
+int main(){
+    int n[2]={1,2};
+    int *m=&n;
+    printf("%u %u\n",m,m++);
+}
