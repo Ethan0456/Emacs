@@ -1,4 +1,5 @@
 ;; Basic Configurations
+
 (setq inhibit-startup-message t) ;; stops showing startup screen when we start emacs
 (setq pixel-scroll-mode 1)       ;; pixel scrolling
 (scroll-bar-mode -1)             ;; disable scroll scrool
