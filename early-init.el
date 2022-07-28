@@ -38,3 +38,14 @@
 							     file-name-full
 							     file-name-without-extension
 							     file-name-without-extension))))))
+
+;; To compile and recompile with universal argument
+(defun ethan/universal-compile-command ()
+  (interactive)
+  (setq current-prefix-arg '(4))
+   (call-interactively 'compile))
+
+(defun ethan/universal-recompile-command ()
+  (interactive)
+  (setq current-prefix-arg '(4))
+   (call-interactively 'recompile))

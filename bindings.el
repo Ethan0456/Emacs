@@ -76,8 +76,8 @@
 
   ;; file
   "f" '(:ignore t :whick-key "Files")
-  "fc" '(compile :whick-key "compile-file")
-  "fr" '(recompile :which-key "recompile-file")
+  "fc" '(ethan/universal-compile-command :whick-key "compile-file")
+  "fr" '(ethan/universal-recompile-command :which-key "recompile-file")
   "fd" '(delete-blank-lines :which-key "delete-blank-lines")
   
   ;; open
@@ -149,6 +149,14 @@
  :states '(normal visual)
   "U" 'evil-scroll-up
   "Y" 'evil-scroll-down) 
+
+;; to indent in insert mode
+(general-define-key
+ :states 'visual
+ "S->" 'indent-rigidly-right
+ "S-<" 'indent-rigidly-left
+ "S-}" 'increase-right-margin
+ "S-{" 'increase-left-margin)
 
 ;; Some Other Evil And Flycheck Bindings
 (general-define-key
