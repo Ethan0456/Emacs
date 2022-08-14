@@ -1,1 +1,1 @@
-("~/.emacs.d/" "~/" "~/.config/" "~/.emacs.d/straight/repos/straight.el/" "~/Projects/")
+("~/Projects/.emacs.d/" "~/.config/" "~/.emacs.d/" "~/" "~/.emacs.d/straight/repos/straight.el/" "~/Projects/")

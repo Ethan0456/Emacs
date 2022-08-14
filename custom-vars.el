@@ -1,7 +1,7 @@
 ;; This File defines custom functions, variables and settings
 
 ;; Set theme
-(load-theme 'doom-xcode t)
+(load-theme 'doom-dracula t)
 
 ;; config section of org-mode
 (defun ethan/org-font-setup ()
