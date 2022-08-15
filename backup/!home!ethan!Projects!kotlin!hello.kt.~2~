@@ -1,0 +1,78 @@
+// BMI INDEX
+//fun bmi(weight: Double, height: Double): String {
+//    val bmi = weight / (height * height)
+//    return if (bmi < 18.5) "UnderWeight"
+//    else if (bmi < 25) "NormalWeight"
+//    else "OverWeight"
+//}
+//fun main() {
+//    val weight = 80.0
+//    val height = 180.0
+//    println(bmi(weight, height))
+//}
+
+// ISPRIME
+//fun isPrime(num: Int): Boolean {
+//    for (i in 2 until num) if (num % i == 0) return false
+//    return true
+//}
+//
+//fun main() {
+//    for (i in 1..100) println("$i = ${isPrime(i)}")
+//}
+
+// IntRange
+//fun main() {
+//    val r1 = IntRange(0,10).sum()
+//    println(r1)
+//}
+
+// (Armstrong Numbers) To String and To Int
+//fun main() {
+//    var sum : Int = 0
+//    val num : Int = 3711
+//    for (i in "$num"){
+//        val n : Int = i.digitToInt()
+//        sum += n*n*n
+//    }
+//    println(if (sum == num) "True" else "False")
+//}
+
+// var and val for classes
+//class Obj1 {
+//    var value : Int = 0
+//}
+//
+//class Obj2 {
+//    var value : Int = 0
+//}
+//
+//fun main() {
+//    val o1 = Obj1()
+//    val o2 = Obj2()
+//    o1.value = 5
+//    o2.value = 10
+//    o1.value = 15
+//    o2.value = 20
+//    println(o1.value)
+//    println(o2.value)
+//}
+
+// Initializing Object with constructor without parameter
+class Human(name : String?){
+    val Name = "My name is $name"
+}
+
+fun main() {
+    val h = Human("Admin")
+    println(h.Name)
+    val s1 : String? = "abc"
+    if (s1 != null){
+	println(s1.length)
+    }
+   val h1 = Human(null)
+   println(h.Name)
+   println(h1.Name)
+   val str : String? = null
+   println(str?.length)
+}

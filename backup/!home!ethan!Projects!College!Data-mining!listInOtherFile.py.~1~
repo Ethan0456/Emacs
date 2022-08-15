@@ -1,0 +1,38 @@
+rollNo = input("Enter Roll No : ")
+name = input("Enter Name : ")
+
+subjects = ["Computer Networks",
+            "Information Security",
+            "Data Mining",
+            "Web Technology",
+            "Applied ML",
+            "System Software and Compiler Design",
+            "Software Engineering"]
+
+fileWithText = open("data.txt", "w")
+fileWithText.write("1. Computer Networks\n2. Information Security\n3. Data Mining\n4. Web Technology\n5. Applied ML\n6. System Software and Compiler Design")
+fileWithText.close()
+
+fileWithList = open("list.py", "w")
+FileWithList.write('subjects = ["Computer Networks",
+         "Information Security",
+         "Data Mining",
+         "Web Technology",
+         "Applied ML",
+         "System Software and Compiler Design",
+         "Software Engineering"]')
+fileWithList.close()
+
+import fileWithList.py
+
+with open("data.txt", "r") as fileToRead:
+    while True:
+        print(fileToRead.read())
+        option = int(input("Enter Option : "))
+        if option < 1 or option > 7:
+            print("Out of Bound!")
+            continue
+        print(rollNo + " " + name + " " + subjects[option - 1])
+        continueOrNot = input("Do you want to continue (y/n) : ")
+        if continueOrNot == "n":
+            break

@@ -1,0 +1,22 @@
+# import pdfkit
+# pdfkit.from_url("https://www.w3schools.com/css/tryit.asp?filename=trycss_syntax1","out.pdf")
+import sys 
+from PyQt5.QtCore import *
+from PyQt5.QtGui import * 
+from PyQt5.QtWebKit import * 
+
+app = QApplication(sys.argv)
+web = QWebView()
+web.load(QUrl("http://www.yahoo.com"))
+printer = QPrinter()
+printer.setPageSize(QPrinter.A4)
+printer.setOutputFormat(QPrinter.PdfFormat)
+printer.setOutputFileName("fileOK.pdf")
+
+def convertIt():
+    web.print_(printer)
+    print("Pdf generated")
+    QApplication.exit()
+
+QObject.connect(web, SIGNAL("loadFinished(bool)"), convertIt)
+sys.exit(app.exec_())

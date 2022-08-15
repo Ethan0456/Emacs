@@ -17,6 +17,8 @@
 
 (use-package zerodark-theme)
 
+;; (use-package spacemacs-theme)
+
 (use-package color-theme-sanityinc-tomorrow)
 
 (use-package ujelly-theme)
