@@ -1,0 +1,166 @@
+import numpy as np
+
+# ndArray
+###
+# predefined
+# arr = np.array([1,2,3,4,5])
+# print(arr)
+# print(type(arr))
+
+# user-input
+# arr = np.array(input("Enter value : "))
+# print(arr)
+
+# 0DArray
+###
+# arr = np.array(42)
+# print(arr)
+# arr = np.array(list(input("Enter List : ")))
+# print(arr)
+
+# 2D Array
+# arr = np.array([[1,2,3], [4,5,6]])
+# print(arr)
+
+# str = input("Enter Elements : ")
+# ls = str.split(" ")
+# print(ls)
+# ls1 = str.split(",")
+# print(ls1)
+# arr = np.array(ls1)
+# print(arr)
+
+# 3D Array
+# arr = np.array([[[1,2,3],
+#                  [4,5,6]],
+#                 [[1,2,3],
+#                  [4,5,6]]])
+# print(arr)
+
+# arr = list(map(int, input("Enter elements : ").split()))
+# print(arr)
+# arr = np.array(arr)
+# print(arr)
+# print("Array Dimension : " + arr.ndim)
+
+# a = np.zeros((3,4))
+# print("a = ", a)
+# print("\n")
+
+# b = np.ones((2,3,4), dtype = np.int16)
+# print("b = ", b)
+# print("\n")
+
+# c = np.arange(10,25,5)
+# print("c = ", c)
+# print("\n")
+
+# d = np.linspace(0,2,9)
+# print("d = ", d)
+# print("\n")
+
+# e = np.full((2,2), 7)
+# print("e = ", e)
+# print("\n")
+
+# f = np.eye(2)
+# print("f = ", f)
+# print("\n")
+
+# g = np.random.random((2,2))
+# print("g = ", g)
+# print("\n")
+
+# h = np.empty((3,2))
+# print("h = ", h)
+# print("\n")
+
+# a = np.array([1,2,3])
+# b = np.array([(1.5,2,3), (4,5,6)], dtype = float)
+# c = np.array([[(1.5,2,3), (4,5,6)], [(3,2,1), (4,5,6)]], dtype = float)
+
+# i = a - b
+# print("i = ", i)
+# print("\n")
+
+# j = np.subtract(a,b)
+# print("j = ", j)
+# print("\n")
+
+# k = a + b
+# print("k = ", k)
+# print("\n")
+
+# l = np.add(a,b)
+# print("l = ", l)
+# print("\n")
+
+# m = a / b
+# print("m = ", m)
+# print("\n")
+
+# n = np.divide(a,b)
+# print("n = ", n)
+# print("\n")
+
+# o = a * b
+# print("o = ", o)
+# print("\n")
+
+# p = np.multiply(a,b)
+# print("p = ", p)
+# print("\n")
+
+# q = np.exp(b)
+# r = np.sqrt(b)
+# s = np.sin(b)
+# t = np.cos(b)
+# u = np.log(b)
+# v = e.dot(f)
+
+# print("q = ", q)
+# print("r = ", r)
+# print("s = ", s)
+# print("t = ", t)
+# print("u = ", u)
+# print("v = ", v)
+
+# np.save("my_array", a)
+# np.savez("array.npz", a, b)
+
+# Opening file using numpy
+
+# file = np.loadtxt("new.txt", dtype=str)
+# print(file)
+
+# print("\n")
+
+# csvFile = np.genfromtxt("data.csv",dtype=str, delimiter=',')
+# print(csvFile)
+
+# take 1D 2D 3D array as input
+
+str = input("Enter string : \n")
+ls3 = []
+ls2 = []
+ls1 = []
+str = str.split()
+for i in range(len(str)):
+    if str[i] == '*':
+        ls2.append(ls1)
+        # print("\nls2 : " , ls2)
+        ls1 = []
+        continue
+    elif str[i] == "$":
+        ls3.append(ls2)
+        # print("\nls3 : ", ls3)
+        ls2 = []
+        ls1 = [] 
+        continue
+    else:
+        ls1.append(str[i])
+        # print("ls1 : " , ls1)
+
+print(ls3)
+arr = np.array(ls3)
+print(arr)

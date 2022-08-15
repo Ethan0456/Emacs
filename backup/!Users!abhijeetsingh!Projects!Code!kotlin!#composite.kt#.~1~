@@ -1,0 +1,8 @@
+interface Components {
+    var price: Int
+    var name: Int
+}
+
+class Composite : Components {
+    var
+}

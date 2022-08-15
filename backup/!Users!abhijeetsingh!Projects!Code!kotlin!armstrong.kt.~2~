@@ -1,0 +1,100 @@
+//fun main(){
+//    var num : Int = 371
+//    var sum : Int = 0
+//    for (i in "$num"){
+//	println(i)
+//    }
+//    println(if (sum == num) "Yes" else "No")
+//}
+
+// class MutableNameAlien(var name: String)
+// class FixedNameAlien(val name: String)
+// fun main() {
+//     val alien1 = MutableNameAlien("Reverse Giraffe")
+//     val alien2 = FixedNameAlien("Krombopolis Michael")
+//     alien1.name = "Parasite"
+//     println(alien1.name)
+// Can't do this:
+// alien2.name = "Parasite"
+// }
+
+// Exception Testing
+//import atomictest.*
+//
+//fun averageIncome(income: Int, months: Int) = if (months == 0)
+//    throw IllegalArgumentException( "Months can't be zero")
+//else
+//    income / months
+//fun main() {
+//    averageIncome(3300, 3) eq 1100
+//    capture {
+//        averageIncome(5000, 0)
+//    } eq "IllegalArgumentException: " + "Months can't be zero"
+//}
+
+// class Human(var name : String){
+//     fun work(job : String) = println("$name : $job")
+// }
+
+// fun main(){
+//     var h1 = Human("Ethan")
+//     h1.work("Developer")
+//
+
+// Lists
+
+// Print List
+
+// fun main(){
+//  var ls = listOf(1,2,5,4,3)
+//  println(ls)
+//  var sortedLs = ls.sorted()
+//  println(sortedLs)
+//  var reversedLS = ls.reversed()
+//  println(reversedLS)
+// }
+
+// import Level.*
+
+// enum class Level {
+//     Overflow, High, Medium, Low, Empty
+// }
+
+// fun main() {
+//     println(Level.Medium)
+//     println(Medium)
+// }
+
+// class Box(name : String){
+//    private var name : String = name
+//    private var type : String = "cube"
+//    private fun changeType() {
+// 	type = "sphere"
+//    }
+//    fun changeTypePublic() {
+// 	changeType()
+//    }
+//    fun printType() = println("type = $type")
+// }
+
+// fun main(){
+//    val box = Box("King")
+//    box.changeTypePublic()
+//    box.printType()
+//    val ls : List<Int> = listOf(1,2,3,4)
+//    val nls : List<Int> = ls.filter({ it % 2 != 0})
+//    println(nls)
+// }
+
+// val isPlus : (Int) -> Boolean = {it > 0}
+
+// fun main() {
+//     println(listOf(1,2,-3).any(isPlus))
+// }
+
+class Com()
+
+fun main(){
+   var c = Com() 
+   println(c.javaClass.simpleName)
+}

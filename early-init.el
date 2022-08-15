@@ -16,7 +16,7 @@
 (eval (ethan/set-ls-command))
 
 ;; set compile-command based on file extension
-(defun ethan/file-compile-command ()
+(defun ethan/file-set-compile-command ()
   (interactive)
   (let* ((file-name-full buffer-file-name)
          (file-ext (file-name-extension buffer-file-name))
@@ -37,7 +37,9 @@
 	  ((string= file-ext "kt") (setq compile-command (format "kotlinc %s -include-runtime -d %s.jar && java -jar %s.jar"
 							     file-name-full
 							     file-name-without-extension
-							     file-name-without-extension))))))
+							     file-name-without-extension)))
+	  ((string= file-ext "py") (setq compile-command (format "python3 %s"
+								 file-name-full))))))
 
 ;; To compile and recompile with universal argument
 (defun ethan/universal-compile-command ()

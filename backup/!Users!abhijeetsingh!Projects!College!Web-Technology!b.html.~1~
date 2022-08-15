@@ -1,0 +1,11 @@
+<html>
+  <head><title> Hello World </title></head>
+  <body bgcolor = "white">
+    <font face = "arial" color = "black">
+      <hr color = "red">
+      <h1> Hello World </h1>
+      <nav> nav1 </nav>
+      <hr color = "red">
+    </font>
+  </body>
+</html>

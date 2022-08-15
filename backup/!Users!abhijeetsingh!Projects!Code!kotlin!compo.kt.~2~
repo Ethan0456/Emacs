@@ -1,0 +1,58 @@
+interface Component {
+    var price: Int
+    fun getSubPrices() : Int
+}
+
+class Leaf(price: Int) : Component {
+    override var price: Int = price
+    override fun getSubPrices() : Int {
+	return price
+    }
+}
+
+class Composite(price: Int) : Component {
+    override var price: Int = price
+    var subprice: Int = 0
+    var list = mutableListOf<Component>() 
+
+    override fun getSubPrices() : Int {
+	subprice = price
+	for (i in list) {
+	    if (i.javaClass.simpleName == "Leaf") {
+		subprice += i.price
+	    }
+	    else {
+		subprice += i.getSubPrices()
+	    }
+	}
+	return this.subprice
+    }
+    fun addComponent(Name: Component) : Unit {
+	list += Name
+    }
+    fun removeComponent(Name: Component) : Unit {
+	list -= Name
+    }
+}
+
+fun main() {
+   var HDD = Leaf(100) 
+   var Mouse = Leaf(50)
+   var Monitor = Leaf(2000)
+   var Ram = Leaf(3000)
+   var CPU = Composite(10000)
+
+   // HDD.price = 100
+   // Mouse.price = 50
+   // Monitor.price = 2000
+   // Ram.price = 3000
+   // CPU.price = 10000
+
+   CPU.addComponent(HDD)
+   CPU.addComponent(Mouse)
+   CPU.addComponent(Monitor)
+   CPU.addComponent(Ram)
+   println(CPU.list)
+
+   println("Subprices of CPU : " + CPU.getSubPrices())
+}

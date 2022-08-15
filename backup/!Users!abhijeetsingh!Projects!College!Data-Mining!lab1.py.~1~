@@ -1,0 +1,2 @@
+rollNo = input("Enter Roll No : ")
+name = input

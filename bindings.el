@@ -32,6 +32,7 @@
   "K" '(uncomment-region :which-key "uncomment-region")
   "c" '(copy-region-as-kill :which-key "copy-region-as-kill")
   "r" '(ranger :which-key "ranger")
+  "C" '(check-parens :which-key "check-parens")
 ;;  "/" '(+consult/ripgrep :which-key "+consult/ripgrep")
 ;;  "SPC" '(projectile-find-file :which-key "Projectile find file")
 ;;  "SPC" '(+consult/find-file :which-key "+consult/find-file")
@@ -47,14 +48,6 @@
   "8" '((lambda () (interactive) (persp-switch-by-number 8)) :which-key "switch-to-persp-8")
   "9" '((lambda () (interactive) (persp-switch-by-number 9)) :which-key "switch-to-persp-9")
 
-  ;; editor
-  "e" '(:ignore t :which-key "Editor")
-  "ef" '(swiper :whick-key "swiper")
-  "em" '(swiper-mc :which-key "swiper-multi-cursor")
-  "er" '(query-replace :which-key "query-replace")
-;;  "eu" '(undo-tree-visualize :which-key "undo-tree-visualize")
-;;  "et" '(hydra-theme/body :which-key "hydra-theme") ; not sure if this is the best place for this, perhaps toggles would be more appropriate?
-;;  "ec" '(consult-theme :which-key "consult-theme")
 
   ;; buffer management
   "b" '(:ignore t :which-key "Buffer")
@@ -74,11 +67,21 @@
   ;; "C-S-a" '+persp/next-buffer
   ;; "C-z" 'consult-buffer
 
+  ;; editor
+  ;; "e" '(:ignore t :which-key "Editor")
+;;  "eu" '(undo-tree-visualize :which-key "undo-tree-visualize")
+;;  "et" '(hydra-theme/body :which-key "hydra-theme") ; not sure if this is the best place for this, perhaps toggles would be more appropriate?
+;;  "ec" '(consult-theme :which-key "consult-theme")
+
   ;; file
   "f" '(:ignore t :whick-key "Files")
+  "fs" '(ethan/file-set-compile-command :which-key "set-compile-command")
   "fc" '(ethan/universal-compile-command :whick-key "compile-file")
   "fr" '(ethan/universal-recompile-command :which-key "recompile-file")
   "fd" '(delete-blank-lines :which-key "delete-blank-lines")
+  "ff" '(swiper :whick-key "swiper")
+  "fm" '(swiper :which-key "swiper-multi-cursor")
+  "fr" '(query-replace :which-key "query-replace")
   
   ;; open
   "o" '(:ignore t :which-key "Open")
@@ -127,6 +130,7 @@
   "tl" '(lsp :which-key "toggle-lsp")
   "tc" '(company-mode :which-key "toggle-company-mode")
   "ty" '(yas-minor-mode :whick-key "toggle-yas-mode")
+  "tr" '(read-only-mode :which-key "read-only-mode")
 
   ;; notes/org
   "n" '(:ignore t :which-key "Notes")
@@ -322,7 +326,9 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(org-agenda-files nil)
- '(safe-local-variable-values '((eval ethan/file-compile-command))))
+ '(safe-local-variable-values
+   '((eval ethan/file-set-compile-command)
+     (eval ethan/file-compile-command))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

@@ -62,7 +62,10 @@
 
 ;; A fancy and fast mode-line inspired by minimalism design.
 (use-package doom-modeline
-  :init (doom-modeline-mode))
+  :init (doom-modeline-mode)
+  :custom
+  (doom-modeline-icon t)
+  ())
 
 ;; WhichKey is a lua plugin for Neovim 0.5 that displays a popup with possible key bindings of the command you started typing. Heavily inspired by the original emacs-which-key and vim-which-key.
 (use-package which-key
@@ -74,7 +77,13 @@
   (dashboard-setup-startup-hook))
   (setq initial-buffer-choice (lambda () (get-buffer "*dashboard*")))
   (setq dashboard-startup-banner "~/.emacs.d/images/black-hole.png")
- ;; Content is not centered by default. To center, set
+  ;; Dashboard items
+  (setq dashboard-items '((recents  . 5)
+                         (bookmarks . 5)
+                         (projects . 5)))
+                         ;; (agenda . 5)
+                         ;; (registers . 5)))
+  ;; Content is not centered by default. To center, set
   (setq dashboard-center-content t)
   ;; To disable shortcut "jump" indicators for each section, set
   (setq dashboard-show-shortcuts nil)
@@ -326,3 +335,54 @@
 	       :repo "jasonjckn/pulsing-cursor")
   :config
   (pulsing-cursor-mode +1))
+
+;; To get color for rgb and texts
+(use-package rainbow-mode)
+
+;; All the icons for ivy-rich
+(use-package all-the-icons-ivy-rich
+  :init (all-the-icons-ivy-rich-mode 1)
+  :custom (all-the-icons-ivy-rich-icon-size 1.0))
+
+;; pdf-tools
+(use-package pdf-tools
+  ;; stop pdf-tools being automatically updated when I update the
+  ;; rest of my packages, since it would need the installation command and restart
+  ;; each time it updated.
+  :mode  ("\\.pdf\\'" . pdf-view-mode)
+  :config
+  (pdf-loader-install)
+  (setq-default pdf-view-display-size 'fit-height)
+  (setq pdf-view-continuous nil) ;; Makes it so scrolling down to the bottom/top of a page doesn't switch to the next page
+  (setq pdf-view-midnight-colors '("#ffffff" . "#121212" )) ;; I use midnight mode as dark mode, dark mode doesn't seem to work
+  :general
+  (general-define-key :states 'motion :keymaps 'pdf-view-mode-map
+                      "j" 'pdf-view-next-page
+                      "k" 'pdf-view-previous-page
+
+                      "C-j" 'pdf-view-next-line-or-next-page
+                      "C-k" 'pdf-view-previous-line-or-previous-page
+
+                      ;; Arrows for movement as well
+                      (kbd "<down>") 'pdf-view-next-line-or-next-page
+                      (kbd "<up>") 'pdf-view-previous-line-or-previous-page
+
+                      (kbd "<down>") 'pdf-view-next-line-or-next-page
+                      (kbd "<up>") 'pdf-view-previous-line-or-previous-page
+
+                      (kbd "<left>") 'image-backward-hscroll
+                      (kbd "<right>") 'image-forward-hscroll
+
+                      "H" 'pdf-view-fit-height-to-window
+                      "0" 'pdf-view-fit-height-to-window
+                      "W" 'pdf-view-fit-width-to-window
+                      "=" 'pdf-view-enlarge
+                      "-" 'pdf-view-shrink
+
+                      "q" 'quit-window
+                      "Q" 'kill-this-buffer
+                      "g" 'revert-buffer
+
+                      "C-s" 'isearch-forward
+                      )
+  )

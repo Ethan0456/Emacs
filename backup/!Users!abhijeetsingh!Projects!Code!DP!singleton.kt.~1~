@@ -1,0 +1,16 @@
+class Singleton {
+    private var instance : Singleton?;
+    public fun getInstance() : Singleton {
+	if (instance == null) {
+	    print("Created New Instance")
+	    return instance
+	}
+	print("Returned Same Instance")
+	return instance
+    }
+}
+
+fun main() {
+    val inst : Singleton = Singleton.getInstance()
+    val inst1 : Singleton = Singleton.getInstance()
+}

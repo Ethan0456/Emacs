@@ -27,6 +27,9 @@
 
 (use-package twilight-theme)
 
+(use-package spacemacs-theme
+  :defer t)
+
 (use-package bespoke-themes
   :straight (:host github :repo "mclear-tools/bespoke-themes" :branch "main")
   :config

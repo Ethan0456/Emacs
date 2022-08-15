@@ -1,0 +1,19 @@
+rollNo = input("Enter Roll No : ")
+name = input("Enter Name : ")
+subjects = ["Computer Networks", "Information Security", "Data-Mining", "Applied ML", "Web Technology", "Software Engineering", "System Software and Compiler Design"]
+
+fileToWrite = open("data.txt", "w")
+fileToWrite.write("1. Computer Networks\n
+2. Information Security\n3. Data-Mining\n4. Applied ML\n5. Web Technology\n6. Software Engineering\n7. System Software and Compiler Design")
+fileToWrite.close()
+
+with open("data.txt", "r") as fileToRead:
+    while True:
+        print(fileToRead.read())
+        option = int(input("Enter Option : "))
+        if option < 1 or option > 7:
+            print("Out of Bound!")
+            continue
+        print(rollNo + " " + name + " " + subjects[option - 1])
+        if input("Do you want to continue (y/n) : ") == "n":
+            break

@@ -1,0 +1,11 @@
+name = input("Enter Name : ")
+rollno = input("Enter Roll No : ")
+subjects = ["Computer Networks", "Information Security", "Data-Mining", "Applied ML", "Web Technology", "Software Engineering", "System Software and Compiler Design"]
+cgpa = []
+creditScore = []
+
+for i in range(len(subjects)):
+    cgpa[i] = input("Enter cgpa for {} : ".format(subjects[i]))
+    for j in range(len(cgpa)):
+        creditScore[j] = cgpa[j]*10
+print("SGPA = ", creditScore.sum()/24)
