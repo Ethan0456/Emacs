@@ -1,0 +1,1289 @@
+* EMACS CONFIGURATION
+
+* INIT.EL
+** Basic Configuration
+#+begin_src emacs-lisp
+
+  (setq inhibit-startup-message t) ;; stops showing startup screen when we start emacs
+  (setq pixel-scroll-mode 1)            ;; pixel scrolling
+  (scroll-bar-mode -1)             ;; disable scroll scrool
+  (tool-bar-mode -1)                 ;; disable toolbar
+  (tooltip-mode -1)                 ;; disable tooltios
+  (set-fringe-mode 10)              ;; gives some breathing room
+  ;; (menu-bar-mode -1)                ;; disable menubar
+  (set-face-attribute 'default nil :font "JetBrainsMono Nerd Font Mono" :height 120) ;; set font and font-size
+  (setq ring-bell-function 'ignore)
+  (setq persp-suppress-no-prefix-key-warning t)
+  (recentf-mode 1) ;; Maintains a list of recent files
+  (setq history-length 25) ;; saves history of minibuffer upto 25 length
+  (savehist-mode 1) ;; initiate above mode
+  (save-place-mode 1) ;; saves cursor location in files
+  (global-auto-revert-mode 1) ;; Sync files if the file is edited outside emacs
+  (setq global-auto-revert-non-file-buffers t) ;; Revert Dired and other buffers (same as above for dired and non file buffers)
+  (column-number-mode) ;; Make column number visible in modeline
+  (global-display-line-numbers-mode t) ;; Enable line numbers
+  (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
+  (add-to-list 'load-path "~/.emacs.d/themes/")
+#+end_src
+
+** Backup Directory Setup
+#+begin_src emacs-lisp
+
+ (setq backup-directory-alist '(("." . "~/.emacs.d/backup"))
+       backup-by-copying      t  ; Don't de-link hard links
+       version-control        t  ; Use version numbers on backups
+       delete-old-versions    t  ; Automatically delete excess backups:
+       kept-new-versions      20 ; how many of the newest versions to keep
+       kept-old-versions      5) ; and how many of the old
+
+#+end_src
+
+** Disable Line number for some modes
+#+begin_src emacs-lisp
+
+ (dolist (mode '(treemacs-mode-hook
+                 org-mode-hook
+                 vterm-mode-hook
+                 neotree-mode-hook
+                 eshell-mode-hook))
+   (add-hook mode (lambda () (display-line-numbers-mode 0))))
+
+#+end_src
+
+** Add Custom Files
+#+begin_src emacs-lisp
+
+;; Move package-list to config.el
+(setq custom-file "~/.emacs.d/package-list.el")
+(load custom-file 'nomessage)
+
+;; Move customizations variables to a separate file and load it
+(setq custom-file "~/.emacs.d/custom-vars.el")
+(load custom-file 'nomessage)
+
+;; Move global bindings to bindings.el
+(setq custom-file "~/.emacs.d/bindings.el")
+(load custom-file 'nomessage)
+
+#+end_src>
+
+* PACKAGE-LIST.EL
+** Initialize package.el 
+#+begin_src emacs-lisp
+
+;; ;; package.el initialization code
+
+;; Initialize package sources
+;; (require 'package) brings all package management functions in the environment
+;; (setq package-archives '(("melpa" . "https://melpa.org/packages/") a alist of archives to fetch packages from
+;; 			 ("org"   . "https://orgmode.org/elpa/")
+;; 	       		 ("elpa"  . "https://elpa.gnu.org/packages/")))
+;; (package-initialize) Initializes the package system and prepares it to be used
+;; (unless package-archive-contents (package-refresh-contents)) checks if packages is already cloned or not
+
+;; Initialize use-package on Non Linux Platforms
+;; (unless (package-installed-p 'use-package) (package-install 'use-package)) downloads use-package if not already installed (Note : -p after function return true or nil)
+
+;; (require 'use-package) loads use-package
+;; (setq use-package-always-ensure t) ensures that all the packages are downloaded locally
+
+#+end_src>
+
+** Initialize straight.el
+#+begin_src emacs-lisp :tangle yes
+
+;; straight.el initialization code
+;; Bootstrap code to install straight.el
+(defvar bootstrap-version)
+(let ((bootstrap-file
+       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+      (bootstrap-version 5))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+        (url-retrieve-synchronously
+         "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+         'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
+
+;; straight integrate with use-package
+(straight-use-package 'use-package)
+;; always invoke straight when using use-package
+(setq straight-use-package-by-default t)
+
+#+end_src>
+
+** Packages and their configs
+
+*** general
+General.el provides a more convenient method for binding keys in emacs (for both evil and non-evil users). 
+
+#+begin_src emacs-lisp
+
+(use-package general)
+
+#+end_src>
+
+*** evil
+Evil is an extensible vi layer for Emacs. It emulates the main features of Vim, and provides facilities for writing custom extensions
+
+#+begin_src emacs-lisp :tangle yes
+
+(use-package evil
+  :init
+  (setq evil-want-integration t)
+  (setq evil-want-keybinding nil)
+  (setq evil-want-C-u-scroll t)
+  (setq evil-want-C-i-jump nil)
+  :config
+  (evil-mode 1)
+  (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state)
+  (define-key evil-insert-state-map (kbd "C-h") 'evil-delete-backward-char-and-join)
+
+  ;; Use visual line motions even outside of visual-line-mode buffers
+  (evil-global-set-key 'motion "j" 'evil-next-visual-line)
+  (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
+
+  (evil-set-initial-state 'messages-buffer-mode 'normal)
+  (evil-set-initial-state 'dashboard-mode 'normal))
+
+#+end_src
+
+
+*** evil-collection
+This is a collection of Evil bindings for the parts of Emacs that Evil does not cover properly by default, such as help-mode, M-x calendar, Eshell and more.
+
+#+begin_src emacs-lisp
+ 
+ (use-package evil-collection
+   :after evil
+   :config
+   (evil-collection-init))
+
+#+end_src
+
+*** rainbow-delimiters
+rainbow-delimiters is a "rainbow parentheses"-like mode which highlights delimiters such as parentheses, brackets or braces according to their depth.
+
+#+begin_src emacs-lisp
+  
+(use-package rainbow-delimiters
+  :init (rainbow-delimiters-mode))
+
+#+end_src
+
+*** ivy
+Ivy is a generic completion mechanism for Emacs. 
+
+#+begin_src emacs-lisp
+
+(use-package ivy
+  :init (ivy-mode))
+  
+#+end_src
+
+*** counsel
+Counsel takes this further, providing versions of common Emacs commands that are customised to make the best use of Ivy.
+
+#+begin_src emacs-lisp
+
+(use-package counsel
+  :init (counsel-mode))
+  
+#+end_src
+
+*** helpful
+Helpful is an alternative to the built-in Emacs help that provides much more contextual information.
+
+#+begin_src emacs-lisp
+
+(use-package helpful
+  :config (helpful-mode))
+
+#+end_src
+
+*** doom-modeline
+A fancy and fast mode-line inspired from minimalism design.
+
+#+begin_src emacs-lisp
+
+(use-package doom-modeline
+  :init (doom-modeline-mode))
+
+#+end_src
+
+*** which-key
+WhichKey is a lua plugin for Neovim 0.5 that displays a popup with possible key bindings of the command you started typing. Heavily inspired by the original emacs-which-key and vim-which-key.
+
+#+begin_src emacs-lisp
+
+(use-package which-key
+  :init (which-key-mode))
+
+#+end_src
+
+*** doom-themes
+Doom Emacs Themes Collection
+
+#+begin_src emacs-lisp
+
+(use-package doom-themes
+   :config
+   (setq doom-themes-enable-bold t
+             doom-themes-enable-italic t))
+
+#+end_src
+
+*** dashboard
+An extensible Emacs Dashboard
+
+#+begin_src emacs-lisp
+
+(use-package dashboard
+  :config
+  (dashboard-setup-startup-hook))
+  (setq initial-buffer-choice (lambda () (get-buffer "*dashboard*")))
+  (setq dashboard-startup-banner "~/.emacs.d/images/black-hole.png")
+ ;; Content is not centered by default. To center, set
+  (setq dashboard-center-content t)
+  ;; To disable shortcut "jump" indicators for each section, set
+  (setq dashboard-show-shortcuts nil)
+
+#+end_src
+
+*** ivy-rich
+This package comes with rich transformers for commands from ivy and counsel. It should be easy enough to define your own transformers too.
+
+#+begin_src emacs-lisp
+
+(use-package ivy-rich
+  :after (ivy)
+  :config (ivy-rich-mode))
+
+#+end_src
+
+*** neotree
+A Emacs Tree plugin like NerdTree for Vim
+
+#+begin_src emacs-lisp
+
+(use-package neotree
+  :custom
+  ((neo-theme 'icons)))
+
+#+end_src
+
+*** perspective
+The Perspective package provides multiple named workspaces (or "perspectives") in Emacs, similar to multiple desktops in window managers like Awesome and XMonad, and Spaces on the Mac.
+
+#+begin_src emacs-lisp
+
+  (use-package perspective
+    :init (persp-mode))
+  
+#+end_src
+
+*** all-the-icons
+Icons for Emacs
+
+#+begin_src emacs-lisp
+
+(use-package all-the-icons)
+
+#+end_src
+
+*** projectile
+Projectile is a project interaction library for Emacs. Its goal is to provide a nice set of features operating on a project level without introducing external dependencies (when feasible).
+
+#+begin_src emacs-lisp
+
+(use-package projectile 
+  :diminish projectile-mode
+  :config (projectile-mode)
+  :custom ((projectile-completion-system 'ivy)
+  (add-to-list 'straight-x-pinned-packages
+               '("projectile" . "4d6da873ae54dbf6043b015efd9b737e2ce152c6")))
+  :init
+  ;; NOTE: Set this to the folder where you keep your Git repos!
+  (when (file-directory-p "/home/ethan/Projects")
+    (setq projectile-project-search-path '("/home/ethan/Projects")))
+  (setq projectile-switch-project-action #'projectile-dired))
+
+#+end_src
+
+*** counsel-projectile
+Projectile has native support for using ivy as its completion system. Counsel-projectile provides further ivy integration into projectile by taking advantage of ivy's support for selecting from a list of actions and applying an action without leaving the completion session.
+
+#+begin_src emacs-lisp
+
+(use-package counsel-projectile 
+  :config (counsel-projectile-mode))
+
+#+end_src
+
+*** vterm
+Terminal for Emacs
+
+#+begin_src emacs-lisp
+
+(use-package vterm
+  :commands vterm
+  :config
+  (setq term-prompt-regexp "^[^#$%>\n]*[#$%>] *")  ;; Set this to match your custom shell prompt
+  ;;(setq vterm-shell "zsh")                       ;; Set this to customize the shell to launch
+  (setq vterm-max-scrollback 10000))
+
+#+end_src
+
+*** magit
+Magit : git interface for emacs
+
+#+begin_src emacs-lisp
+
+(use-package magit
+  :custom
+  (magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1))
+
+#+end_src
+
+*** evil-magit
+Evil bindings for Magit
+
+#+begin_src emacs-lisp
+
+;; (use-package evil-magit
+;;   :after magit)
+
+#+end_src
+
+*** org
+ Org Mode
+
+#+begin_src emacs-lisp
+(use-package org
+  :straight (:type built-in)
+  :hook (org-mode . efs/org-mode-setup)
+  :config
+  (setq org-ellipsis " ▾")
+
+  (setq org-agenda-start-with-log-mode t)
+  (setq org-log-done 'time)
+  (setq org-log-into-drawer t)
+
+  (setq org-agenda-files
+        '("Users/abhijeetsingh/Projects/Code/emacs-from-scratch/OrgFiles/Tasks.org"
+          "Users/abhijeetsingh/Projects/Code/emacs-from-scratch/OrgFiles/Habits.org"
+          "Users/abhijeetsingh/Projects/Code/emacs-from-scratch/OrgFiles/Birthdays.org"))
+
+  (require 'org-habit)
+  (add-to-list 'org-modules 'org-habit)
+  (setq org-habit-graph-column 60)
+
+  (setq org-todo-keywords
+    '((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d!)")
+      (sequence "BACKLOG(b)" "PLAN(p)" "READY(r)" "ACTIVE(a)" "REVIEW(v)" "WAIT(w@/!)" "HOLD(h)" "|" "COMPLETED(c)" "CANC(k@)")))
+
+  (setq org-refile-targets
+    '(("Archive.org" :maxlevel . 1)
+      ("Tasks.org" :maxlevel . 1)))
+
+  ;; Save Org buffers after refiling!
+  (advice-add 'org-refile :after 'org-save-all-org-buffers)
+
+  (setq org-tag-alist
+    '((:startgroup)
+       ; Put mutually exclusive tags here
+       (:endgroup)
+       ("@errand" . ?E)
+       ("@home" . ?H)
+       ("@work" . ?W)
+       ("agenda" . ?a)
+       ("planning" . ?p)
+       ("publish" . ?P)
+       ("batch" . ?b)
+       ("note" . ?n)
+       ("idea" . ?i)))
+
+  ;; Configure custom agenda views
+  (setq org-agenda-custom-commands
+   '(("d" "Dashboard"
+     ((agenda "" ((org-deadline-warning-days 7)))
+      (todo "NEXT"
+        ((org-agenda-overriding-header "Next Tasks")))
+      (tags-todo "agenda/ACTIVE" ((org-agenda-overriding-header "Active Projects")))))
+
+    ("n" "Next Tasks"
+     ((todo "NEXT"
+        ((org-agenda-overriding-header "Next Tasks")))))
+
+    ("W" "Work Tasks" tags-todo "+work-email")
+
+    ;; Low-effort next actions
+    ("e" tags-todo "+TODO=\"NEXT\"+Effort<15&+Effort>0"
+     ((org-agenda-overriding-header "Low Effort Tasks")
+      (org-agenda-max-todos 20)
+      (org-agenda-files org-agenda-files)))
+
+    ("w" "Workflow Status"
+     ((todo "WAIT"
+            ((org-agenda-overriding-header "Waiting on External")
+             (org-agenda-files org-agenda-files)))
+      (todo "REVIEW"
+            ((org-agenda-overriding-header "In Review")
+             (org-agenda-files org-agenda-files)))
+      (todo "PLAN"
+            ((org-agenda-overriding-header "In Planning")
+             (org-agenda-todo-list-sublevels nil)
+             (org-agenda-files org-agenda-files)))
+      (todo "BACKLOG"
+            ((org-agenda-overriding-header "Project Backlog")
+             (org-agenda-todo-list-sublevels nil)
+             (org-agenda-files org-agenda-files)))
+      (todo "READY"
+            ((org-agenda-overriding-header "Ready for Work")
+             (org-agenda-files org-agenda-files)))
+      (todo "ACTIVE"
+            ((org-agenda-overriding-header "Active Projects")
+             (org-agenda-files org-agenda-files)))
+      (todo "COMPLETED"
+            ((org-agenda-overriding-header "Completed Projects")
+             (org-agenda-files org-agenda-files)))
+      (todo "CANC"
+            ((org-agenda-overriding-header "Cancelled Projects")
+             (org-agenda-files org-agenda-files)))))))
+
+  (setq org-capture-templates
+    `(("t" "Tasks / Projects")
+      ("tt" "Task" entry (file+olp "Users/abhijeetsingh/Projects/Code/emacs-from-scratch/OrgFiles/Tasks.org" "Inbox")
+           "* TODO %?\n  %U\n  %a\n  %i" :empty-lines 1)
+
+      ("j" "Journal Entries")
+      ("jj" "Journal" entry
+           (file+olp+datetree "Users/abhijeetsingh/Projects/Code/emacs-from-scratch/OrgFiles/Journal.org")
+           "\n* %<%I:%M %p> - Journal :journal:\n\n%?\n\n"
+           ;; ,(dw/read-file-as-string "~/Notes/Templates/Daily.org")
+           :clock-in :clock-resume
+           :empty-lines 1)
+      ("jm" "Meeting" entry
+           (file+olp+datetree "Users/abhijeetsingh/Projects/Code/emacs-from-scratch/OrgFiles/Journal.org")
+           "* %<%I:%M %p> - %a :meetings:\n\n%?\n\n"
+           :clock-in :clock-resume
+           :empty-lines 1)
+
+      ("w" "Workflows")
+      ("we" "Checking Email" entry (file+olp+datetree "Users/abhijeetsingh/Projects/Code/emacs-from-scratch/OrgFiles/Journal.org")
+           "* Checking Email :email:\n\n%?" :clock-in :clock-resume :empty-lines 1)
+
+      ("m" "Metrics Capture")
+      ("mw" "Weight" table-line (file+headline "Users/abhijeetsingh/Projects/Code/emacs-from-scratch/OrgFiles/Metrics.org" "Weight")
+       "| %U | %^{Weight} | %^{Notes} |" :kill-buffer t)))
+
+  (define-key global-map (kbd "C-c j")
+    (lambda () (interactive) (org-capture nil "jj")))
+
+  (efs/org-font-setup))
+
+#+end_src
+
+*** org-bullets
+Org Bullets
+
+#+begin_src emacs-lisp
+
+(use-package org-bullets
+  :after org
+  :hook (org-mode . org-bullets-mode)
+  :custom
+  (org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
+
+#+end_src
+
+*** visual-fill-column
+Visual Fill Column 
+
+#+begin_src emacs-lisp
+
+(use-package visual-fill-column
+  :hook (org-mode . efs/org-mode-visual-fill))
+
+#+end_src
+
+*** lsp
+
+#+begin_src emacs-lisp
+
+(add-hook 'prog-mode-hook 'lsp-mode)
+
+;; Language Server Protocol Mode 
+(use-package lsp-mode
+  :commands (lsp lsp-deferred)
+  :hook (lsp-mode . efs/lsp-mode-setup)
+  :init
+  (setq lsp-keymap-prefix "C-c l")  ;; Or 'C-l', 's-l'
+  :custom
+  ((lsp-server-trace t)
+  (lsp-log-io-mode t)
+  (lsp-enable-which-key-integration t)
+  (setq lsp-clients-clangd-args '("-j=4" "-background-index" "-log=error"))
+;; if you are adding the support for your language server in separate repo use
+;; Use shopify-cli / theme-check-language-server for Shopify's liquid syntax
+  (add-to-list 'lsp-language-id-configuration '(kotlin-mode . "kotlin-ls"))
+  (lsp-register-client
+   (make-lsp-client :new-connection (lsp-stdio-connection "kotlin-language-server")
+                     :activation-fn (lsp-activate-on "kotlin-ls")
+                     :server-id 'kotlin-ls))))
+
+#+end_src
+
+
+*** lsp-ui
+Gives various ui features for lsp mode
+
+#+begin_src emacs-lisp
+
+(use-package lsp-ui
+  :hook (prog-mode . lsp-ui-mode)
+  :custom
+  (lsp-ui-doc-enable t)
+  (lsp-ui-doc-use-childframe t)
+  (lsp-ui-doc-position 'top)
+  (lsp-ui-doc-include-signature t)
+  (lsp-ui-sideline-enable t)
+  (lsp-ui-flycheck-enable t)
+  (lsp-ui-flycheck-list-position 'right)
+  (lsp-ui-flycheck-live-reporting t)
+  (lsp-ui-peek-enable t)
+  (lsp-ui-peek-list-width 60)
+  (lsp-ui-peek-peek-height 25)
+  (lsp-ui-doc-position 'bottom))
+
+#+end_src
+
+*** flycheck
+Flycheck for errors before compiling
+
+#+begin_src emacs-lisp
+
+(use-package flycheck
+  :hook (prog-mode . flycheck-mode))
+
+#+end_src
+
+*** yasnippet
+
+#+begin_src emacs-lisp
+
+(add-to-list 'load-path "~/.emacs.d/snippets")
+;; yasnippet
+(use-package yasnippet
+  :hook (prog-mode . yas-minor-mode)
+  :custom
+   ((yas-snippet-dirs '("~/.emacs.d/snippets"))
+    (yas-global-mode 1)))
+
+#+end_src
+
+*** yasnippet-snippets
+
+#+begin_src emacs-lisp
+
+(use-package yasnippet-snippets)
+
+#+end_src
+
+*** lsp-treemacs
+Treemacs to view different methods and variables of file in a tree view
+
+#+begin_src emacs-lisp
+
+(use-package lsp-treemacs
+  :hook (prog-mode . lsp-treemacs-sync-mode)
+  :after lsp)
+
+#+end_src
+
+*** lsp-ivy 
+Better lsp viewer
+
+#+begin_src emacs-lisp
+
+(use-package lsp-ivy)
+
+#+end_src
+
+*** company
+Nice Completions
+
+#+begin_src emacs-lisp
+
+(use-package company
+  :after lsp-mode
+  :hook (prog-mode . company-mode)
+  :bind (:map company-active-map
+         ("<tab>" . company-complete-selection))
+        (:map lsp-mode-map
+         ("<tab>" . company-indent-or-complete-common))
+  :custom
+  (yas-recompile-all)
+  (yas-reload-all)
+  (company-minimum-prefix-length 1)
+  (company-idle-delay 0.0))
+  (setq company-backends
+        '((company-yasnippet
+	   :with company-files
+	   :with company-capf
+	   :with company-dabbrev-code
+	   :with company-gtags
+	   :with company-etags
+	   :with company-keywords)))
+;; (setq company-backends '(company-capf
+;;                       company-keywords
+;;                       company-semantic
+;;                       company-files
+;;                       company-etags
+;;                       company-elisp
+;;                       company-clang
+;;                       company-irony-c-headers
+;;                       company-irony
+;;                       company-jedi
+;;                       company-cmake
+;;                       company-ispell
+;;                       company-yasnippet))
+
+#+end_src
+
+*** company-box
+Nice Completions viewer for lsp
+
+#+begin_src emacs-lisp
+
+(use-package company-box
+  :hook (company-mode . company-box-mode))
+
+#+end_src
+
+*** dired and its packages
+Dired and its packages
+
+#+begin_src emacs-lisp
+
+(use-package dired
+  :straight nil
+  :commands (dired dired-jump)
+  :custom ((insert-directory-program "gls" dired-use-ls-dired t)
+	   (dired-listing-switches "-alhg --group-directories-first"))
+  :config
+  (evil-collection-define-key 'normal 'dired-mode-map
+    "h" 'dired-single-up-directory
+    "l" 'dired-single-buffer))
+
+#+end_src
+
+*** dired-single
+
+#+begin_src emacs-lisp
+
+(use-package dired-single)
+
+#+end_src
+
+*** all-the-icons-dired-mode  
+
+#+begin_src emacs-lisp :tangle yes
+
+(use-package all-the-icons-dired
+  :hook (dired-mode . all-the-icons-dired-mode))
+
+#+end_src
+
+*** dired-open
+
+#+begin_src emacs-lisp :tangle yes
+
+(use-package dired-open)
+  ;; :config
+  ;; Doesn't work as expected!
+  ;;(add-to-list 'dired-open-functions #'dired-open-xdg t)
+  ;; (setq dired-open-extensions '(("png" . "feh")
+  ;;                               ("mkv" . "mpv"))))
+
+#+end_src
+
+
+*** dired-hide-dotfiles
+
+#+begin_src emacs-lisp :tangle yes
+
+(use-package dired-hide-dotfiles
+  :hook (dired-mode . dired-hide-dotfiles-mode)
+  :config
+  (evil-collection-define-key 'normal 'dired-mode-map
+    "H" 'dired-hide-dotfiles-mode))
+
+#+end_src
+
+*** dap-mode
+
+#+begin_src emacs-lisp :tangle yes
+
+(use-package dap-mode
+  ;; Uncomment the config below if you want all UI panes to be hidden by default!
+  ;; :custom
+  ;; (lsp-enable-dap-auto-configure nil)
+  ;; :config
+  ;; (dap-ui-mode 1)
+
+  :config
+  ;; Set up Node debugging
+  (require 'dap-node)
+  (dap-node-setup) ;; Automatically installs Node debug adapter if needed
+
+  ;; Bind `C-c l d` to `dap-hydra` for easy access
+  (general-define-key
+    :keymaps 'lsp-mode-map
+    :prefix lsp-keymap-prefix
+    "d" '(dap-hydra t :wk "debugger")))
+
+#+end_src
+
+*** beacon
+#+begin_src emacs-lisp :tangle yes
+  
+(use-package beacon
+  :custom
+  ((beacon-color "#009f00")
+  (beacon-size 40)
+  (beacon-blink-when-window-scrolls t)
+  (beacon-blink-when-window-changes t)
+  (beacon-blink-when-point-moves t)
+  (beacon-mode t)))
+
+#+end_src
+
+*** minimap
+#+begin_src emacs-lisp :tangle yes
+
+(use-package minimap
+  :custom
+  (( minimap-window-location 'right) ; Minimap on the right side
+  (minimap-width-fraction 0.0) ; slightly smaller minimap
+  (minimap-minimum-width 20) ; also slightly smaller minimap
+  (minimap-dedicated-window t) ; seems to work better
+  (minimap-enlarge-certain-faces nil))) ; enlarge breaks BlockFont
+
+#+end_src
+
+*** ranger
+#+begin_src emacs-lisp :tangle yes
+
+(use-package ranger)
+
+#+end_src
+
+*** Extra themes packages 
+#+begin_src emacs-lisp :tangle yes
+
+;; (use-package shanty-themes)
+
+;; (use-package lorisan-theme
+;;   :ensure nil
+;;   :if (not (custom-theme-enabled-p 'lorisan))
+;;   :init
+;;   (setq custom-theme-directory "~/.emacs.d/themes/")
+;;   (load-theme 'lorisan t)
+;;   (add-hook 'after-init-hook (lambda () (enable-theme 'lorisan))))
+
+#+end_src
+* BINDINGS.EL
+This file provides with the user specified general.el bindings for emacs
+
+#+begin_src emacs-lisp :tangle yes
+
+  (general-evil-setup t)
+  (defconst my-leader "SPC")
+  (general-create-definer my-leader-def
+    :prefix my-leader)
+  (general-override-mode) ;; https://github.com/noctuid/general.el/issues/99#issuecomment-360914335
+  ;; doomesque hotkeys using spacebar as prefix
+  (my-leader-def
+    :states '(motion normal visual treemacs) ;; NOTE the treemacs state
+    :keymaps 'override ;; https://github.com/noctuid/general.el/issues/99#issuecomment-360914335
+
+    ;; map universal argument to SPC-u
+    "u" '(universal-argument :which-key "Universal argument")
+
+    ;; Quick Access
+    ";" '(eval-region :which-key "eval-region")
+    "SPC ;" '(eval-buffer :which-key "eval-buffer")
+    "SPC ." '(find-file :which-key "Find file")
+    "SPC ," '(counsel-switch-buffer :which-key "counsel-switch-buffer")
+    ":" '(execute-extended-command :which-key "M-x")
+    "x" '(open-scratch-buffer :which-key "Open scratch buffer")
+    "d" '(dired-jump :which-key "dired-jump")
+    "[" '(persp-prev :which-key "persp-prev")
+    "]" '(persp-next :which-key "persp-next")
+    "," '(evil-window-left :which-key "evil-window-left")
+    "." '(evil-window-right :which-key "evil-window-right")
+    "<" '(evil-window-up :which-key "evil-window-up")
+    ">" '(evil-window-down :which-key "evil-window-down")
+    "k" '(comment-region :whick-key "comment-region")
+    "K" '(uncomment-region :which-key "uncomment-region")
+    "c" '(copy-region-as-kill :which-key "copy-region-as-kill")
+  ;  "/" '(+consult/ripgrep :which-key "+consult/ripgrep")
+  ;;  "SPC" '(projectile-find-file :which-key "Projectile find file")
+  ;;  "SPC" '(+consult/find-file :which-key "+consult/find-file")
+
+    ;; editor
+    "e" '(:ignore t :which-key "Editor")
+    "ef" '(swiper :whick-key "swiper")
+    "em" '(swiper-mc :which-key "swiper-multi-cursor")
+    "er" '(query-replace :which-key "query-replace")
+  ;;  "eu" '(undo-tree-visualize :which-key "undo-tree-visualize")
+  ;;  "et" '(hydra-theme/body :which-key "hydra-theme") ; not sure if this is the best place for this, perhaps toggles would be more appropriate?
+  ;;  "ec" '(consult-theme :which-key "consult-theme")
+
+    ;; buffer
+    "b" '(:ignore t :which-key "Buffer")
+    "bp" '(switch-to-prev-buffer :which-key "Prev buffer")
+    "bb" '(consult-buffer :which-key "consult-buffer")
+    "b[" '(previous-buffer :which-key "Previous buffer")
+    "b]" '(next-buffer :which-key "Next buffer")
+    "bd" '(kill-current-buffer :which-key "Kill buffer")
+    "bk" '(kill-current-buffer :which-key "Kill buffer")
+    "bl" '(evil-switch-to-windows-last-buffer :which-key "Switch to last buffer")
+    "br" '(revert-buffer-no-confirm :which-key "Revert buffer")
+    "bK" '(kill-other-buffers :which-key "Kill other buffers")
+
+    ;; open
+    "o" '(:ignore t :which-key "Open")
+    "ot" '(treemacs :which-key "Treemacs")
+    "oT" '(treemacs-find-file :which-key "Treemacs find file")
+    "ov" '(vterm :which-key "Open vterm")
+    "on" '(neotree-toggle :which-key "Open Neotree")
+    "om" '(minimap-mode :which-key "Open Minimap")
+    ;;"oc" '(open-init-file :which-key "Open init.el")
+  
+    ;; projectile
+    "p" '(projectile-command-map :which-key "Projectile")
+
+    ;; help
+    "h" '(:ignore t :which-key "Help")
+    "hm" '(describe-mode :which-key "describe-mode")
+    "hF" '(describe-face :which-key "describe-face")
+    "hw" '(where-is :which-key "where-is")
+    "hf" '(helpful-callable :which-key "helpful-callable")
+    "hk" '(helpful-key :which-key "helpful-key")
+    "hv" '(helpful-variable :which-key "helpful-variable")
+    "hs" '(helpful-symbol :which-key "helpful-symbol")
+    "hp" '(helpful-at-point :which-key "helpful-at-point")
+
+    ;; zoom
+    "=" '(text-scale-increase :which-key "text-scale-increase")
+    "-" '(text-scale-decrease :which-key "text-scale-decrease")
+    ;; ;; "z" '(:ignore t :which-key "zoom")
+    ;; ;; "z=" '(zoom-in :which-key "zoom-in")
+    ;; ;; "z-" '(zoom-out :which-key "zoom-out")
+    ;; ;; "zz" '(hydra-zoom/body :which-key "hydra-zoom")
+    ;; ;; the hydra is nice but the rest is kind of jank, need to pla around with this more
+
+    ;; window
+    "w" '(evil-window-map :which-key "Window")
+
+    ;; toggles
+    "t" '(:ignore t :which-key "Toggles")
+    "th" '(counsel-load-theme :which-key "counsel-load-theme")
+    "tf" '(flyspell-mode :which-key "flyspell-mode")
+    "tc" '(flycheck-mode :which-key "flycheck-mode")
+    "tm" '(minimap-mode :which-key "minimap-mode")
+    ;; "ts" '(flyspell-mode :which-key "flyspell-mode")
+    ;; "ta" '(corfu-mode :which-key "corfu-mode") ;; 'a' for autocomplete
+    ;; "tg" '(evil-goggles-mode :which-key "evil-goggles")
+    ;; "tI" '(toggle-indent-style :which-key "Indent style")
+    ;; "tv" '(visual-line-mode  :which-key "visual-line-mode")
+  
+    ;; notes/org
+    "n" '(:ignore t :which-key "Notes")
+    "nf" '(org-roam-node-find :which-key "find-node")
+    "ni" '(org-roam-node-insert :which-key "insert-node")
+    "nt" '(org-roam-dailies-goto-today :which-key "org-roam-dailies-goto-today")
+    "n/" '(+consult/org-roam-ripgrep :which-key "+consult/org-roam-ripgrep")
+    "na" '(org-agenda :which-key "org-agenda")
+
+    ;; persps
+    "TAB" '(perspective-map :which-key "Persp" :config (persp-mode))
+    ;; "TAB" '(:ignore t :which-key "Perspective")
+    ;; "TAB TAB" '(persp-switch :which-key "persp-switch")
+    ;; "TAB [" '(persp-prev :which-key "persp-prev")
+    ;; "TAB ]" '(persp-next :which-key "persp-next")
+    ;; "TAB n" '(+persp/add-new :which-key "+persp/add-new")
+    ;; "TAB N" '(+persp/add-new-import-buffer :which-key "+persp/add-new-import-buffer")
+    ;; "TAB k" '(+persp/kill-current :which-key "+persp/kill-current")
+    ;; "TAB d" '(+persp/kill-current :which-key "+persp/kill-current")
+    ;; "TAB K" '(+persp/kill-all-except-default :which-key "+persp/kill-all-except-default")
+    ;; "TAB r" '(+persp/rename :which-key "+persp/rename")
+    ;; "TAB a" '(+persp/add-buffer-switch :which-key "+persp/add-buffer-switch")
+    ;; "TAB b" '(persp-ivy-switch-buffer :which-key "list-or-switch-buffer")
+  
+    ;; quick persp switching
+    "1" '((lambda () (interactive) (persp-switch-by-number 1)) :which-key "switch-to-persp-1")
+    "2" '((lambda () (interactive) (persp-switch-by-number 2)) :which-key "switch-to-persp-2")
+    "3" '((lambda () (interactive) (persp-switch-by-number 3)) :which-key "switch-to-persp-3")
+    "4" '((lambda () (interactive) (persp-switch-by-number 4)) :which-key "switch-to-persp-4")
+    "5" '((lambda () (interactive) (persp-switch-by-number 5)) :which-key "switch-to-persp-5")
+    "6" '((lambda () (interactive) (persp-switch-by-number 6)) :which-key "switch-to-persp-6")
+    "7" '((lambda () (interactive) (persp-switch-by-number 7)) :which-key "switch-to-persp-7")
+    "8" '((lambda () (interactive) (persp-switch-by-number 8)) :which-key "switch-to-persp-8")
+    "9" '((lambda () (interactive) (persp-switch-by-number 9)) :which-key "switch-to-persp-9")
+
+    ;; git
+    "g" '(magit-status-here :which-key "Git")) ; prefix
+
+  ;; minibuffer keybindings
+  ;; (general-define-key
+  ;;   :keymaps  
+  ;;   ;; [escape] 'abort-recursive-edit ;; escape should always quit
+  ;;   "C-j" 'move
+  ;;   "C-a" 'move-beginning-of-line
+  ;;   "C-e" 'move-end-of-line
+
+  ;;   "C-w" 'backward-delete-word
+  ;;   "C-v" 'yank)
+
+  ;; evil bindings
+  ;; TODO this is a bit of a mess, I need to go through the state hierarchy to define hotkeys in highest priority
+  ;; normal/visual mode hotkeys
+  (general-define-key
+   :states '(normal visual)
+    "U" 'evil-scroll-up
+    "Y" 'evil-scroll-down) 
+  ;; (general-define-key
+  ;;   :states '(normal visual)
+  ;;   ;; evil numbers
+  ;;   "g=" 'evil-numbers/inc-at-pt
+  ;;   "g-" 'evil-numbers/dec-at-pt
+
+  ;;   ;; Comment Text
+  ;;   "M-" 'comment-region
+  ;;   "M+" 'uncomment-region
+
+  ;;   ;; flyspell correct
+  ;;   "z=" 'flyspell-correct-wrapper
+  ;;   "C-;" 'flyspell-correct-wrapper
+
+  ;;   ;; movement
+  ;;   "C-n" 'evil-next-visual-line ;; TODO should be in motion? doesn't seem to go down to these states?
+  ;;   "C-p" 'evil-previous-visual-line
+  ;;   "s" 'avy-goto-char)
+
+  ;; insert mode hotkeys
+  ;; (general-define-key
+  ;;   :states 'insert
+  ;;   ;"C-SPC" 'company-complete
+  ;;   "C-SPC" 'completion-at-point ;; bring up corfu completion
+  ;;   "C-v" 'yank ;; C-v should paste clipboard contents
+
+  ;;   "C-<backspace>" 'backward-kill-word
+  ;;   "C-S-<backspace>" 'backward-kill-line
+
+  ;;   ;; some emacs editing hotkeys inside insert mode
+  ;;   "C-a" 'evil-beginning-of-visual-line
+  ;;   "C-e" 'evil-end-of-visual-line
+  ;;   "C-n" 'evil-next-visual-line
+  ;;   "C-p" 'evil-previous-visual-line)
+
+  ;; motion mode hotkeys, inherited by normal/visual
+  ;; (general-define-key
+  ;;   :states 'motion
+  ;;   "?" '+consult-line
+
+  ;;   ;; window management
+  ;;   "C-w C-u" 'winner-undo
+  ;;   "C-w u" 'winner-undo
+
+  ;;   "C-w a" 'ace-window
+  ;;   "C-w C-w" 'ace-window
+  ;;   "C-w w" 'ace-window
+
+  ;;   "C-w C-l" 'evil-window-right
+  ;;   "C-w C-h" 'evil-window-left)
+
+  ;; company
+  ;; DELETEME keeping for now to help configure corfu
+  ;; (general-define-key
+  ;;   :keymaps '(company-active-map)
+  ;;   "C-w" nil ; allow C-w to act normally during completion
+  ;;   "C-h" nil
+  ;;   "C-n" #'company-select-next
+  ;;   "C-p" #'company-select-previous
+  ;;   "TAB" #'company-complete-selection
+  ;;   "<tab>" #'company-complete-selection)
+
+  ;; unbind C-z from evil
+  (general-unbind '(motion insert treemacs) "C-z")
+
+  ;; key bindings for evil search ('/')
+  ;; there could be a better way to do this, but this works so whatever
+  (general-define-key
+    ;; NOTE evil-ex-map is different from evil-ex-search-keymap
+    :keymaps 'evil-ex-search-keymap
+    ;; C-v should paste clipboard contents
+    "C-v" 'yank)
+
+  ;; global
+  (general-define-key
+    ;; more traditional zoom keys
+    "C-=" 'text-scale-increase
+    "C--" 'text-scale-decrease
+    "C-M-=" 'zoom-in
+    "C-M--" 'zoom-out
+
+     ;; C-v to paste (or "yank" in emacs jargon) from clipboard, useful for minibuffers (such as query-replace and M-x)
+    "C-v" 'yank)
+
+    ;; buffer management
+    ;"C-a" 'bury-buffer
+    ;"C-S-a" 'unbury-buffer
+    ;; "C-a" '+persp/previous-buffer
+    ;; "C-S-a" '+persp/next-buffer
+    ;"C-z" 'consult-buffer
+
+    ;; persp cycling
+    ;; "C-<tab>" 'persp-next
+    ;; "C-<iso-lefttab>" 'persp-prev
+    ;; "C-S-<tab>" 'persp-prev
+    ;; "<backtab>" '+persp/switch-to-last-accessed
+
+    ;; quick persp switching
+    ;; "M-1" (lambda () (interactive) (+persp/switch-by-index 0))
+    ;; "M-2" (lambda () (interactive) (+persp/switch-by-index 1))
+    ;; "M-3" (lambda () (interactive) (+persp/switch-by-index 2))
+    ;; "M-4" (lambda () (interactive) (+persp/switch-by-index 3))
+    ;; "M-5" (lambda () (interactive) (+persp/switch-by-index 4))
+    ;; "M-6" (lambda () (interactive) (+persp/switch-by-index 5))
+    ;; "M-7" (lambda () (interactive) (+persp/switch-by-index 6))
+    ;; "M-8" (lambda () (interactive) (+persp/switch-by-index 7))
+    ;; "M-9" (lambda () (interactive) (+persp/switch-by-index 8)))
+
+  ;; magit
+  (general-define-key
+    ;; https://github.com/emacs-evil/evil-magit/issues/14#issuecomment-626583736
+    :keymaps 'transient-base-map
+    "<escape>" 'transient-quit-one)
+
+  ;; magit keybindings
+  ;; TODO refactor within use-package
+  (general-define-key
+    :states '(normal visual)
+    :keymaps 'magit-mode-map
+    ;; rebind "q" in magit-status to kill the magit buffers instead of burying them
+    "q" '+magit/quit)
+
+    ;; persp switching within magit
+    ;; "M-1" (lambda () (interactive) (+persp/switch-by-index 0))
+    ;; "M-2" (lambda () (interactive) (+persp/switch-by-index 1))
+    ;; "M-3" (lambda () (interactive) (+persp/switch-by-index 2))
+    ;; "M-4" (lambda () (interactive) (+persp/switch-by-index 3))
+    ;; "M-5" (lambda () (interactive) (+persp/switch-by-index 4))
+    ;; "M-6" (lambda () (interactive) (+persp/switch-by-index 5))
+    ;; "M-7" (lambda () (interactive) (+persp/switch-by-index 6))
+    ;; "M-8" (lambda () (interactive) (+persp/switch-by-index 7))
+    ;; "M-9" (lambda () (interactive) (+persp/switch-by-index 8)))
+
+  ;; org mode specific evil binding
+  ;; unbind the return (enter) key so it becomes org-return
+  ;; the return key is not that useful here anyways
+  (general-define-key
+    :states 'motion
+    :keymaps 'org-mode-map
+    :major-modes t
+    "RET" 'org-return)
+
+  ;; neotree
+  (general-define-key
+   :states '(normal visual insert)
+   :keymaps 'neotree-mode-map
+   "RET" 'neotree-enter
+   "j" 'neotree-next-line
+   "k" 'neotree-previous-line
+   "p" 'neotree-select-up-node
+   "d" 'neotree-select-down-node
+   "c" 'neotree-create-node
+   "r" 'neotree-rename-node
+   "f" 'neotree-find
+   "o" 'neotree-collapse-all
+   "C" 'neotree-copy-node
+   "R" 'neotree-refresh
+   "J" 'neotree-select-next-sibling-node
+   "K" 'neotree-select-previous-sibling-node
+   "P" 'neotree-copy-filepath-to-yank-ring
+   "D" 'neotree-delete-node)
+
+  ;; ;; treemacs
+  ;; (general-define-key
+  ;;  :states 'treemacs-mode
+  ;;  "RET" 'treemacs-RET-action
+  ;;  "j" 'treemacs-next-line
+  ;;  "k" 'treemacs-previous-line
+  ;;  "F" 'treemacs-create-file
+  ;;  "d" 'treemacs-create-dir
+  ;;  "D" 'treemacs-delete-file
+  ;;  "W" 'treemacs-create-workspace
+  ;;  "r" 'treemacs-rename-file
+  ;;  "c" 'treemacs-collapse-parent-node
+  ;;  "i" 'treemacs-increase-width
+  ;;  "I" 'treemacs-decrease-width
+  ;;  "C" 'treemacs-copy-file
+  ;;  "M" 'treemacs-move-file
+  ;;  "R" 'treemacs-refresh)
+
+  ;;----
+  ;;
+  ;;
+  ;;; LANGUAGES
+  ;; lsp
+  ;;se-package lsp-mode
+  ;;:custom
+  ;;(lsp-completion-provider :none) ;; we use Corfu!
+  ;;:init
+  ;;(defun +lsp-mode-setup-completion ()
+  ;;  (setf (alist-get 'styles (alist-get 'lsp-capf completion-category-defaults))
+  ;;        '(orderless))) ;; Configure orderless
+  ;;:hook ((lsp-mode . lsp-enable-which-key-integration)
+  ;;       (lsp-mode . lsp-ui-mode)
+  ;;       (rustic-mode . lsp))
+  ;;       (lsp-completion-mode . +lsp-mode-setup-completion)
+  ;;:commands lsp
+  ;;:config
+  ;;(setq lsp-headerline-breadcrumb-enable nil
+  ;;      lsp-enable-snippet nil)) ;; TODO this is broken
+  (custom-set-variables
+   ;; custom-set-variables was added by Custom.
+   ;; If you edit it by hand, you could mess it up, so be careful.
+   ;; Your init file should contain only one such instance.
+   ;; If there is more than one, they won't work right.
+   '(org-agenda-files nil))
+  (custom-set-faces
+   ;; custom-set-faces was added by Custom.
+   ;; If you edit it by hand, you could mess it up, so be careful.
+   ;; Your init file should contain only one such instance.
+   ;; If there is more than one, they won't work right.
+   )
+
+#+end_src
+
+* CUSTOM-VARS.EL
+Custom Functions and Variables defined by user.
+#+begin_src emacs-lisp :tangle yes
+
+(defun efs/org-font-setup ()
+  ;; Replace list hyphen with dot
+  (font-lock-add-keywords 'org-mode
+                          '(("^ *\\([-]\\) "
+                             (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
+
+  ;; Set faces for heading levels
+  (dolist (face '((org-level-1 . 1.2)
+                  (org-level-2 . 1.1)
+                  (org-level-3 . 1.05)
+                  (org-level-4 . 1.0)
+                  (org-level-5 . 1.1)
+                  (org-level-6 . 1.1)
+                  (org-level-7 . 1.1)
+                  (org-level-8 . 1.1)))
+    (set-face-attribute (car face) nil :font "Cantarell" :weight 'regular :height (cdr face)))
+
+  ;; Ensure that anything that should be fixed-pitch in Org files appears that way
+  (set-face-attribute 'fixed-pitch nil :font "JetBrainsMono Nerd Font Mono" :height 120)
+  (set-face-attribute 'org-block nil :foreground nil :inherit 'fixed-pitch)
+  (set-face-attribute 'org-code nil   :inherit '(shadow fixed-pitch))
+  (set-face-attribute 'org-table nil   :inherit '(shadow fixed-pitch))
+  (set-face-attribute 'org-verbatim nil :inherit '(shadow fixed-pitch))
+  (set-face-attribute 'org-special-keyword nil :inherit '(font-lock-comment-face fixed-pitch))
+  (set-face-attribute 'org-meta-line nil :inherit '(font-lock-comment-face fixed-pitch))
+  (set-face-attribute 'org-checkbox nil :inherit 'fixed-pitch))
+
+(defun efs/org-mode-setup ()
+  (org-indent-mode)
+  (variable-pitch-mode 1)
+  (visual-line-mode 1))
+
+(defun efs/org-mode-visual-fill ()
+  (setq visual-fill-column-width 100
+        visual-fill-column-center-text t)
+  (visual-fill-column-mode 1))
+
+;; This is needed as of Org 9.2
+(require 'org-tempo)
+
+(add-to-list 'org-structure-template-alist '("sh" . "src shell"))
+(add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
+(add-to-list 'org-structure-template-alist '("py" . "src python"))
+
+;; Automatically tangle our Emacs.org config file when we save it
+(defun efs/org-babel-tangle-config ()
+  (when (string-equal (buffer-file-name)
+                      (expand-file-name "~/Projects/Code/emacs-from-scratch/Emacs.org"))
+    ;; Dynamic scoping to the rescue
+    (let ((org-confirm-babel-evaluate nil))
+      (org-babel-tangle))))
+
+(add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'efs/org-babel-tangle-config)))
+
+(defun efs/lsp-mode-setup ()
+  (setq lsp-headerline-breadcrumb-segments '(path-up-to-project file symbols))
+  (lsp-headerline-breadcrumb-mode))
+(load-theme 'doom-henna t)
+
+#+end_src
+
+* LSP.EL
+This file defined packages required for language server and its settings.
+#+begin_src emacs-lisp :tangle yes
+
+;; Java
+
+(use-package lsp-java 
+  :hook (java-mode. lsp-deferred))
+
+;; Python
+(use-package python-mode
+  :hook (python-mode . lsp-deferred)
+  :custom
+  ;; NOTE: Set these if Python 3 is called "python3" on your system!
+  ;; (python-shell-interpreter "python3")
+  ;; (dap-python-executable "python3")
+  (dap-python-debugger 'debugpy)
+  :config
+  (require 'dap-python))
+
+;; C/C++
+;; (use-package ccls
+;;   :if (not *sys/win32*)
+;;   :hook ((c-mode c++-mode objc-mode) .
+;;          (lambda () (require 'ccls) (lsp)))
+;;   :custom
+;;   (ccls-executable "/usr/bin/clangd") ; Add ccls to path if you haven't done so
+;;   (ccls-sem-highlight-method 'font-lock)
+;;   (ccls-enable-skipped-ranges nil)
+;;   :config
+;;   (lsp-register-client
+;;    (make-lsp-client
+;;     :new-connection (lsp-tramp-connection (cons ccls-executable ccls-args))
+;;     :major-modes '(c-mode c++-mode cuda-mode objc-mode)
+;;     :server-id 'ccls-remote
+;;     :multi-root nil
+;;     :remote? t
+;;     :notification-handlers
+;;     (lsp-ht ("$ccls/publishSkippedRanges" #'ccls--publish-skipped-ranges)
+;;             ("$ccls/publishSemanticHighlight" #'ccls--publish-semantic-highlight))
+;;     :initialization-options (lambda () ccls-initialization-options)
+;;     :library-folders-fn nil)))
+
+;; Kotlin
+(use-package kotlin-mode
+  :hook (kotlin-mode .  lsp-deferred)) 
+(use-package flycheck-kotlin
+  :hook (flycheck-mode . lsp--buffer-deferred))
+
+#+end_src

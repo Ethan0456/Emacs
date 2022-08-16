@@ -1,3 +1,8 @@
+* INIT.EL
+#+PROPERTY: header-args:emacs-lisp :tangle /Users/abhijeetsingh/.emacs.d/int.el
+** Basic Configuration
+#+begin_src
+
 ;; Basic Configurations
 
 (setq inhibit-startup-message t) ;; stops showing startup screen when we start emacs
@@ -22,6 +27,12 @@
 (setq display-line-numbers-type 'relative)   ;; Line numbers type relative
 (setq debug-on-error t)
 
+#+end_src
+
+#+PROPERTY: header-args:emacs-lisp :tangle /Users/abhijeetsingh/.emacs.d/int1.el
+** Backup Directory
+#+begin_src
+
 ;; Write backups to ~/.emacs.d/backup/
 (setq backup-directory-alist '(("." . "~/.emacs.d/backup"))
       backup-by-copying      t  ; Don't de-link hard links
@@ -30,29 +41,4 @@
       kept-new-versions      20 ; how many of the newest versions to keep
       kept-old-versions      5) ; and how many of the old
 
-;; Disable line numbers for some modes
-(dolist (mode '(treemacs-mode-hook
-		org-mode-hook
-		vterm-mode-hook
-		neotree-mode-hook
-		eshell-mode-hook))
-  (add-hook mode (lambda () (display-line-numbers-mode 0))))
-
-;; Add custom theme path
-(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
-
-;; Move package-list to separate file 
-(setq custom-file "~/.emacs.d/packages.el")
-(load custom-file 'nomessage)
-
-;; Move themes to separate files
-(setq custom-file "~/.emacs.d/themes.el")
-(load custom-file 'nomessage)
-
-;; Move customizations variables to a separate file and load it
-(setq custom-file "~/.emacs.d/custom-vars.el")
-(load custom-file 'nomessage)
-
-;; Move global bindings to bindings.el
-(setq custom-file "~/.emacs.d/bindings.el")
-(load custom-file 'nomessage)
+#+end_src

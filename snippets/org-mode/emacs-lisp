@@ -2,7 +2,7 @@
 # name: emacs-lisp
 # key: emacs-lisp_
 # --
-#+begin_src emacs-lisp :tangle yes
+#+begin_src emacs-lisp :tangle /Users/abhijeetsingh/.emacs.d/
 
 $0
 

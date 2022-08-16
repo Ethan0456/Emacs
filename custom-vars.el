@@ -1,7 +1,7 @@
 ;; This File defines custom functions, variables and settings
 
 ;; Set theme
-(load-theme 'doom-henna t)
+(load-theme 'modus-vivendi t)
 
 ;; config section of org-mode
 (defun ethan/org-font-setup ()
