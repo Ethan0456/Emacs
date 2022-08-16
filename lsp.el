@@ -18,3 +18,20 @@
 
 (use-package flycheck-kotlin
   :hook (flycheck-mode . lsp--buffer-deferred))
+
+;; HTML/CSS/JS
+(use-package web-mode
+  :init
+  (add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode)) ;; Open .html files in web-mode
+  :config
+  (setq web-mode-enable-current-element-highlight t
+        web-mode-enable-current-column-highlight t)
+
+  :general
+  (general-def
+  :prefix ","
+  :states 'motion
+  :keymaps 'web-mode-map
+  "" nil
+  "i" '(web-mode-buffer-indent :which-key "web mode indent")
+  "c" '(web-mode-fold-or-unfold :which-key "web mode toggle fold")))
