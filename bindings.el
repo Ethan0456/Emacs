@@ -122,6 +122,7 @@
 
   ;; toggles
   "t" '(:ignore t :which-key "Toggles")
+  "tu" '(centered-cursor-mode :which-key "centered-cursor-mode")
   "th" '(counsel-load-theme :which-key "counsel-load-theme")
   "tf" '(flyspell-mode :which-key "flyspell-mode")
   "tc" '(flycheck-mode :which-key "flycheck-mode")
@@ -320,3 +321,15 @@
 ;;   "C-p" #'company-select-previous
 ;;   "TAB" #'company-complete-selection
 ;;   "<tab>" #'company-complete-selection)
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(safe-local-variable-values '((eval ethan/file-set-compile-command))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+ 
+<head>
+    <title>Form submitting to itself</title>
+</head>
+ 
+<body>
+    <?php
+        
+//           
+        // Defining variables
+        $uno = $uname = "";
+ 
+        if(isset($_POST['insert'])) 
+        { 
+            //echo "user has entered an input";
+
+            $uno = $_POST['uno'];
+            $uname = $_POST['uname'];
+            
+            echo "<h2>Insert Operation</h2>";
+            echo $uno;
+            echo "<br>";
+            echo $uname;
+            echo "<br>";  
+            
+        }
+    
+        if(isset($_POST['delete'])) 
+        { 
+            //echo "user has entered an input";
+
+            $uno = $_POST['uno'];            
+            
+            echo "<h2>Delete Operation</h2>";
+            echo $uno;            
+            echo "<br>";  
+            
+        }
+    
+        if(isset($_POST['update'])) 
+        { 
+            //echo "user has entered an input";
+
+            $uno = $_POST['uno'];
+            $uname = $_POST['uname'];
+            
+            echo "<h2>Update Operation</h2>";
+            echo $uno;
+            echo "<br>";
+            echo $uname;
+            echo "<br>";  
+            
+        }
+ 
+        // Removing the redundant HTML characters if any exist.
+        function test_input($data) {
+          $data = trim($data);
+          $data = stripslashes($data);
+          $data = htmlspecialchars($data);
+          return $data;
+        }
+        ?>
+ 
+        <h1>Form submitting to itself example</h1>
+    <hr>
+    <h2>Insert Operation</h2>
+        <form method="post" action=
+            '<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>'>           
+            
+            No.:
+            <input type="text" name="uno">
+            <br>
+            <br>
+            Name:
+            <input type="text" name="uname">
+            <br>
+            
+            <input type="submit" name="insert"
+                   value="Submit">
+        </form>
+    
+    <hr>
+    <h2>Delete Operation</h2>
+        <form method="post" action=
+            '<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>'>           
+            
+            No.:
+            <input type="text" name="uno">
+            <br>           
+            <input type="submit" name="delete"
+                   value="Submit">
+        </form>
+    <hr>
+    <h2>Update Operation</h2>
+        <form method="post" action=
+            '<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>'>           
+            
+            No.:
+            <input type="text" name="uno">
+            <br>           
+            <input type="submit" name="update"
+                   value="Submit">
+        </form>
+        
+</body>
+ 
+</html>

@@ -1,0 +1,236 @@
+<!-- Name : Abhijeetsingh Meena -->
+<!-- Roll No : 20BCP241 -->
+<!-- Div : 4 (G7) -->
+<!DOCTYPE html>
+<html>
+  
+  <head>
+    <title>Form submitting to itself</title>
+  </head>
+  
+  <body>
+    
+    <?php
+     error_reporting(E_ERROR | E_PARSE);
+     session_start();
+     $servername = "localhost";
+     $username = "root";
+     $password = "";
+     $dbname = "my_db";
+
+     // Create connection
+     $conn = mysqli_connect($servername, $username, $password, $dbname);
+     // Check connection
+     if (!$conn) {
+     die("Connection failed: " . mysqli_connect_error());
+     }
+     $uid = "";
+     if (isset($_SESSION['userid'])){
+     $temp_uemail = $_SESSION['userid'];
+     $sql = "select id,uname from user_tbl where uemail = '$temp_uemail'";
+     $result = mysqli_query($conn, $sql);
+     if (mysqli_num_rows($result) > 0) {
+    while($row = mysqli_fetch_assoc($result)){			
+    echo "<h2>Welcome ".$row["uname"],"</h2>";
+    $uid = $row["id"];
+    }
+    echo "<a href='logout.php'>Logout</a><br>";
+    if (empty($row["PIC"])){
+	echo "<a href='test.php'>Upload Profile Pic</a>";
+    }
+    }
+    else
+    {
+    }
+    }
+    else{
+    header("location:login_reg.php");
+    }
+    //------------------Insert record----------------------//
+
+    if(isset($_POST['insert'])) 
+    { 
+    //echo "user has entered an input";
+    
+    $uname = $_POST['uname'];
+    $uph = $_POST['uph'];
+    $uadd = $_POST['uadd'];
+    $uemail = $_POST['uemail'];
+    if ($_POST['upublic'] == "1"){
+    $upublic = "1";
+    }
+    else {
+    $upublic = "0";
+    };
+    
+    $sql = "INSERT INTO data_tbl (uid,cname,cph,cemail,cadd,cpublic) VALUES ('$uid', '$uname','$uph','$uemail','$uadd','$upublic')";
+
+    if (mysqli_query($conn, $sql)) {
+    //echo "New contact created successfully";
+    } else {
+    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+    }
+    
+    }
+    //------------------Insert record----------------------//
+
+    //------------------Update record----------------------//
+    if(isset($_POST['update'])) 
+    { 
+    //echo "user has entered an input";
+    $uno = $_POST['uno'];
+    $uname = $_POST['uname'];
+    $uph = $_POST['uph'];
+    $uadd = $_POST['uadd'];
+    $uemail = $_POST['uemail'];
+    if ($_POST['upublic'] == "1"){
+    $upublic = "1";
+    }
+    else {
+    $upublic = "0";
+    };
+
+    $sql = "UPDATE data_tbl SET 
+    cname = '".$uname."', 
+    cph = '".$uph."',
+    cemail = '".$uemail."',
+    cadd = '".$uadd."',
+    cpublic = '".$upublic."',
+    uid = '".$uid."'
+    WHERE id=$uno";
+
+    if (mysqli_query($conn, $sql)) {
+    //echo "Record updated successfully";
+    } else {
+    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+    }
+
+    }
+    //-------------------------Update record-------------------------//
+    
+    
+    //------------------Delete record----------------------//
+    if(isset($_POST['delete'])) 
+    { 
+    //echo "user has entered an input";
+
+    $uno = $_POST['uno'];
+
+    $sql = "DELETE FROM data_tbl WHERE id=$uno";
+
+    if (mysqli_query($conn, $sql)) {
+    //echo "Record updated successfully";
+    } else {
+    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+    }
+
+    }
+    //-------------------------Delete record-------------------------//
+    
+    
+    
+    //-------------------------Show record-------------------------//
+    
+    $sql = "SELECT * FROM data_tbl where uid = '$uid' or cpublic = 1";
+    $result = mysqli_query($conn, $sql);
+
+    if (mysqli_num_rows($result) > 0) {
+    echo "<table border='1' align='center'>";
+      echo "<tr>";
+        echo "<th>ID</th>";
+        echo "<th>uid</th>";
+        echo "<th>cname</th>";
+        echo "<th>cph</th>";
+        echo "<th>cemail</th>";
+        echo "<th>cadd</th>";
+        echo "<th>cpublic</th>";
+	echo "<th>PIC</th>";
+        echo "</tr>";
+      while($row = mysqli_fetch_assoc($result)) {    
+      echo "<tr>";	
+        echo "<td>".$row["id"]."</td>";
+        echo "<td>".$row["uid"]."</td>";
+        echo "<td>".$row["cname"]."</td>";
+        echo "<td>".$row["cph"]."</td>";
+        echo "<td>".$row["cemail"]."</td>";
+        echo "<td>".$row["cadd"]."</td>";
+        echo "<td>".$row["cpublic"]."</td>";
+	echo "<td>".$row["PIC"]."</td>";
+        //echo "<td align='center'>".$row["reg_date"]."</td>";
+
+        //echo "<td align='center'><a data-toggle='tooltip' title='Edit Record' href='edit.php?id=".$row['id']."'><button class='btn btn-success btn-sm remove'><span class='glyphicon glyphicon-edit'></span></button></a></td>";
+
+        //echo "<td align='center'><a data-toggle='tooltip' title='Delete Record' href='del.php?id=".$row['id']."' onClick=\"return confirm('Are you sure you want to delete?');\"><button class='btn btn-danger btn-sm remove'><span class='glyphicon glyphicon-remove'></span></button></a></td>";
+
+        echo "</tr>";              
+      }
+      echo "</table>";
+    } else {
+    echo "Please add any record below";
+    }
+    
+    //-------------------------Show record-------------------------//
+    ?>
+
+    <hr>
+    <h2>Insert Operation</h2>
+    <form method="post" action=
+          '<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>'> 
+            Name:
+            <input type="text" name="uname">
+            <p>
+            Phone Number:
+            <input type="text" name="uph">
+            <p>
+            Email:
+            <input type="text" name="uemail">
+            <p>
+            Address:
+            <input type="text" name="uadd">
+            <p>
+            Public Contact:
+            <input type="checkbox" name="upublic" value="1">
+            <p>
+            <input type="submit" name="insert" value="Submit">
+        </form>
+    
+    <hr>
+    <h2>Delete Operation</h2>
+        <form method="post" action=
+            '<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>'>           
+            
+           
+            <input type="text" name="uno" placeholder="Enter record number">
+            <p>           
+            <input type="submit" name="delete"
+                   value="Submit">
+        </form>
+    <hr>
+    <h2>Update Operation</h2>
+        <form method="post" action=
+            '<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>'>           
+            
+            No.:
+            <input type="text" name="uno">
+            <p>
+            Name:
+            <input type="text" name="uname">
+            <p>
+            Phone Number:
+            <input type="text" name="uph">
+            <p>
+            Email:
+            <input type="text" name="uemail">
+            <p>
+            Address:
+            <input type="text" name="uadd">
+            <p>
+            Public Contact:
+            <input type="checkbox" name="upublic" value="1">
+            <p>
+            <input type="submit" name="update"
+                   value="Submit">
+        </form>
+
+    </body>
+</html>

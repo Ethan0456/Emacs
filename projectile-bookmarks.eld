@@ -1,1 +1,1 @@
-("~/.emacs.d/" "~/.config/" "~/" "~/.emacs.d/straight/repos/straight.el/" "~/Projects/")
+("~/.emacs.d/" "~/Projects/" "/Applications/XAMPP/xamppfiles/phpmyadmin/" "~/Projects/Org/" "~/Docs/" "~/.config/" "~/" "~/.emacs.d/straight/repos/straight.el/")

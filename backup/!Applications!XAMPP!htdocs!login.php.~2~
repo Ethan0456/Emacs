@@ -1,0 +1,165 @@
+<!-- Name : Abhijeetsingh Meena -->
+<!-- Roll No : 20BCP241 -->
+<!-- Div : 4 (G7) -->
+<!DOCTYPE html>
+<html>
+ 
+<head>
+    <title>Login & Registration</title>
+    <script>
+            
+            // Function to check Whether both passwords 
+            // is same or not. 
+            function checkPassword(form) { 
+                password1 = form.password1.value; 
+                password2 = form.password2.value; 
+  
+                // If password not entered 
+                if (password1 == '') 
+                    alert ("Please enter Password"); 
+                      
+                // If confirm password not entered 
+                else if (password2 == '') 
+                    alert ("Please enter confirm password"); 
+                      
+                // If Not same return False.     
+                else if (password1 != password2) { 
+                    alert ("\nPasswords do not match: Please try again...") 
+                    return false; 
+                } 
+  
+                // If same return True. 
+                else{ 
+                    //alert("Password Match: Welcome to PDEU!") 
+                    return true; 
+                } 
+            } 
+        
+  </script>
+</head>
+ 
+<body>
+    
+    <?php
+        session_start();
+    
+        $servername = "localhost";
+        $username = "root";
+        $password = "";
+        $dbname = "my_db";
+
+        // Create connection
+        $conn = mysqli_connect($servername, $username, $password, $dbname);
+        // Check connection
+        if (!$conn) {
+          die("Connection failed: " . mysqli_connect_error());
+        }
+    ?>
+    
+    <?php
+        
+//           
+        // Defining variables
+        $uno = $uname = "";
+ 
+        if(isset($_POST['login'])) 
+        { 
+                        
+            //echo "User entered an input";	
+
+            $uemail = $_POST['uemail'];
+            $upass = $_POST['upass'];
+
+            $sql = "select * from user_tbl where uemail = '$uemail' and upass = '$upass'";
+            $result = mysqli_query($conn, $sql);
+            if (mysqli_num_rows($result) > 0) {
+                //echo "logged in";
+                $_SESSION["userid"] = $uemail;
+                mysqli_close($conn); // Close connection
+                //header("location:index1.php"); // redirects to main page
+                echo("<script>location.href = 'index1.php';</script>");	
+                //echo "Login successful";
+                
+            }
+            else
+            {
+                echo "Invalid username or password";
+            }
+        }             
+        ?>
+        <?php
+        if(isset($_POST['register'])) 
+        { 
+            //echo "user has entered an input";
+            
+            $uname = $_POST['uname'];
+            $uemail = $_POST['uemail'];
+            $upass = $_POST['password1'];
+            
+            $sql = "SELECT * FROM user_tbl where uemail = '$uemail' ";
+            $result = mysqli_query($conn, $sql);
+
+            if (mysqli_num_rows($result) > 0) {
+              // output data of each row
+                echo "Email already registered";
+            } 
+            else {
+              //echo "0 results";
+                $sql = "INSERT INTO user_tbl (uname,uemail,upass)                         VALUES ('$uname','$uemail','$upass')";
+
+                        if (mysqli_query($conn, $sql)) {
+                          echo "User registered successfully. Please login.";
+                        } 
+                        else {
+                          echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+                        }
+            }
+        
+        }
+ 
+        // Removing the redundant HTML characters if any exist.
+        function test_input($data) {
+          $data = trim($data);
+          $data = stripslashes($data);
+          $data = htmlspecialchars($data);
+          return $data;
+        }
+        ?>
+ 
+        <h1>Login</h1>
+   
+        <form method="post" action=
+            '<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>'>           
+            
+            
+            <input type="text" name="uemail" placeholder="Enter email"><p>
+            
+            
+            <input type="password" name="upass" placeholder="Enter password"><p>
+            
+            
+            <input type="submit" name="login" value="Submit">
+        </form>
+    
+    <hr>
+    <h1>Registration</h1>
+   
+        <form method="post" action=
+            '<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>' onSubmit = "return checkPassword(this)">           
+            
+            <input type="text" name="uname" placeholder="Enter name"><p>           <input type="text" name="uemail" placeholder="Enter email"><p>       
+            <input type="password" name="password1" placeholder="Enter password"><p>            
+            <input type="password" name="password2" placeholder="Re-enter Password"><p>
+            
+            <input type="submit" name="register" value="Submit">
+            
+            <input type="reset" value="Clear">
+            
+        </form>
+        
+    <?php
+      mysqli_close($conn);  
+    ?>
+</body>
+ 
+</html>

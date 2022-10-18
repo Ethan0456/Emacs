@@ -1,0 +1,15 @@
+# plainText = input("Enter plaintext : ")
+# key = input("Enter key (int) : ")
+plainText="geeksforgeeks"
+key="ayush"
+alpha="abcdefghijklmnopqrstuvwxyz"
+
+i = 0
+cipher=""
+
+while i < len(plainText):
+    for j in range(len(key)):
+        cipher+= alpha[alpha.find(key[j]) + alpha.find(plainText[i])%26]
+        i+=1
+
+print(cipher)

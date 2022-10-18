@@ -1,0 +1,75 @@
+#include<bits/stdc++.h>
+#include<fstream>
+
+using namespace std;
+
+int main(){
+  string lines;
+  ifstream MyReadFile("test.c");
+  int plus = 0;
+  int minus = 0;
+  int multiply = 0;
+  int divide = 0;
+  int increment = 0;
+  int decrement = 0;
+  int lessthan = 0;
+  int lessthanequal = 0;
+  int greaterthan = 0;
+  int greaterthanequal = 0;
+  int plusequal = 0;
+  int minusequal = 0;
+  int multiplyequal = 0;
+  int divideequal = 0;
+
+  while (getline(MyReadFile, lines)) {
+    for (int i = 0; i < lines.size(); i++){
+      switch (lines[i]) {
+      case '+':
+	if (lines[i+1] == '='){
+	  plusequal++; break; 
+	}
+	else plus++; break;
+      case '-':
+	if (lines[i+1] == '='){
+	  minusequal++; break; 
+	}
+	else minus++; break;
+      case '*':
+	if (lines[i+1] == '='){
+	  multiplyequal++; break; 
+	}
+	else multiply++; break;
+      case '/':
+	if (lines[i+1] == '='){
+	  divideequal++; break; 
+	}
+	else divide++; break;
+      case '<':
+	if (lines[i+1] == '='){
+	  lessthanequal++; break; 
+	}
+	else lessthan++; break;
+      case '>':
+	if (lines[i+1] == '='){
+	  greaterthanequal++; break; 
+	}
+	else greaterthan++; break;
+      }
+    }
+  }
+  MyReadFile.close();
+  cout << "plus : " << plus << endl;
+  cout << "plusequal : " << plusequal << endl;
+  cout << "minus : " << minus << endl;
+  cout << "minusequal : " << minusequal << endl;
+  cout << "multiply : " << multiply << endl;
+  cout << "multiplyequal : " << multiplyequal << endl;
+  cout << "divide : " << divide << endl;
+  cout << "divideequal : " << divideequal << endl;
+  cout << "lessthan : " << lessthan << endl;
+  cout << "greaterthan : " << greaterthan << endl;
+  cout << "lessthanequal : " << lessthanequal << endl;
+  cout << "greaterthanequal : " << greaterthanequal << endl;
+
+  return 0;
+}

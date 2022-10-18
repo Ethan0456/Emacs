@@ -1,0 +1,11 @@
+plainText="geeksforgeeks"
+key="ayush"
+
+i=0
+cipher=""
+while i < range(len(plainText)):
+    for j in range(len(key)):
+        cipher[i] = plainText[i]+key[j]
+        i+=1
+print(cipher)
+        

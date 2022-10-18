@@ -1,0 +1,16 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+pair<int,int> fun(int cur){
+  return pair(1,2);
+}
+
+int main(){
+  int times;
+  cin >> times;
+  while (times--){
+    int n;
+    cin >> n;
+    
+  }
+}

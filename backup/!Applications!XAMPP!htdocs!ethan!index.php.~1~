@@ -1,0 +1,56 @@
+<?php
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "mytable";
+
+// Create connection
+$conn = mysqli_connect($servername, $username, $password, $dbname);
+// Check connection
+if (!$conn) {
+  die("Connection failed: " . mysqli_connect_error());
+}
+
+$sql = "SELECT * FROM mytable";
+$result = mysqli_query($conn, $sql);
+
+if (mysqli_num_rows($result) > 0) {
+    ?><table style="margin: auto; border:solid black 1px;"><?php
+  // output data of each row
+  while($row = mysqli_fetch_assoc($result)) {
+    ?><tr style="border:solid black 1px;"><?php
+    echo "<td>" . $row["uno"]. "</td><td>" . $row["uname"]. "</td> ";
+    ?></tr><?php
+  }
+  ?></table><?php
+} else {
+  echo "0 results";
+}
+
+mysqli_close($conn);
+?>
+
+<hr>
+<h1>Insert Data</h1>
+<form method="post" action="insert.php">
+  <input type="number" name="uno" placeholder="Enter number"><p>
+  <input type="text" name="uname" placeholder="Enter name"><p>
+  <input type="submit" value="Send data"><p>
+  <input type="reset" value="Clear data">
+</form>
+
+<hr>
+<h1>Delete Data</h1>
+<form method="post" action="delete.php">
+  <input type="number" name="uno" placeholder="Enter number"><p>
+  <input type="submit" value="Send data"><p>
+</form>
+
+<hr>
+<h1>Update Data</h1>
+<form method="post" action="update.php">
+  <input type="number" name="uno" placeholder="Enter number"><p>
+  <input type="text" name="uname" placeholder="Enter name"><p>
+  <input type="submit" value="Send data"><p>
+  <input type="reset" value="Clear data">
+</form>

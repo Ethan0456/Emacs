@@ -1,0 +1,5 @@
+plainText = input("Enter plaintext : ")
+key = int(input("Enter key (int) : "))
+
+for i in range(len(plainText)):
+   while  

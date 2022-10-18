@@ -1,0 +1,14 @@
+plainText="geeksforgeeks"
+key="ayush"
+alpha="abcdefghijklmnopqrstuvwxyz"
+
+def encrypt(plainText, key):
+    i=0
+    cipher="" 
+    while i < len(plainText):
+        for j in range(len(key)):
+            if (i == 13):
+                break
+            cipher += alpha[(alpha.find(plainText[i])+alpha.find(key[j]))%26]
+            i+=1
+    return cipher

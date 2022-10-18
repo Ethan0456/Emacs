@@ -1,0 +1,112 @@
+<?php
+        error_reporting(E_ERROR | E_PARSE);
+        session_start();
+        $servername = "localhost";
+        $username = "root";
+        $password = "";
+        $dbname = "my_db";
+
+        // Create connection
+        $conn = mysqli_connect($servername, $username, $password, $dbname);
+        // Check connection
+        if (!$conn) {
+          die("Connection failed: " . mysqli_connect_error());
+        }
+        $uid = "";
+        if (isset($_SESSION['userid'])){
+            $temp_uemail = $_SESSION['userid'];
+            $sql = "select id,uname from user_tbl where uemail = '$temp_uemail'";
+            $result = mysqli_query($conn, $sql);
+            if (mysqli_num_rows($result) > 0) {
+                while($row = mysqli_fetch_assoc($result)){			
+                    echo "<h2>Welcome ".$row["uname"],"</h2>";
+                    $uid = $row["id"];
+			}
+			echo "<br><a href='logout.php'>Logout</a><br>";
+            }
+            else
+            {
+            }
+        }
+        else{
+            header("location:login_reg.php");
+        }
+
+
+
+//// Image Upload
+$target_dir = "uploads/";
+$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+$uploadOk = 1;
+$imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+
+//Check if image file is a actual image or fake image
+if (isset($_POST["submit"])) {
+	$check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
+	if ($check !== false) {
+		echo "File is an image - " . $check["mime"] . ".";
+		$uploadOk = 1;
+	} else {
+		echo "<p> File is not image.";
+		$uploadOk = 0;
+	}
+}
+
+// Check if file already exists
+if (file_exists($target_file)) {
+	echo "Sorry, file already exists.";
+	$uploadOk = 0;
+}
+
+// Check file size
+if ($_FILES["fileToUpload"]["size"] > 500000) {
+	echo "<p> Sorry, your file is too large.";
+	$uploadOk = 0;
+}
+
+// Allow certain file formats
+if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif") {
+	echo "<p> Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+	$uploadOk = 0;
+}
+
+// Check if $uploadOk is set to 0 by an error
+if ($uploadOk == 0) {
+	echo "<p> Sorry, your file was not uploaded.";
+	//if everything is ok, try to upload file
+}
+else {
+	if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+		$servername = "localhost";
+		$username = "root";
+		$password = "";
+		$filename = $_FILES["fileToUpload"]["name"];
+		$dbname = "my_db";
+
+		// Create connection
+		$conn = new mysqli($servername, $username, $password, $dbname);
+		// Check connection
+		if ($conn->connect_error) {
+		die("Connection failed: " . $conn->connect_error);
+		}
+
+		$sql = "INSERT INTO data_tbl(PIC) VALUES('.$filename') WHERE id=$uid";
+
+		if ($conn->query($sql) === TRUE) {
+		echo "New record created successfully";
+		} else {
+		echo "Error: " . $sql . "<br>" . $conn->error;
+		}
+
+		$conn->close();
+ 
+		echo "<p> The file " . htmlspecialchars(basename($_FILES["fileToUpload"]["name"])) . " has been uploaded.";
+	} else {
+		echo "<p> Sorry, there was an error uploading your file.";
+	}
+}
+?>
+
+<p>
+	<a href="index1.php"> Click here to go back</a>
+</p>

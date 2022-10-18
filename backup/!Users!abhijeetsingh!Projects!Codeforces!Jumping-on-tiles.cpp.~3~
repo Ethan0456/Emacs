@@ -1,0 +1,21 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+void solve(string s){
+  int move = 0;
+  map<char, vector<int> > m;
+  for (int i=0; i<s.size(); i++){
+    m[s[i]].push_back(i+1);
+  }
+}
+
+int main(){
+  int test;
+  cin >> test;
+  while (test--){
+    string s;
+    cin >> s;
+    solve(s);
+  }
+  return 0;
+}

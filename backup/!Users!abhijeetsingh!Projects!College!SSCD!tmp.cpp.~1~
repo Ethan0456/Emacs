@@ -1,0 +1,50 @@
+#include<bits/stdc++.h>
+#include<fstream>
+
+using namespace std;
+
+int main(){
+  string lines;
+  ifstream MyReadFile("test.c");
+  int plus = 0;
+  int minus = 0;
+  int multiply = 0;
+  int divide = 0;
+  int increment = 0;
+  int decrement = 0;
+  int lessthan = 0;
+  int lessthanequal = 0;
+  int greaterthan = 0;
+  int greaterthanequal = 0;
+
+  while (getline(MyReadFile, lines)) {
+    for (int i = 0; i < lines.size(); i++){
+      switch (lines[i]) {
+      case '+': plus++; break;
+      case '-': minus++; break;
+      case '*': multiply++; break;
+      case '/': divide++; break;
+      case '<':
+	if (lines[i+1] == '=') lessthanequal++;
+	else lessthan++;
+      case '>':
+	if (lines[i+1] == '=') greaterthanequal++;
+	else{
+	  cout << lines << endl;
+	  greaterthan++;
+	}
+      }
+    }
+  }
+  MyReadFile.close();
+  cout << "plus : " << plus << endl;
+  cout << "minus : " << minus << endl;
+  cout << "multiply : " << multiply << endl;
+  cout << "divide : " << divide << endl;
+  cout << "lessthan : " << lessthan << endl;
+  cout << "greaterthan : " << greaterthan << endl;
+  cout << "lessthanequal : " << lessthanequal << endl;
+  cout << "greaterthanequal : " << greaterthanequal << endl;
+
+  return 0;
+}

@@ -284,7 +284,7 @@
 ;; To illuminate the cursor position
 (use-package beacon
   :custom
-  ((beacon-color "#009f00")
+  ((beacon-color "#ffffff")
   (beacon-size 40)
   (beacon-blink-when-window-scrolls t)
   (beacon-blink-when-window-changes t)

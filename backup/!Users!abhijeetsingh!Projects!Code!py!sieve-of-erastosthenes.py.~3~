@@ -1,0 +1,41 @@
+num = int(input("Enter range : "))
+di = {i:0 for i in range(2,num)}
+
+def nextValue(value):
+    for i in di:
+        if i > value and di[i] == 0:
+            return i
+    return 0
+        
+    
+def checkComposite(value):
+    for i in di:
+        if i > value and di[i]==0 and i%value==0:
+            di[i]=1
+
+
+value = 2
+while value!=0:
+    value = nextValue(value)
+    if value!=0:
+        checkComposite(value)
+
+primes = []
+for i in di:
+    if di[i]==0:
+        primes.append(i)
+
+# for i in range(len(primes)):
+#     if len(str(primes[i])) > len(str(primes[i-1])):
+#         print('\n')
+#     print(primes[i], end=' ')
+
+ls = [[] for i in range(1,10)]
+for i in range(len(primes)):
+    for j in range(9):
+        if i%(j+1)==0:
+           ls[j].append(primes[i])
+
+
+for i in ls:
+    print(i)

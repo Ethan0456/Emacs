@@ -1,0 +1,27 @@
+<?php
+$uno = $_POST["uno"];
+$uname = $_POST["uname"];
+
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "mytable";
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+// Check connection
+if ($conn->connect_error) {
+  die("Connection failed: " . $conn->connect_error);
+}
+
+$sql = "UPDATE mytable SET uname='$uname' WHERE uno=$uno;
+
+if ($conn->query($conn, $sql) === TRUE) {
+  echo "Record updated successfully";
+} else {
+  echo "Error updating record: " . mysqli_error($conn);
+}
+
+$conn->close();
+?>
+<a href="index.php">Go to Index</a>
