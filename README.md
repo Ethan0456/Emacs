@@ -1,0 +1,3 @@
+# Emacs
+
+Vanilla Emacs Configuration.
